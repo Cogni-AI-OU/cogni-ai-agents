@@ -85,7 +85,7 @@ pre-commit run flake8 -a
 
 This repository is the **source of truth** for Cogni AI agent configurations.
 Agent files live in the **repository root** so that when this repo is added
-as a submodule at `.github/agents`, consumers receive them directly at
+via git subtree at `.github/agents`, consumers receive them directly at
 `.github/agents/cogni-ai.agent.md` (and `.github/agents/AGENTS.md`).
 
 ### Agent Configuration Files
@@ -100,13 +100,12 @@ as a submodule at `.github/agents`, consumers receive them directly at
 | [.github/prompts/](.github/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
 | [.github/instructions/](.github/instructions/) | Linters & agents | Language-specific code standards |
 
-### Using This Repository as a Submodule
+### Using This Repository via Git Subtree
 
-Other projects initialize this repo as a submodule **directly at `.github/agents`**:
+Other projects initialize this repo via git subtree **directly at `.github/agents`**:
 
 ```bash
-git submodule add https://github.com/Cogni-AI-OU/cogni-ai-agents.git .github/agents
-git submodule update --init --depth=1 .github/agents
+git subtree add --prefix=.github/agents https://github.com/Cogni-AI-OU/cogni-ai-agents.git main --squash
 ```
 
 After initialization the consumer project gets:
@@ -114,13 +113,12 @@ After initialization the consumer project gets:
 - `.github/agents/cogni-ai.agent.md` — the primary agent
 - `.github/agents/AGENTS.md` — the agents catalog
 
-This mirrors the pattern used for skills (submodule at a subdirectory under `.github/skills/`),
+This mirrors the pattern used for skills (git subtree at a subdirectory under `.github/skills/`),
 except agents are mounted **directly** at `.github/agents` rather than in a subdirectory:
 
 ```bash
-# Skills submodule (reference — note the subdirectory)
-git submodule add https://github.com/Cogni-AI-OU/cogni-ai-agent-skills.git \
-  .github/skills/cogni-ai-skills
+# Skills git subtree (reference — note the subdirectory)
+git subtree add --prefix=.github/skills/cogni-ai-skills https://github.com/Cogni-AI-OU/cogni-ai-agent-skills.git main --squash
 ```
 
 See also:
