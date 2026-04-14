@@ -17,7 +17,7 @@ Cogni-AI-OU projects:
 
 - **GitHub Actions Workflows**: CI/CD and automation (OpenCode, pre-commit, etc.)
 - **AI Agent Configurations**: AGENTS.md, skills, and prompts for automated development
-- **Coding Instructions**: Language-specific standards in `.github/instructions/`
+- **Coding Instructions**: Language-specific standards in `.agents/instructions/`
 - **Pre-commit Hooks**: Linting and validation tooling
 - **Code Tours**: Guided walkthroughs for repository onboarding
 
@@ -45,7 +45,7 @@ Cogni-AI-OU projects:
 3. Review the core guidance:
    - This README for repository scope and the local workflow
    - [.tours/getting-started.tour](.tours/getting-started.tour) for a guided walkthrough
-   - [AGENTS.md](AGENTS.md) for repository-specific agent guidance
+   - [.agents/AGENTS.md](.agents/AGENTS.md) for repository-specific agent guidance
 
 ## Development
 
@@ -88,12 +88,12 @@ This repository provides AI agent configurations for automated development.
 
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
-| [AGENTS.md](AGENTS.md) | All agents | Repository-specific guidance and workflows |
-| [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
-| [.github/agents/](.github/agents/) | Orchestrators | Specialized agent configs for specific tasks |
-| [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
-| [.github/prompts/](.github/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
-| [.github/instructions/](.github/instructions/) | Linters & agents | Language-specific code standards |
+| [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Repository-specific guidance and workflows |
+| [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
+| [.agents/agents/](.agents/agents/) | Orchestrators | Specialized agent configs for specific tasks |
+| [.agents/skills/](.agents/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
+| [.agents/prompts/](.agents/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
+| [.agents/instructions/](.agents/instructions/) | Linters & agents | Language-specific code standards |
 
 See also:
 
