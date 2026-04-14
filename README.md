@@ -75,25 +75,51 @@ pre-commit run flake8 -a
 
 ## Project Layout
 
+- `cogni-ai.agent.md`: primary agent configuration (source of truth for agent consumers)
+- `AGENTS.md`: agents catalog and repository-specific guidance
 - `.github/`: default templates, workflows, instructions, prompts, skills, and agent configuration
 - `.tours/`: guided walkthroughs for repository onboarding
-- `AGENTS.md`: repository-specific guidance for automation agents
 - `README.md`: repository overview and local development workflow
 
 ## AI Agents
 
-This repository provides AI agent configurations for automated development.
+This repository is the **source of truth** for Cogni AI agent configurations.
+Agent files live in the **repository root** so that when this repo is added
+via git subtree at `.github/agents`, consumers receive them directly at
+`.github/agents/cogni-ai.agent.md` (and `.github/agents/AGENTS.md`).
 
 ### Agent Configuration Files
 
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
-| [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Repository-specific guidance and workflows |
+| [.agents/agents/cogni-ai.agent.md](.agents/agents/cogni-ai.agent.md) | Orchestrators | Primary Cogni AI agent definition |
+| [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
 | [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
-| [.agents/agents/](.agents/agents/) | Orchestrators | Specialized agent configs for specific tasks |
+| [.agents/agents/](.agents/agents/) | Orchestrators | Local agent configs for this template repo |
 | [.agents/skills/](.agents/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
 | [.agents/prompts/](.agents/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
 | [.agents/instructions/](.agents/instructions/) | Linters & agents | Language-specific code standards |
+
+### Using This Repository via Git Subtree
+
+Other projects initialize this repo via git subtree **directly at `.github/agents`**:
+
+```bash
+git subtree add --prefix=.github/agents https://github.com/Cogni-AI-OU/cogni-ai-agents.git main --squash
+```
+
+After initialization the consumer project gets:
+
+- `.github/agents/cogni-ai.agent.md` — the primary agent
+- `.github/agents/AGENTS.md` — the agents catalog
+
+This mirrors the pattern used for skills (git subtree at a subdirectory under `.github/skills/`),
+except agents are mounted **directly** at `.github/agents` rather than in a subdirectory:
+
+```bash
+# Skills git subtree (reference — note the subdirectory)
+git subtree add --prefix=.github/skills/cogni-ai-skills https://github.com/Cogni-AI-OU/cogni-ai-agent-skills.git main --squash
+```
 
 See also:
 
