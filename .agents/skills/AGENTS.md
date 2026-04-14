@@ -9,15 +9,10 @@ For a human-readable overview, see [README.md](README.md).
 
 ## Mandatory Catalog Loading
 
-- Before selecting or loading any skill, MUST read
-  [cogni-ai-skills/AGENTS.md](cogni-ai-skills/AGENTS.md).
-- Treat [cogni-ai-skills/AGENTS.md](cogni-ai-skills/AGENTS.md) as the
-  authoritative list of actual available skills in this repository.
-- Resolve candidate skills from that catalog, then load the relevant
+- Before selecting or loading any skill, scan the skills directory for
+  available `SKILL.md` files.
+- Resolve candidate skills from this catalog, then load the relevant
   `SKILL.md` file or files before proceeding.
-- If the submodule catalog is unavailable, state that the actual skill list
-  could not be loaded and continue only with explicitly available local skill
-  files.
 
 ## Usage
 
