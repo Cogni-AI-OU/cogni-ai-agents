@@ -4,7 +4,7 @@
 
 ### Submitting A Bug Report
 
-Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
+Bugs are tracked as [GitHub issues](https://docs.github.com/en/issues).
 After you've determined which repository your bug is related to,
 create an issue on that repository and provide the details.
 
@@ -20,7 +20,7 @@ To optimize the code for readability, please follow these guidelines:
 ## Proposing changes
 
 To propose a code change on GitHub,
-please send a [Pull Request](https://support.github.com/features/pull-requests).
+please send a [Pull Request](https://docs.github.com/en/pull-requests).
 
 ## Testing
 
