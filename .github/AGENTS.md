@@ -6,14 +6,14 @@ Use this as the entry point for agent work, and follow linked catalogs when rele
 
 Read these Agent files when working in corresponding dirs:
 
-- [`instructions/AGENTS.md`](instructions/AGENTS.md)
-- [`prompts/AGENTS.md`](prompts/AGENTS.md)
-- [`skills/AGENTS.md`](skills/AGENTS.md)
+- [`../.agents/instructions/AGENTS.md`](../.agents/instructions/AGENTS.md)
+- [`../.agents/prompts/AGENTS.md`](../.agents/prompts/AGENTS.md)
+- [`../.agents/skills/AGENTS.md`](../.agents/skills/AGENTS.md)
 - [`workflows/AGENTS.md`](workflows/AGENTS.md)
 
 ## Additional key files
 
-- [.github/copilot-instructions.md](copilot-instructions.md): main coding standards for agents.
+- [../.agents/copilot-instructions.md](../.agents/copilot-instructions.md): main coding standards for agents.
 - [.github/mcp-config.json](mcp-config.json): MCP server configuration for GitHub Copilot.
   Provides access to built-in GitHub tools including:
   - Repository & Code: `get_file_contents`, `search_code`, `search_repositories`, `list_branches`, `list_commits`
