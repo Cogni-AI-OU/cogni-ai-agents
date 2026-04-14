@@ -4,7 +4,7 @@
 
 ### Submitting A Bug Report
 
-Bugs are tracked as [GitHub issues](https://docs.github.com/en/issues).
+Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 After you've determined which repository your bug is related to,
 create an issue on that repository and provide the details.
 
