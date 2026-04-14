@@ -113,14 +113,6 @@ After initialization the consumer project gets:
 - `.github/agents/cogni-ai.agent.md` — the primary agent
 - `.github/agents/AGENTS.md` — the agents catalog
 
-This mirrors the pattern used for skills (git subtree at a subdirectory under `.github/skills/`),
-except agents are mounted **directly** at `.github/agents` rather than in a subdirectory:
-
-```bash
-# Skills git subtree (reference — note the subdirectory)
-git subtree add --prefix=.github/skills/cogni-ai-skills https://github.com/Cogni-AI-OU/cogni-ai-agent-skills.git main --squash
-```
-
 See also:
 
 - [`AGENTS.md` file format specification](https://agents.md/)
