@@ -3,9 +3,9 @@
 # Note: Keep keys and envs in alphabetical order.
 name: OpenCode Review
 # Prevent concurrent runs on the same PR to avoid push conflicts.
-# When a new run is triggered, the previous pending run is cancelled.
+# When a new run is triggered, it will queue until the previous pending run completes.
 concurrency:
-  cancel-in-progress: true
+  cancel-in-progress: false
   group: opencode-review-${{ github.event.issue.number || github.event.pull_request.number || github.ref }}
 on:
   issue_comment:
@@ -16,6 +16,14 @@ on:
       - created
   pull_request:
     types:
+      - edited
+      - opened
+      - ready_for_review
+      - reopened
+      - review_requested
+  pull_request_target:
+    types:
+      - edited
       - opened
       - ready_for_review
       - reopened
@@ -23,16 +31,17 @@ on:
   workflow_call:
     inputs:
       additional_prompt:
+        default: ''
         description: Additional instructions for the review prompt
         required: false
         type: string
       agent:
-        default: build
+        default: cogni-ai-architect
         description: Agent to use.
         required: false
         type: string
       model:
-        default: ${{ vars.OPENCODE_MODEL_DEFAULT || 'opencode/gemini-3.1-pro' }}
+        default: ${{ vars.OPENCODE_MODEL_DEFAULT || 'opencode/gpt-5.3-codex' }}
         description: Model to use for OpenCode
         required: false
         type: string
@@ -48,15 +57,16 @@ on:
   workflow_dispatch:
     inputs:
       additional_prompt:
+        default: ''
         description: Additional instructions for the review prompt
         required: false
         type: string
       agent:
-        default: cogni-ai
+        default: cogni-ai-architect
         description: Agent to use.
         options:
           - build
-          - cogni-ai
+          - cogni-ai-architect
           - compaction
           - plan
           - summary
@@ -64,7 +74,7 @@ on:
         required: false
         type: choice
       model:
-        default: opencode/gemini-3.1-pro
+        default: opencode/gpt-5.3-codex
         description: Model to use for OpenCode
         options:
           - opencode/big-pickle
@@ -108,6 +118,12 @@ on:
           - opencode/nemotron-3-super-free
           - opencode/qwen3-coder
           - opencode/qwen3.6-plus-free
+          # Grok models (xAI)
+          - xai/grok-4-1-fast-non-reasoning  # Fast responses, 2M context
+          - xai/grok-4-1-fast-reasoning  # Tool-calling + reasoning, 2M context
+          - xai/grok-4.20-0309-non-reasoning  # Flagship, 2M context
+          - xai/grok-4.20-0309-reasoning  # Flagship + reasoning, 2M context
+          - xai/grok-code-fast-1  # Agentic coding + reasoning, 256K context
         required: false
         type: choice
       pr_number:
@@ -122,7 +138,8 @@ on:
         required: false
         type: choice
 env:
-  OPENCODE_MODEL_DEFAULT: opencode/gemini-3.1-pro
+  OPENCODE_AGENT_DEFAULT: cogni-ai-architect
+  OPENCODE_MODEL_DEFAULT: opencode/gpt-5.3-codex
 jobs:
   opencode-review:
     # Run automatically for trusted PRs, including Copilot-authored PRs,
@@ -140,12 +157,22 @@ jobs:
       ) || (
         github.event_name == 'issue_comment' &&
         github.event.issue.pull_request &&
-        contains(github.event.comment.body, '/review') &&
+        (
+          contains(github.event.comment.body, ' /review ') ||
+          startsWith(github.event.comment.body, '/review ') ||
+          endsWith(github.event.comment.body, ' /review') ||
+          github.event.comment.body == '/review'
+        ) &&
         !endsWith(github.actor, '[bot]') &&
         contains(fromJson('["COLLABORATOR","MEMBER","OWNER"]'), github.event.comment.author_association)
       ) || (
         github.event_name == 'pull_request_review_comment' &&
-        contains(github.event.comment.body, '/review') &&
+        (
+          contains(github.event.comment.body, ' /review ') ||
+          startsWith(github.event.comment.body, '/review ') ||
+          endsWith(github.event.comment.body, ' /review') ||
+          github.event.comment.body == '/review'
+        ) &&
         !endsWith(github.actor, '[bot]') &&
         contains(fromJson('["COLLABORATOR","MEMBER","OWNER"]'), github.event.comment.author_association)
       ) ||
@@ -204,6 +231,8 @@ jobs:
           cache: pip
           cache-dependency-path: .devcontainer/requirements.txt
           python-version: '3.12'
+      - name: Install pre-commit
+        run: pip install pre-commit
       - name: Cache installed dependencies
         id: cache-dependencies
         uses: actions/cache@v5.0.1
@@ -216,15 +245,47 @@ jobs:
       - name: Load review prompt
         id: load-prompt
         env:
+          ADDITIONAL_PROMPT_INPUT: ${{ inputs.additional_prompt }}
+          PR_FILES_JSON: ${{ steps.pr-details.outputs.files }}
+          PR_NUMBER: ${{ steps.pr-number.outputs.number }}
+          PR_SHA: ${{ steps.pr-details.outputs.sha }}
+          PR_TITLE: ${{ steps.pr-details.outputs.title }}
           PROMPT_INPUT: ${{ inputs.prompt }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
           prompt_name="${PROMPT_INPUT:-pr-review}"
           [[ "$prompt_name" =~ ^[a-z0-9-]+$ ]] || { echo "Invalid prompt: $prompt_name"; exit 1; }
           prompt_file=".github/prompts/$prompt_name.prompt.md"
           [ -f "$prompt_file" ] || { echo "Missing prompt: $prompt_file"; exit 1; }
-          { echo 'prompt<<EOF'; cat "$prompt_file"; echo 'EOF'; } >> "$GITHUB_OUTPUT"
-      - uses: anomalyco/opencode/github@latest
+          {
+            echo 'prompt<<EOF'
+            printf '%s\n' \
+              'Pull request needs to be reviewed in the context of the following repository:' \
+              '<repo>' \
+              "$REPOSITORY" \
+              '</repo>' \
+              '<pr-number>' \
+              "$PR_NUMBER" \
+              '</pr-number>' \
+              '<pr-files-json>' \
+              "$PR_FILES_JSON" \
+              '</pr-files-json>' \
+              '<pr-title>' \
+              "$PR_TITLE" \
+              '</pr-title>' \
+              '<pr-sha>' \
+              "$PR_SHA" \
+              '</pr-sha>'
+            cat "$prompt_file"
+            if [ -n "${ADDITIONAL_PROMPT_INPUT:-}" ]; then
+              printf '\nAdditional instructions:\n%s\n' "$ADDITIONAL_PROMPT_INPUT"
+            fi
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+      - name: Run opencode
+        id: opencode
+        uses: anomalyco/opencode/github@v1.4.3
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name == 'pull_request_target' && 'pull_request' || github.event_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -245,11 +306,13 @@ jobs:
                 "gh pr review*": "deny",
                 "git*": "allow",
                 "hexdump*": "allow",
+                "jq*": "allow",
                 "links*": "allow",
                 "mawk*": "allow",
                 "pipx*": "allow",
                 "pre-commit*": "allow",
                 "printf*": "allow",
+                "sed*": "allow",
                 "set*": "allow",
                 "time*": "allow",
                 "timeout*": "allow",
@@ -259,28 +322,25 @@ jobs:
               }
             }
         with:
-          agent: ${{ inputs.agent || 'build' }}
+          agent: ${{ inputs.agent || env.OPENCODE_AGENT_DEFAULT }}
           # See: <https://opencode.ai/docs/models/>
           model: ${{ inputs.model || env.OPENCODE_MODEL_DEFAULT }}
-          prompt: |-
-            Pull request needs to be reviewed in the context of the following repository:
-            <repo>
-            ${{ github.repository }}
-            </repo>
-            <pr-number>
-            ${{ steps.pr-number.outputs.number }}
-            </pr-number>
-            <pr-files-json>
-            ${{ steps.pr-details.outputs.files }}
-            </pr-files-json>
-            <pr-title>
-            ${{ steps.pr-details.outputs.title }}
-            </pr-title>
-            <pr-sha>
-            ${{ steps.pr-details.outputs.sha }}
-            </pr-sha>
-            ${{ steps.load-prompt.outputs.prompt }}
-            ${{ inputs.additional_prompt && format('\nAdditional instructions:\n{0}', inputs.additional_prompt) || '' }}
+          prompt: ${{ steps.load-prompt.outputs.prompt }}
+      - name: Annotate OpenCode prompt and output
+        env:
+          OPENCODE_PROMPT: ${{ steps.load-prompt.outputs.prompt }}
+          OPENCODE_OUTPUT: ${{ steps.opencode.outputs.response }}
+        run: |
+          set -euo pipefail
+          escape() {
+            local value="$1"
+            value=${value//'%'/'%25'}
+            value=${value//$'\r'/'%0D'}
+            value=${value//$'\n'/'%0A'}
+            printf '%s' "$value"
+          }
+          echo "::notice title=OpenCode prompt::$(escape "$OPENCODE_PROMPT")"
+          echo "::notice title=OpenCode output::$(escape "${OPENCODE_OUTPUT:-}")"
       - name: Show OpenCode log on failure
         if: failure()
         run: |-
