@@ -50,8 +50,8 @@ directory when needed.
 
 The `prompts/` directory contains ready-to-use prompts for AI agents to perform
 common repository management tasks. For agent-loading guidance and catalog, see
-[prompts/AGENTS.md](prompts/AGENTS.md). For human-oriented details, see
-[prompts/README.md](prompts/README.md).
+[../.agents/prompts/AGENTS.md](../.agents/prompts/AGENTS.md). For human-oriented details, see
+[../.agents/prompts/README.md](../.agents/prompts/README.md).
 
 ## Problem Matchers
 

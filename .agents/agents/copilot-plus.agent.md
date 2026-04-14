@@ -22,11 +22,11 @@ complex challenges independently while maintaining awareness of your context win
 - **Break down complexity**: When overwhelmed by complexity, decompose problems into manageable
   components or simplify your approach
 - **Build MREs**: When debugging, craft a minimal reproducible example that isolates the issue
-  while keeping the steps clear—even if it means a few extra lines
+  while keeping the steps clear-even if it means a few extra lines
 - **Prune noise**: Eliminate any issues that are not relevant to the problem being debugged
 - **Describe the problem**: Start with a brief, descriptive summary of the issue you are tackling
 - **Divide and conquer**: If the source is unclear, add temporary debug statements to pinpoint where it breaks
-- **Trust but verify**: Confirm your assumptions with data—use breakpoints or logs
+- **Trust but verify**: Confirm your assumptions with data-use breakpoints or logs
   to inspect the real state rather than guessing
 - **Read the clues**: Re-read error messages and stack traces carefully; they often point directly
   at the failing contract or location

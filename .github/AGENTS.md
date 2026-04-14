@@ -1,22 +1,36 @@
-# .github Directory Catalog (Agent View)
+# .github Directory
 
-Catalog of folders within the `.github` directory of this repository.
-Use this as the entry point for agent work, and follow linked catalogs where present.
+Use this as the entry point for agent work, and follow linked catalogs when relevant.
 
-## Folder catalog
+## Directory-Specific Agent files
 
-| Folder | Purpose | Agent catalog |
-| ------ | ------- | ------------- |
-| [.github/agents/](agents/) | Agent configuration files (e.g., specialized agent definitions) | — |
-| [.github/instructions/](instructions/) | Language- and file-type editing standards | [.github/instructions/AGENTS.md](instructions/AGENTS.md) |
-| [.github/prompts/](prompts/) | Prompt files for AI agents (Markdown and YAML) | [.github/prompts/AGENTS.md](prompts/AGENTS.md) |
-| [.github/skills/](skills/) | Loadable Copilot skills with SKILL.md entries | [.github/skills/AGENTS.md](skills/AGENTS.md) |
-| [.github/workflows/](workflows/) | Reusable GitHub Actions workflows | [.github/workflows/AGENTS.md](workflows/AGENTS.md) |
+Read these Agent files when working in corresponding dirs:
+
+- [`../.agents/instructions/AGENTS.md`](../.agents/instructions/AGENTS.md)
+- [`../.agents/prompts/AGENTS.md`](../.agents/prompts/AGENTS.md)
+- [`../.agents/skills/AGENTS.md`](../.agents/skills/AGENTS.md)
+- [`workflows/AGENTS.md`](workflows/AGENTS.md)
 
 ## Additional key files
 
-- [.github/copilot-instructions.md](copilot-instructions.md): main coding standards for agents.
+- [../.agents/copilot-instructions.md](../.agents/copilot-instructions.md): main coding standards for agents.
+- [.github/mcp-config.json](mcp-config.json): MCP server configuration for GitHub Copilot.
+  Provides access to built-in GitHub tools including:
+  - Repository & Code: `get_file_contents`, `search_code`, `search_repositories`, `list_branches`, `list_commits`
+  - Issues & PRs: `get_issue`, `list_pull_requests`, `create_pull_request`
+  - Actions: `list_workflows`, `list_workflow_runs`, `get_job_logs`
 - [.github/actionlint-matcher.json](actionlint-matcher.json): problem matchers used in workflows.
 - [.github/pre-commit-matcher.json](pre-commit-matcher.json): problem matchers used in workflows.
 
-Keep this catalog updated when adding, removing, or renaming folders or agent catalogs.
+## Hardened NEVER List
+
+- **NEVER create `.github/README.md`**: GitHub renders `.github/README.md` with the highest priority. Creating it will
+  override the main `README.md` on the repository homepage and profile page.
+
+## Troubleshooting
+
+TBA
+
+## Additional notes
+
+- Keep this Agent file up-to-date.
