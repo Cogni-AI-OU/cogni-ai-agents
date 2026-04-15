@@ -51,7 +51,7 @@ on:
         type: number
       prompt:
         default: pr-review
-        description: Prompt template name from .agents/prompts (without extension)
+        description: Prompt template name (without extension)
         required: false
         type: string
   workflow_dispatch:
@@ -132,7 +132,7 @@ on:
         type: number
       prompt:
         default: pr-review
-        description: Prompt template name from .agents/prompts (without extension)
+        description: Prompt template name (without extension)
         options:
           - pr-review
         required: false
@@ -256,7 +256,7 @@ jobs:
           set -euo pipefail
           prompt_name="${PROMPT_INPUT:-pr-review}"
           [[ "$prompt_name" =~ ^[a-z0-9-]+$ ]] || { echo "Invalid prompt: $prompt_name"; exit 1; }
-          prompt_file=".agents/prompts/$prompt_name.prompt.md"
+          prompt_file="prompts/$prompt_name.prompt.md"
           [ -f "$prompt_file" ] || { echo "Missing prompt: $prompt_file"; exit 1; }
           {
             echo 'prompt<<EOF'

@@ -12,7 +12,7 @@ this repo is used via git subtree at `.github/agents`.
 
 | File | Purpose |
 | ---- | ------- |
-| [cogni-ai-architect.agent.md](agents/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
+| [cogni-ai-architect.agent.md](../cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
 
 ## Directory-Specific Agent files
 
@@ -412,7 +412,7 @@ If you encounter firewall issues when using the GitHub Copilot Agent:
 - Do not workaround blocked URLs by adding markdown-link-check ignore/whitelist patterns for real links.
 - Keep markdown-link-check validating real links, and request firewall allowlisting instead.
 - If you need to allowlist additional hosts, update your firewall configuration accordingly
-  by following `.agents/agents/FIREWALL.md` and keep that file up to date.
+  by following `FIREWALL.md` and keep that file up to date.
 
 ### Linting issues
 

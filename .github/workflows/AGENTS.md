@@ -37,7 +37,7 @@ For a human-readable overview, see [README.md](README.md).
 ### opencode.yml
 
 - Purpose: invoke OpenCode agents via slash commands or manual triggers.
-- Inputs: `agent` (default `cogni-ai`), `model` (workflow_call default via
+- Inputs: `agent` (default `cogni-ai-architect`), `model` (workflow_call default via
   `vars.OPENCODE_MODEL_DEFAULT` with fallback `opencode/gpt-5.3-codex`; workflow_dispatch
   default `opencode/gpt-5.3-codex`), `prompt` (optional override).
 - Triggers: `workflow_dispatch`, `workflow_call`, or issue comments with `/oc` or `/opencode` from trusted (non-bot) collaborators/members/owners.
@@ -49,7 +49,7 @@ For a human-readable overview, see [README.md](README.md).
 ### opencode-review.yml
 
 - Purpose: OpenCode-driven PR review.
-- Inputs: agent (cogni-ai), model (workflow_call default via
+- Inputs: agent (cogni-ai-architect), model (workflow_call default via
   `vars.OPENCODE_MODEL_DEFAULT` with fallback `opencode/gpt-5.3-codex`; workflow_dispatch
   default `opencode/gpt-5.3-codex`), additional_prompt, pr_number (req for call/dispatch),
   prompt (default pr-review).
@@ -73,7 +73,7 @@ workflow, local OpenCode, and VS Code auto-approve configs.
 | ---- | -------- |
 | [opencode.yml](opencode.yml) | Line ~130 (env section) |
 | [opencode-review.yml](opencode-review.yml) | Line ~210 (env section) |
-| [.opencode/opencode.jsonc](../../.opencode/opencode.jsonc) | `agent.cogni-ai.permission.bash` |
+| [.opencode/opencode.jsonc](../../.opencode/opencode.jsonc) | `agent.cogni-ai-architect.permission.bash` |
 | [.vscode/settings.json](../../.vscode/settings.json) | `chat.tools.terminal.autoApprove` |
 
 ### Model options list
