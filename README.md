@@ -119,8 +119,6 @@ See also:
 
 ## Available Agents
 
-### [Cogni AI agent](cogni-ai/cogni-ai.agent.md)
-
 ### [Cogni AI Architect agent](cogni-ai-architect/cogni-ai-architect.agent.md)
 
 Enhanced agent with critical thinking, robust problem-solving, and context-aware resource management. Features:
@@ -171,7 +169,7 @@ See: [Customizing or disabling the firewall for GitHub Copilot coding agent][fir
 
 ### Firewall allowlist
 
-See [FIREWALL.md](.agents/agents/FIREWALL.md) for recommended hosts to allow and the official guidance link.
+See [FIREWALL.md](FIREWALL.md) for recommended hosts to allow and the official guidance link.
 
 ### MCP Server Setup
 
