@@ -146,8 +146,7 @@ to improve onboarding experiences for new engineers.
 {
   "steps": [
     {
-      "description": "Let's add a new component. Insert this code:\n\n```typescript\nexport class NewComponent
-      {\n  // Your code here\n}\n```",
+      "description": "Insert code:\n\n```typescript\nexport class NewComponent {}\n```",
       "file": "src/components/new-component.ts",
       "line": 1
     },

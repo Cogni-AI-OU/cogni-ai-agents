@@ -86,16 +86,16 @@ pre-commit run flake8 -a
 This repository is the **source of truth** for Cogni AI agent configurations.
 Agent files live in the **repository root** so that when this repo is added
 via git subtree at `.github/agents`, consumers receive them directly at
-`.github/agents/cogni-ai.agent.md` (and `.github/agents/AGENTS.md`).
+`.github/agents/cogni-ai/cogni-ai.agent.md` (and `.github/agents/AGENTS.md`).
 
 ### Agent Configuration Files
 
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
-| [.agents/agents/cogni-ai.agent.md](.agents/agents/cogni-ai.agent.md) | Orchestrators | Primary Cogni AI agent definition |
+| [cogni-ai/cogni-ai.agent.md](cogni-ai/cogni-ai.agent.md) | Orchestrators | Primary Cogni AI agent definition |
 | [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
 | [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
-| [.agents/agents/](.agents/agents/) | Orchestrators | Local agent configs for this template repo |
+| [cogni-ai/](cogni-ai/) | Orchestrators | Local agent configs for this template repo |
 | [.agents/skills/](.agents/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
 | [.agents/prompts/](.agents/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
 | [.agents/instructions/](.agents/instructions/) | Linters & agents | Language-specific code standards |
@@ -110,7 +110,7 @@ git subtree add --prefix=.github/agents https://github.com/Cogni-AI-OU/cogni-ai-
 
 After initialization the consumer project gets:
 
-- `.github/agents/cogni-ai.agent.md` — the primary agent
+- `.github/agents/cogni-ai/cogni-ai.agent.md` — the primary agent
 - `.github/agents/AGENTS.md` — the agents catalog
 
 See also:

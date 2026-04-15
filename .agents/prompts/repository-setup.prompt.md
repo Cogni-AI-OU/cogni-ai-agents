@@ -394,8 +394,8 @@ exist. Do not skip items just because a file already exists.
   - Content: Overview of repository structure, key files, development workflows
   - Format: JSON file following CodeTour schema
   - Note: Use the code-tour agent to create repository-specific tours
-  - Agent instructions: `https://github.com/Cogni-AI-OU/.github/blob/main/.agents/agents/code-tour.agent.md`
-  - The agent should be copied to `.agents/agents/code-tour.agent.md` in the repository
+  - Agent instructions: `https://github.com/Cogni-AI-OU/.github/blob/main/code-tour/code-tour.agent.md`
+  - The agent should be copied to `code-tour/code-tour.agent.md` in the repository
   - Reference the agent when creating tours: "Use the Code Tour Expert agent to create a getting-started tour"
 
 - [ ] **Create or update repository README.md**
