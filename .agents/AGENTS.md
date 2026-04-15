@@ -13,6 +13,7 @@ this repo is used via git subtree at `.github/agents`.
 | File | Purpose |
 | ---- | ------- |
 | [cogni-ai.agent.md](../cogni-ai/cogni-ai.agent.md) | Primary Cogni AI autonomous coding agent |
+| [cogni-ai-architect.agent.md](../cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
 
 ## Directory-Specific Agent files
 

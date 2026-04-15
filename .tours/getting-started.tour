@@ -33,8 +33,8 @@
     },
     {
       "title": "Custom Agents",
-      "description": "## Custom Agent Profiles\n\nThe custom agent profiles are located in their respective directories in the repository root.\n\n### Notable Files:\n\n- **`cogni-ai/cogni-ai.agent.md`**: The newer Cogni AI agent profile that replaces the older Copilot Plus reference\n- **`code-tour/code-tour.agent.md`**: Guidance for creating and maintaining CodeTour files\n\nThe repository also includes `.opencode/` assets so OpenCode can load the matching Cogni AI behavior and helper commands.",
-      "file": "cogni-ai/cogni-ai.agent.md",
+      "description": "## Custom Agent Profiles\n\nThe custom agent profiles are located in their respective directories in the repository root.\n\n### Notable Files:\n\n- **`cogni-ai-architect/cogni-ai-architect.agent.md`**: The Cogni AI Architect agent profile for autonomous engineering and system architecture\n- **`code-tour/code-tour.agent.md`**: Guidance for creating and maintaining CodeTour files\n\nThe repository also includes `.opencode/` assets so OpenCode can load the matching Cogni AI behavior and helper commands.",
+      "file": "cogni-ai-architect/cogni-ai-architect.agent.md",
       "line": 1
     },
     {

@@ -20,7 +20,7 @@ To optimize the code for readability, please follow these guidelines:
 ## Proposing changes
 
 To propose a code change on GitHub,
-please send a [Pull Request](https://support.github.com/features/pull-requests).
+please send a [Pull Request](https://docs.github.com/en/pull-requests).
 
 ## Testing
 
