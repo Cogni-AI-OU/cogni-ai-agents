@@ -62,7 +62,7 @@ jobs:
       id-token: write
       issues: write
       pull-requests: write
-    secrets: inherit
+    secrets: inherit  # pragma: allowlist secret
     uses: Cogni-AI-OU/.github/.github/workflows/opencode.yml@main
     with:
       agent: >-

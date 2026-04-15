@@ -43,7 +43,7 @@ jobs:
       id-token: write
       issues: write
       pull-requests: write
-    secrets: inherit
+    secrets: inherit  # pragma: allowlist secret
     uses: Cogni-AI-OU/.github/.github/workflows/opencode-review.yml@main
     with:
       pr_number: >-
