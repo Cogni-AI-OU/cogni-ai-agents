@@ -86,18 +86,17 @@ pre-commit run flake8 -a
 This repository is the **source of truth** for Cogni AI agent configurations.
 Agent files live in the **repository root** so that when this repo is added
 via git subtree at `.github/agents`, consumers receive them directly at
-`.github/agents/cogni-ai-architect.agent.md` (and `.github/agents/AGENTS.md`).
+`.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` (and `.github/agents/AGENTS.md`).
 
 ### Agent Configuration Files
 
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
-| [.agents/agents/cogni-ai-architect.agent.md](.agents/agents/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
+| [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
 | [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
 | [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
-| [.agents/agents/](.agents/agents/) | Orchestrators | Local agent configs for this template repo |
+| [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
 | [.agents/skills/](.agents/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
-| [.agents/prompts/](.agents/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
 | [.agents/instructions/](.agents/instructions/) | Linters & agents | Language-specific code standards |
 
 ### Using This Repository via Git Subtree
@@ -110,7 +109,7 @@ git subtree add --prefix=.github/agents https://github.com/Cogni-AI-OU/cogni-ai-
 
 After initialization the consumer project gets:
 
-- `.github/agents/cogni-ai-architect.agent.md` — the primary agent
+- `.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` — the primary agent
 - `.github/agents/AGENTS.md` — the agents catalog
 
 See also:
@@ -120,7 +119,7 @@ See also:
 
 ## Available Agents
 
-### [Cogni AI Architect agent](.agents/agents/cogni-ai-architect.agent.md)
+### [Cogni AI Architect agent](cogni-ai-architect/cogni-ai-architect.agent.md)
 
 Enhanced agent with critical thinking, robust problem-solving, and context-aware resource management. Features:
 
@@ -130,7 +129,7 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 - Self-improvement capabilities
 - Never-give-up problem-solving approach
 
-### [Code Tour Expert](.agents/agents/code-tour.agent.md)
+### [Code Tour Expert](code-tour/code-tour.agent.md)
 
 Expert agent for creating and maintaining VSCode CodeTour files. Features:
 
@@ -170,7 +169,7 @@ See: [Customizing or disabling the firewall for GitHub Copilot coding agent][fir
 
 ### Firewall allowlist
 
-See [FIREWALL.md](.agents/agents/FIREWALL.md) for recommended hosts to allow and the official guidance link.
+See [FIREWALL.md](FIREWALL.md) for recommended hosts to allow and the official guidance link.
 
 ### MCP Server Setup
 
