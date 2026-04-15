@@ -46,13 +46,6 @@ actively executed but are preserved for future use or copying to other
 repositories. These templates can be customized and moved to the `workflows/`
 directory when needed.
 
-## Agent Prompts
-
-The `prompts/` directory contains ready-to-use prompts for AI agents to perform
-common repository management tasks. For agent-loading guidance and catalog, see
-[../.agents/prompts/AGENTS.md](../.agents/prompts/AGENTS.md). For human-oriented details, see
-[../.agents/prompts/README.md](../.agents/prompts/README.md).
-
 ## Problem Matchers
 
 GitHub Actions problem matchers automatically annotate files with errors and

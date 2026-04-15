@@ -97,7 +97,6 @@ via git subtree at `.github/agents`, consumers receive them directly at
 | [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai/](cogni-ai/) | Orchestrators | Local agent configs for this template repo |
 | [.agents/skills/](.agents/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
-| [.agents/prompts/](.agents/prompts/) | All | Prompt templates (`.md` for VSCode, `.yaml` for GitHub Models) |
 | [.agents/instructions/](.agents/instructions/) | Linters & agents | Language-specific code standards |
 
 ### Using This Repository via Git Subtree
