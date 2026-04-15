@@ -49,41 +49,11 @@ For a human-readable overview, see [README.md](README.md).
 ### opencode-review.yml
 
 - Purpose: OpenCode-driven PR review.
-- Inputs: agent (cogni-ai), model (workflow_call default via
-  `vars.OPENCODE_MODEL_DEFAULT` with fallback `opencode/gpt-5.3-codex`; workflow_dispatch
-  default `opencode/gpt-5.3-codex`), additional_prompt, pr_number (req for call/dispatch),
-  prompt (default pr-review).
+- Inputs: pr_number (req for call/dispatch).
 - Triggers: pull_request_target (trusted authors), /review comment (COLLABORATOR/OWNER/MEMBER), workflow_call,
   workflow_dispatch.
-- Guardrail: align review default behavior with OpenCode by using workflow-level
-  `env` fallbacks for `agent` and `model` rather than hardcoded literals in steps.
 - Permissions: `contents: read`, `id-token: write`, `issues: read`, `pull-requests: write`.
 - Reusable: `uses: Cogni-AI-OU/.github/.github/workflows/opencode-review.yml@main`.
-
-## Synchronized Configuration
-
-The following configuration values **MUST** be kept in sync across multiple files:
-
-### OPENCODE_PERMISSION
-
-The OpenCode bash command allow/deny list must stay synchronized across
-workflow, local OpenCode, and VS Code auto-approve configs.
-
-| File | Location |
-| ---- | -------- |
-| [opencode.yml](opencode.yml) | Line ~130 (env section) |
-| [opencode-review.yml](opencode-review.yml) | Line ~210 (env section) |
-| [.opencode/opencode.jsonc](../../.opencode/opencode.jsonc) | `agent.cogni-ai.permission.bash` |
-| [.vscode/settings.json](../../.vscode/settings.json) | `chat.tools.terminal.autoApprove` |
-
-### Model options list
-
-The `model` input options for `workflow_dispatch` must be identical in both workflow files:
-
-| File | Location |
-| ---- | -------- |
-| [opencode.yml](opencode.yml) | Lines ~48-90 (workflow_dispatch inputs) |
-| [opencode-review.yml](opencode-review.yml) | Lines ~67-107 (workflow_dispatch inputs) |
 
 ## Notes
 
