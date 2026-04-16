@@ -2,8 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   "instructions": [
     "AGENTS.md",
-    ".agents/copilot-instructions.md",
-    ".agents/skills/AGENTS.md"
+    ".github/copilot-instructions.md",
+    ".github/skills/AGENTS.md"
   ],
   "agent": {
     "cogni-ai-architect": {

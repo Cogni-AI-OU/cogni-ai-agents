@@ -331,9 +331,9 @@ exist. Do not skip items just because a file already exists.
   - Purpose: Agent instruction file describing workflows, triggers, and inputs
   - Action: Create if missing; update when workflows are added, removed, or renamed
 
-- [ ] **`.agents/prompts/` directory**
+- [ ] **`.github/prompts/` directory**
   - Check if directory exists with prompt files
-  - Reference: `https://github.com/Cogni-AI-OU/.github/tree/main/.agents/prompts`
+  - Reference: `https://github.com/Cogni-AI-OU/.github/tree/main/.github/prompts`
   - Purpose: Prompt templates for GitHub Models, OpenCode, and Copilot
   - Action: Include relevant prompt files; keep formats (Markdown/YAML) as upstream
   - Available prompts:
@@ -343,9 +343,9 @@ exist. Do not skip items just because a file already exists.
     - `test.prompt.yml` - Example prompt
   - Customize: Add prompts for repository-specific tasks as needed
 
-- [ ] **`.agents/prompts/AGENTS.md`**
+- [ ] **`.github/prompts/AGENTS.md`**
   - Check if file exists
-  - Reference: `https://github.com/Cogni-AI-OU/.github/blob/main/.agents/prompts/AGENTS.md`
+  - Reference: `https://github.com/Cogni-AI-OU/.github/blob/main/.github/prompts/AGENTS.md`
   - Purpose: Agent instruction file describing workflows, triggers, and inputs
   - Action: Create if missing; update when prompts change
 
@@ -394,13 +394,13 @@ exist. Do not skip items just because a file already exists.
   - Content: Overview of repository structure, key files, development workflows
   - Format: JSON file following CodeTour schema
   - Note: Use the code-tour agent to create repository-specific tours
-  - Agent instructions: `https://github.com/Cogni-AI-OU/.github/blob/main/.agents/agents/code-tour.agent.md`
-  - The agent should be copied to `.agents/agents/code-tour.agent.md` in the repository
+  - Agent instructions: `https://github.com/Cogni-AI-OU/.github/blob/main/.github/agents/code-tour.agent.md`
+  - The agent should be copied to `.github/agents/code-tour.agent.md` in the repository
   - Reference the agent when creating tours: "Use the Code Tour Expert agent to create a getting-started tour"
 
 - [ ] **Create or update repository README.md**
   - Check if `README.md` exists
-  - Reference instructions: `https://github.com/Cogni-AI-OU/.github/blob/main/.agents/instructions/readme.instructions.md`
+  - Reference instructions: `https://github.com/Cogni-AI-OU/.github/blob/main/.github/instructions/readme.instructions.md`
   - Purpose: Main documentation for repository
   - Action: Ensure it follows organization standards
   - Required sections: Project overview, getting started, development, structure, contributing, license
@@ -463,9 +463,9 @@ exist. Do not skip items just because a file already exists.
   - Format: JSON file with `contextFileName` property
   - Example: `{ "contextFileName": "AGENTS.md" }`
 
-- [ ] **`.agents/copilot-instructions.md`**
+- [ ] **`.github/copilot-instructions.md`**
   - Check if file exists
-  - Reference: `https://github.com/Cogni-AI-OU/.github/blob/main/.agents/copilot-instructions.md`
+  - Reference: `https://github.com/Cogni-AI-OU/.github/blob/main/.github/copilot-instructions.md`
   - Purpose: Comprehensive coding standards for GitHub Copilot
   - Action: Create if missing, adapted for repository language/framework
   - Content: Project overview, coding standards, formatting guidelines, troubleshooting
