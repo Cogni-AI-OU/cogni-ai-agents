@@ -19,7 +19,6 @@ Cogni-AI-OU projects:
 - **AI Agent Configurations**: AGENTS.md, skills, and prompts for automated development
 - Coding Instructions: Language-specific standards in `.github/instructions/`
 - **Pre-commit Hooks**: Linting and validation tooling
-- **Code Tours**: Guided walkthroughs for repository onboarding
 
 ### How to Use
 
@@ -130,17 +129,6 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 - Command installation fallback logic
 - Self-improvement capabilities
 - Never-give-up problem-solving approach
-
-### [Code Tour Expert](code-tour/code-tour.agent.md)
-
-Expert agent for creating and maintaining VSCode CodeTour files. Features:
-
-- Creating `.tours/` files with proper CodeTour schema
-- Designing step-by-step walkthroughs for complex codebases
-- Implementing interactive tours with command links and code snippets
-- Setting up primary tours and tour linking sequences
-
-**When to use**: Anytime you need to create or update `.tour` files for repository onboarding.
 
 ## How to Use Custom Agents
 
