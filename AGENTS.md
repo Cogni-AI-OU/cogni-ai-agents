@@ -341,7 +341,6 @@ molecule syntax
 
 ### Updating Coding Standards
 
-- Language-specific instructions are in `.github/instructions/`
 - Update `.markdownlint.yaml`, `.yamllint`, or `.editorconfig` for linting rules
 - Run `pre-commit run -a` to verify changes pass all checks
 

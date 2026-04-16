@@ -16,8 +16,7 @@ Cogni-AI-OU projects:
 ### Key Features
 
 - **GitHub Actions Workflows**: CI/CD and automation (OpenCode, pre-commit, etc.)
-- **AI Agent Configurations**: AGENTS.md, skills, and prompts for automated development
-- Coding Instructions: Language-specific standards in `.github/instructions/`
+- **AI Agent Configurations**: AGENTS.md and skills for automated development
 - **Pre-commit Hooks**: Linting and validation tooling
 
 ### How to Use
@@ -77,7 +76,7 @@ pre-commit run flake8 -a
 - `cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `AGENTS.md`: agents catalog and repository-specific guidance
-- `.github/`: default templates, workflows, instructions, prompts, skills, and agent configuration
+- `.github/`: default templates, workflows, skills, and agent configuration
 - `.tours/`: guided walkthroughs for repository onboarding
 - `README.md`: repository overview and local development workflow
 
@@ -98,7 +97,6 @@ via git subtree at `.github/agents`, consumers receive them directly at
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
 | [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
-| [.github/instructions/](.github/instructions/) | Linters & agents | Language-specific code standards |
 
 ### Using This Repository via Git Subtree
 
