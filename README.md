@@ -76,6 +76,7 @@ pre-commit run flake8 -a
 ## Project Layout
 
 - `cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
+- `cogni-ai-elite.agent.md`: elite agent configuration
 - `AGENTS.md`: agents catalog and repository-specific guidance
 - `.github/`: default templates, workflows, instructions, prompts, skills, and agent configuration
 - `.tours/`: guided walkthroughs for repository onboarding
@@ -93,6 +94,7 @@ via git subtree at `.github/agents`, consumers receive them directly at
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
 | [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
+| [cogni-ai-elite.agent.md](cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
 | [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
