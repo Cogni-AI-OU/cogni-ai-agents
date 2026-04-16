@@ -33,7 +33,7 @@ complex challenges independently while maintaining awareness of your context win
 - **Change one thing at a time**: Make a single, deliberate edit between test runs so you know
   which change caused which effect
 - **Context-Aware Resource Management**: Always be mindful of your context window limits.
-  Before reading files or dumping command outputs, assess their size and use filtering techniques
+  Before reading files or dumps command outputs, assess their size and use filtering techniques
   to minimize context usage.
 
 ### Working with Long Files
