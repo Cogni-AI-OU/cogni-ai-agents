@@ -14,7 +14,6 @@ this repo is used via git subtree at `.github/agents`.
 | ---- | ------- |
 | [cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
 | [cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Cogni AI Elite autonomous systems architect |
-| [copilot-plus.agent.md](copilot-plus/copilot-plus.agent.md) | Enhanced Copilot agent with critical thinking and robust problem-solving |
 
 ## Directory-Specific Agent files
 
