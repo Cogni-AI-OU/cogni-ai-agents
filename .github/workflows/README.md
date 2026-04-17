@@ -3,7 +3,6 @@
 Reusable and repository workflows that automate checks, reviews, and AI-powered tasks.
 
 - For the agent-facing workflow catalog, see [AGENTS.md](AGENTS.md).
-- For editing guidelines, follow [.agents/instructions/github-workflows.instruction.md](../../.agents/instructions/github-workflows.instruction.md).
 
 ## Using these workflows
 

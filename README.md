@@ -16,10 +16,8 @@ Cogni-AI-OU projects:
 ### Key Features
 
 - **GitHub Actions Workflows**: CI/CD and automation (OpenCode, pre-commit, etc.)
-- **AI Agent Configurations**: AGENTS.md, skills, and prompts for automated development
-- **Coding Instructions**: Language-specific standards in `.agents/instructions/`
+- **AI Agent Configurations**: AGENTS.md and skills for automated development
 - **Pre-commit Hooks**: Linting and validation tooling
-- **Code Tours**: Guided walkthroughs for repository onboarding
 
 ### How to Use
 
@@ -45,7 +43,7 @@ Cogni-AI-OU projects:
 3. Review the core guidance:
    - This README for repository scope and the local workflow
    - [.tours/getting-started.tour](.tours/getting-started.tour) for a guided walkthrough
-   - [.agents/AGENTS.md](.agents/AGENTS.md) for repository-specific agent guidance
+   - [AGENTS.md](AGENTS.md) for repository-specific agent guidance
 
 ## Development
 
@@ -75,9 +73,10 @@ pre-commit run flake8 -a
 
 ## Project Layout
 
-- `cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
+- `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
+- `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `AGENTS.md`: agents catalog and repository-specific guidance
-- `.github/`: default templates, workflows, instructions, prompts, skills, and agent configuration
+- `.github/`: default templates, workflows, skills, and agent configuration
 - `.tours/`: guided walkthroughs for repository onboarding
 - `README.md`: repository overview and local development workflow
 
@@ -93,11 +92,11 @@ via git subtree at `.github/agents`, consumers receive them directly at
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
 | [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
-| [.agents/AGENTS.md](.agents/AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
-| [.agents/copilot-instructions.md](.agents/copilot-instructions.md) | Copilot | Coding standards and project context |
+| [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
+| [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
+| [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
-| [.agents/skills/](.agents/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
-| [.agents/instructions/](.agents/instructions/) | Linters & agents | Language-specific code standards |
+| [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
 
 ### Using This Repository via Git Subtree
 
@@ -128,17 +127,6 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 - Command installation fallback logic
 - Self-improvement capabilities
 - Never-give-up problem-solving approach
-
-### [Code Tour Expert](code-tour/code-tour.agent.md)
-
-Expert agent for creating and maintaining VSCode CodeTour files. Features:
-
-- Creating `.tours/` files with proper CodeTour schema
-- Designing step-by-step walkthroughs for complex codebases
-- Implementing interactive tours with command links and code snippets
-- Setting up primary tours and tour linking sequences
-
-**When to use**: Anytime you need to create or update `.tour` files for repository onboarding.
 
 ## How to Use Custom Agents
 

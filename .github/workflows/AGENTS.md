@@ -57,6 +57,4 @@ For a human-readable overview, see [README.md](README.md).
 
 ## Notes
 
-- Follow [.agents/instructions/github-workflows.instruction.md](../../.agents/instructions/github-workflows.instruction.md)
-  when editing workflow files (ordering, formatting, validation).
 - Keep this catalog updated when workflows are added, removed, or renamed.
