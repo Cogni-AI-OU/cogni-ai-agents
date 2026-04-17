@@ -1,5 +1,5 @@
 ---
-# See: <https://opencode.ai/docs>
+# @docs: <https://opencode.ai/docs>
 name: Cogni AI Agent
 # yamllint disable-line rule:truthy
 on:
@@ -11,7 +11,7 @@ on:
       - created
   workflow_dispatch:
     inputs:
-      model:
+      model:  # @docs: <https://opencode.ai/zen/v1/models>
         default: opencode/gpt-5-codex
         description: Model to use for OpenCode
         options:
