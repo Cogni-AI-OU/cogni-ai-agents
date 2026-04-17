@@ -2,7 +2,7 @@
 
 Persistent single-source truth for autonomous agent behavior.
 
-For general project invariants see [README.md](../README.md).
+For general project invariants see [README.md](README.md).
 
 ## Agents Catalog
 
@@ -12,24 +12,25 @@ this repo is used via git subtree at `.github/agents`.
 
 | File | Purpose |
 | ---- | ------- |
-| [cogni-ai-architect.agent.md](../cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
+| [cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
+| [cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Cogni AI Elite autonomous systems architect |
 
 ## Directory-Specific Agent files
 
 Read and merge these when operating inside corresponding sub-directories (order = precedence):
 
 - `.opencode/AGENTS.md`
-- [`../.github/AGENTS.md`](../.github/AGENTS.md)
-- [`skills/AGENTS.md`](skills/AGENTS.md) to discover the available
+- [`.github/AGENTS.md`](.github/AGENTS.md)
+- [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
-- [`../.vscode/AGENTS.md`](../.vscode/AGENTS.md) (command permissions and tasks)
+- [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
 - Any `AGENTS.md` or `SKILL.md` in ancestor, then current directory tree
 
 ## Mandatory Skill Loading Protocol
 
 - Before any tool invocation, code delta, or execution plan, MUST read
-  [`skills/AGENTS.md`](skills/AGENTS.md) when present.
-- Treat [`skills/AGENTS.md`](skills/AGENTS.md) as the
+  [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) when present.
+- Treat [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) as the
   authoritative catalog of available skills; follow its links to candidate
   `SKILL.md` files.
 - Deterministically route user intent to skills in this order: exact
@@ -89,7 +90,7 @@ Read and merge these when operating inside corresponding sub-directories (order 
   environment and upstream dependencies. If the root cause originates outside the repository scope,
   state the required upstream fix clearly and halt rather than introducing local entropy.
 - Read, assimilate, and strictly enforce the invariants defined in the main `AGENTS.md`,
-  along with any directory-specific `AGENTS.md` and related files, `.agents/copilot-instructions.md`,
+  along with any directory-specific `AGENTS.md` and related files, `.github/copilot-instructions.md`,
   and autonomously load any relevant `.instructions.md` rules or `SKILL.md` workflows before formulating a strategy.
 - Declare required inputs, missing context, edge cases, and optimal strategy before any tool invocation or code delta.
 - Snapshot current problem state in one entropy-minimized sentence.
@@ -211,9 +212,9 @@ the agent MUST integrate remote changes with a merge commit workflow.
 
 ## Required References
 
-- Project overview & install: [README.md](../README.md)
-- Agent configuration & conventions: [copilot-instructions.md](copilot-instructions.md)
-- Workflow navigation: [../.tours/getting-started.tour](../.tours/getting-started.tour)
+- Project overview & install: [README.md](README.md)
+- Agent configuration & conventions: [.github/copilot-instructions.md](.github/copilot-instructions.md)
+- Workflow navigation: [.tours/getting-started.tour](.tours/getting-started.tour)
 - Latest org baseline: <https://github.com/Cogni-AI-OU/.github/blob/main/AGENTS.md>
 
 ## Example Structure for New/Updated AGENTS.md Files
@@ -290,7 +291,7 @@ pre-commit run yamllint -a
   performing complex regex parsing, or safely editing a few lines in-place within an automated script context.
   It is especially useful for large files where patching the whole file via MCP could take a lot of context
   processing for simple changes.
-- For detailed commands and examples, see `.agents/skills/vim-ex/SKILL.md`.
+- For detailed commands and examples, see `.github/skills/vim-ex/SKILL.md`.
 
 ### Renaming/removing files
 
@@ -340,7 +341,6 @@ molecule syntax
 
 ### Updating Coding Standards
 
-- Language-specific instructions are in `.agents/instructions/`
 - Update `.markdownlint.yaml`, `.yamllint`, or `.editorconfig` for linting rules
 - Run `pre-commit run -a` to verify changes pass all checks
 
@@ -356,7 +356,7 @@ on top of the updated target branch:
 5. Verify only your changes remain
 
 **For detailed step-by-step instructions with commands**, see:
-`.agents/skills/git/SKILL.md`
+`.github/skills/git/SKILL.md`
 
 ### Key Points
 
@@ -389,11 +389,11 @@ tries to auto-rebase (e.g., 113 commits), it encounters conflicts it cannot reso
 **Error Patterns:** `Rebasing (1/XXX)` with large numbers, `CONFLICT (content)`, session crash with `GitError`
 
 **For complete details**, see:
-`.agents/skills/git/SKILL.md` - "Working with Automation Tools"
+`.github/skills/git/SKILL.md` - "Working with Automation Tools"
 
 ## References
 
-- Main documentation: [README.md](../README.md)
+- Main documentation: [README.md](README.md)
 
 ## Troubleshooting
 
