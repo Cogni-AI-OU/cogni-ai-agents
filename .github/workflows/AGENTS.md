@@ -10,7 +10,6 @@ For a human-readable overview, see [README.md](README.md).
 - **[check.yml](check.yml)**: Linting and quality gates via actionlint and pre-commit.
 - **[devcontainer-ci.yml](devcontainer-ci.yml)**: Build/test devcontainer and required tools/packages.
 - **[opencode.yml](opencode.yml)**: OpenCode agent invocation via comments or manual triggers.
-- **[opencode-review.yml](opencode-review.yml)**: OpenCode PR review.
 
 ## Details
 
@@ -45,15 +44,6 @@ For a human-readable overview, see [README.md](README.md).
   with workflow-level `env` values instead of hardcoding agent/model literals in steps.
 - Permissions: `contents: read`, `id-token: write`, `issues: write`, `pull-requests: write`.
 - Reusable: `uses: Cogni-AI-OU/.github/.github/workflows/opencode.yml@main`.
-
-### opencode-review.yml
-
-- Purpose: OpenCode-driven PR review.
-- Inputs: pr_number (req for call/dispatch).
-- Triggers: pull_request_target (trusted authors), /review comment (COLLABORATOR/OWNER/MEMBER), workflow_call,
-  workflow_dispatch.
-- Permissions: `contents: read`, `id-token: write`, `issues: read`, `pull-requests: write`.
-- Reusable: `uses: Cogni-AI-OU/.github/.github/workflows/opencode-review.yml@main`.
 
 ## Notes
 

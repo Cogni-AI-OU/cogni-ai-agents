@@ -55,7 +55,7 @@
     },
     {
       "title": "GitHub Actions Workflow",
-      "description": "## Continuous Integration\n\nThe repository keeps the standard `check.yml` validation workflow and now also includes OpenCode automation workflows.\n\n### Reusable Workflow:\n\nThe `check.yml` workflow uses a reusable workflow call from the `.github` organization repository:\n- **Location**: `Cogni-AI-OU/.github/.github/workflows/check.yml@main`\n- **Jobs**: actionlint and pre-commit checks\n\n### OpenCode Workflows:\n\n- **`opencode.yml`**: Handles `/oc` and `/opencode` issue and PR commands\n- **`opencode-review.yml`**: Runs OpenCode-based PR reviews\n\nThis centralizes workflow definitions across all organization repositories while keeping repository-specific entrypoints checked in here.",
+      "description": "## Continuous Integration\\n\\nThe repository keeps the standard `check.yml` validation workflow and now also includes OpenCode automation workflows.\\n\\n### Reusable Workflow:\\n\\nThe `check.yml` workflow uses a reusable workflow call from the `.github` organization repository:\\n- **Location**: `Cogni-AI-OU/.github/.github/workflows/check.yml@main`\\n- **Jobs**: actionlint and pre-commit checks\\n\\n### OpenCode Workflows:\\n\\n- **`opencode.yml`**: Handles `/oc` and `/opencode` issue and PR commands\\n\\nThis centralizes workflow definitions across all organization repositories while keeping repository-specific entrypoints checked in here.",
       "file": ".github/workflows/check.yml",
       "line": 10
     },
