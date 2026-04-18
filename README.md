@@ -235,7 +235,7 @@ if Claude doesn't respond as expected.
 ## GitHub Actions
 
 For documentation on GitHub Actions workflows, problem matchers, and CI/CD
-configuration, see [.github/GITHUB-WORKFLOWS.md](.github/GITHUB-WORKFLOWS.md).
+configuration, see [.github/workflows/README.md](.github/workflows/README.md).
 
 ## Organization Profile
 

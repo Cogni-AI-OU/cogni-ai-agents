@@ -1,3 +1,4 @@
+---
 name: Copilot Setup Steps
 # yamllint disable-line rule:truthy
 on:
