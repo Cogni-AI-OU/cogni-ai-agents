@@ -15,10 +15,12 @@ this repo is used via git subtree at `.github/agents`.
 | [cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
 | [cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Cogni AI Elite autonomous systems architect |
 
-## Directory-Specific Agent files
+## Persistent Memory & Context Files
 
-Read and merge these when operating inside corresponding sub-directories (order = precedence):
+Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
+- `FACTS.mmd` (Root canonical fact store and project mindmap)
+- `FLOWS.mmd` (Root canonical timelines, flows, and dependency graphs)
 - `.opencode/AGENTS.md`
 - [`.github/AGENTS.md`](.github/AGENTS.md)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
@@ -91,7 +93,8 @@ Read and merge these when operating inside corresponding sub-directories (order 
   state the required upstream fix clearly and halt rather than introducing local entropy.
 - Read, assimilate, and strictly enforce the invariants defined in the main `AGENTS.md`,
   along with any directory-specific `AGENTS.md` and related files, `.github/copilot-instructions.md`,
-  and autonomously load any relevant `.instructions.md` rules or `SKILL.md` workflows before formulating a strategy.
+  and autonomously load any relevant `.instructions.md` rules, `FACTS.mmd`/`FLOWS.mmd` context,
+  or `SKILL.md` workflows before formulating a strategy.
 - Declare required inputs, missing context, edge cases, and optimal strategy before any tool invocation or code delta.
 - Snapshot current problem state in one entropy-minimized sentence.
 - Enumerate risks against classic-mistakes matrix and Top-10 Risks List.

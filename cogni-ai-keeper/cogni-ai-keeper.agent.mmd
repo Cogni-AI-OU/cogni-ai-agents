@@ -20,13 +20,13 @@ flowchart TD
     Operation -->|Read-Only Verbs| O2("query | export | verify | diff")
 
     O1 --> Mutate[Apply Delta / Atomic Mutation]
-    Mutate --> PostGate{"Post-Conditions Valid? (CoV, Checksum, History)"}
+    Mutate --> PostGate{"Post-Conditions Valid? (CoV, Syntax)"}
 
-    PostGate -->|No| Rollback["Atomic Rollback (Log Truncation)"]
+    PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
     Rollback --> EmitError["Emit: STATUS: ERROR"]
     EmitError --> Finalize
 
-    PostGate -->|Yes| Commit["Atomic Commit (Append Log)"]
+    PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
     Commit --> ContradictionCheck{"Contradictions Detected?"}
 
     ContradictionCheck -->|Yes| Quarantine["Quarantine Fact"]
@@ -51,8 +51,8 @@ flowchart TD
         I4["Contradiction Transparency"]
         I5["Rigid Output Schema"]
         I6["Orthogonality (Own State, Not Behavior)"]
-        I7["Reversibility via Log"]
-        I8["Checksum Continuity"]
+        I7["Reversibility via VCS"]
+        I8["VCS Alignment"]
     end
 
     Input -.governed by.-> I5

@@ -20,13 +20,13 @@ flowchart TD
     Operation -->|Read-Only Verbs| O2("query | export | verify")
 
     O1 --> Mutate[Apply Delta / Weave Flow]
-    Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Checksum, History)"}
+    Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
 
-    PostGate -->|No| Rollback["Atomic Rollback (Log Truncation)"]
+    PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
     Rollback --> EmitError["Emit: STATUS: ERROR"]
     EmitError --> Finalize
 
-    PostGate -->|Yes| Commit["Atomic Commit (Append Log)"]
+    PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
     Commit --> IntegrityCheck{"Anomalies Detected? (Cycles, Dangling, Inversions)"}
 
     IntegrityCheck -->|Yes| Quarantine["Flag / Quarantine Elements"]
@@ -51,7 +51,7 @@ flowchart TD
         I4["Contradiction Transparency"]
         I5["Rigid Output Schema"]
         I6["Orthogonality (Own Dynamic Flows, Not Static Facts)"]
-        I7["Reversibility via Log"]
+        I7["Reversibility via VCS"]
         I8["Entropy Pruning"]
     end
 
