@@ -74,6 +74,7 @@ pre-commit run flake8 -a
 ## Project Layout
 
 - `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
+- `cogni-ai-devops/cogni-ai-devops.agent.md`: elite autonomous DevOps and SRE agent
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
@@ -95,6 +96,7 @@ via git subtree at `.github/agents`, consumers receive them directly at
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
 | [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
+| [cogni-ai-devops/cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | DevOps/SREs | Elite autonomous DevOps and SRE agent |
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
 | [cogni-ai-reviewer/cogni-ai-reviewer.agent.md](cogni-ai-reviewer/cogni-ai-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
@@ -133,6 +135,11 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 - Command installation fallback logic
 - Self-improvement capabilities
 - Never-give-up problem-solving approach
+
+### [Cogni AI DevOps](cogni-ai-devops/cogni-ai-devops.agent.md)
+
+Elite autonomous DevOps and Site Reliability Engineering agent. Focuses on task automation,
+CI/CD pipeline precision, infrastructure-as-code (IaC), and resolving deployment challenges.
 
 ### [Cogni AI Elite](cogni-ai-elite/cogni-ai-elite.agent.md)
 
