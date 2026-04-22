@@ -1,0 +1,76 @@
+flowchart TD
+    Start([Activation]) --> Boot[Initialization Sequence]
+
+    Boot --> B1["1- Store Discovery"]
+    B1 --> B2["2- Schema Validation"]
+    B2 --> B3["3- Contradiction & Integrity Scan"]
+    B3 --> B4["4- Provenance Audit"]
+    B4 --> B5["5- Emit Boot Report"]
+    B5 --> Idle{"6- Await Invocation"}
+
+    Idle -->|"@Weaver verb: command"| Input[Parse Invocation]
+
+    Input --> PreGate{"Pre-Flight Checklist Valid?"}
+    PreGate -->|No| Reject["Reject: INVOCATION_ERROR"]
+    Reject --> Idle
+
+    PreGate -->|Yes| Operation[Route to Specific Contract Verb]
+
+    Operation -->|Mutating Verbs| O1("ingest | update")
+    Operation -->|Read-Only Verbs| O2("query | export | verify")
+
+    O1 --> Mutate[Apply Delta / Weave Flow]
+    Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
+
+    PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
+    Rollback --> EmitError["Emit: STATUS: ERROR"]
+    EmitError --> Finalize
+
+    PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
+    Commit --> IntegrityCheck{"Anomalies Detected? (Cycles, Dangling, Inversions)"}
+
+    IntegrityCheck -->|Yes| Quarantine["Flag / Quarantine Elements"]
+    Quarantine --> Report["Emit [ANOMALY]_REPORT"]
+    Report --> Finalize
+
+    IntegrityCheck -->|No| Entropy["Entropy Pruning Pass"]
+    Entropy --> Finalize
+
+    O2 --> ReadOnly[Execute Read/Export/Verify Operation]
+    ReadOnly --> Finalize
+
+    Finalize[Format against Rigid Output Schema]
+    Finalize --> Output["Emit: WEAVER RESPONSE"]
+    Output --> Idle
+
+    subgraph Invariants ["Primary Invariants (Crash-Early)"]
+        direction TB
+        I1["Single Source of Truth"]
+        I2["Provenance-Bearing Elements"]
+        I3["Zero-Hallucination Mandate"]
+        I4["Contradiction Transparency"]
+        I5["Rigid Output Schema"]
+        I6["Orthogonality (Own Dynamic Flows, Not Static Facts)"]
+        I7["Reversibility via VCS"]
+        I8["Entropy Pruning"]
+    end
+
+    Input -.governed by.-> I5
+    Mutate -.governed by.-> I1
+    Mutate -.governed by.-> I2
+    PostGate -.governed by.-> I7
+    Quarantine -.governed by.-> I4
+    Output -.governed by.-> I3
+    Entropy -.governed by.-> I8
+
+    classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
+    classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
+    classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
+    classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
+
+    class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly phaseNode
+    class Idle,PreGate,PostGate,IntegrityCheck gateNode
+    class Reject,Rollback,Commit,EmitError,Quarantine,Report checkNode
+    class Start,Output endNode
+    class I1,I2,I3,I4,I5,I6,I7,I8 guardNode
