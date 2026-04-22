@@ -1,0 +1,101 @@
+flowchart TD
+    Start([New Objective Received]) --> Boot[Initialization Sequence]
+
+    Boot --> B1[1. AGENTS.md Contract Alignment]
+    B1 --> B2[2. Load SKILL.md & .instructions.md]
+    B2 --> B3{Submodules<br/>Initialized?}
+    B3 -->|No| B3a[git submodule update --init]
+    B3a --> B2
+    B3 -->|Yes| B4[3. Context Verification]
+    B4 --> B5[4. Context Intake<br/>Memory + Trackers]
+    B5 --> B6[5. Pre-Flight Snapshot<br/>Entropy-Minimized Sentence]
+    B6 --> B7[6. Design-It-Twice<br/>+ #todos Formulation]
+    B7 --> B8[7. Task Refinement<br/>Atomic Decomposition]
+
+    B8 --> Phase0[Phase 0: Intent & Architecture]
+
+    Phase0 --> P0a[Task Triage & Context Economy]
+    P0a --> P0b[Adversarial Constraint Analysis<br/>Top-10 Risks + Edge Cases]
+    P0b --> P0c[Tracer-Bullet Planning]
+    P0c --> P0d[Visual Architecture Charting<br/>Mermaid Diagrams]
+    P0d --> TL{Traffic Light<br/>Classification}
+
+    TL -->|Green<br/>Autonomous| Phase1
+    TL -->|Yellow<br/>Collaborative| Escalate[Extrinsic Escalation<br/>10-Point Gate]
+    Escalate -->|User Input Received| Phase1
+
+    Phase1[Phase 1: Execution & Instrumentation]
+    Phase1 --> P1a[Atomic Implementation<br/>Deep Modules + Info Hiding]
+    P1a --> P1b[Pre: Assertion<br/>Design-by-Contract]
+    P1b --> P1c[Surgical Edit<br/>Read-Match-Edit Pattern]
+    P1c --> P1d[Post: Verified<br/>Chain-of-Verification]
+
+    P1d --> Cognitive{Cognitive<br/>Checkpoint}
+    Cognitive -->|Every 1-8 Steps| MiniCP[Mini-Checkpoint<br/>Verify Invariants]
+    Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint<br/>Re-Serialize State]
+    MiniCP --> Contradiction{Contradiction<br/>Detected?}
+    HardCP --> Contradiction
+
+    Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate<br/>Discard Downstream Trace]
+    Rewind --> P1a
+    Contradiction -->|No| Phase2
+
+    Phase2[Phase 2: Verification & Assurance]
+    Phase2 --> P2a[Narrowest Scope Verification]
+    P2a --> P2b[Blast-Radius Audit<br/>Regressions + Edge Cases]
+    P2b --> P2c[QA Perfection Gate<br/>Lint + Format + Security]
+    P2c --> QAPass{All Gates<br/>Passed?}
+
+    QAPass -->|No| Signal[Signal Extraction Rule<br/>Root-Cause Ablation]
+    Signal --> P1a
+    QAPass -->|Yes| TodosCheck{100% #todos<br/>Verified?}
+
+    TodosCheck -->|No| Phase1
+    TodosCheck -->|Yes| Phase3
+
+    Phase3[Phase 3: Termination & Memory Injection]
+    Phase3 --> P3a[Zero-Defect Validation]
+    P3a --> P3b[Memory Injection<br/>AGENTS.md / SKILL.md Sync]
+    P3b --> P3c[Living Documentation Sync]
+    P3c --> P3d[Commit-Message Summary]
+    P3d --> End([Objective Complete])
+
+    subgraph Guardrails [Continuous Guardrails]
+        direction TB
+        G1[Anti-Premature Termination]
+        G2[Explicit Tokenization<br/>No Mental Leaps]
+        G3[Trust-but-Verify]
+        G4[Draft vs Committed State]
+        G5[Fix-Over-Create Bias]
+        G6[Zero-Trust Security]
+        G7[Two-Hats Discipline<br/>Feature XOR Refactor]
+    end
+
+    subgraph Escalation [10-Point Escalation Gates]
+        direction TB
+        E1[Credential Lock]
+        E2[Milestone Validation]
+        E3[Environment Hard-Block]
+        E4[Requirement Contradiction]
+        E5[Irresolvable Ambiguity]
+        E6[Vector Exhaustion]
+        E7[High-Stakes Trade-Off]
+        E8[Destructive Confirmation]
+        E9[Persistent Regression]
+        E10[Network/Firewall Isolation]
+    end
+
+    Escalate -.references.-> Escalation
+    Phase1 -.enforced by.-> Guardrails
+    Phase2 -.enforced by.-> Guardrails
+
+    classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
+    classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
+    classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
+    classDef subgraphStyle fill:#2a2a3a,stroke:#888,color:#ddd
+
+    class Phase0,Phase1,Phase2,Phase3 phaseNode
+    class Contradiction,QAPass,TodosCheck,TL,B3,Cognitive gateNode
+    class Rewind,Signal,Escalate checkNode
+    class Start,End endNode
