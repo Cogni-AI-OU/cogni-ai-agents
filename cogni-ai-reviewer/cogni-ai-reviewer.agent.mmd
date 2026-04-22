@@ -1,0 +1,74 @@
+flowchart TD
+    Start([New Objective Received]) --> Boot[Initialization Sequence]
+
+    Boot --> B1["1- Agent Contract Alignment"]
+    B1 --> B2["2- Skill & Instruction Loading"]
+    B2 --> B3{"3- Submodules Initialized?"}
+    B3 -->|No| B3a["git submodule update --init"]
+    B3a --> B2
+    B3 -->|Yes| B4["4- Context Verification"]
+    B4 --> B5["5- Context Intake: Memory, Trackers, Docs"]
+    B5 --> B6["6- Pre-Flight Snapshot: PR Context & Scope"]
+    B6 --> B7["7- Strategy Initialization: Review Path & #todos"]
+    B7 --> B8["8- Autonomous Engagement"]
+
+    B8 --> Phase0[Phase 0: Discovery & Scope Alignment]
+
+    Phase0 --> P0a[PR Triage and Context Economy]
+    P0a --> P0b[Adversarial Constraint Analysis]
+    P0b --> Phase1[Phase 1: Deep Code Review & Execution]
+
+    Phase1 --> P1a[Atomic File Analysis: Step-by-Step]
+    P1a --> P1b[Vulnerability Tracing & Security Sweep]
+    P1b --> P1c[Regression Detection]
+    P1c --> P1d[Feedback Formulation: Actionable Critique]
+
+    P1d --> Cognitive{Cognitive Checkpoint}
+    Cognitive -->|Per Batch| MiniCP["Mini-Checkpoint (Attention Fencing)"]
+
+    MiniCP --> MRECheck{"Issue Detected?"}
+    MRECheck -->|Yes| MRE["Construct MRE / Preemptive Simulation"]
+    MRE --> Feedback["Draft Problem + Resolution Guidance"]
+    Feedback --> P1a
+    MRECheck -->|No| Phase2
+
+    Phase2[Phase 2: Verification & Assurance]
+    Phase2 --> P2a[Test-Driven Audit: Unit/Integration]
+    P2a --> P2b[Security & Quality Gates Check]
+    P2b --> QAPass{All Gates Passed?}
+
+    QAPass -->|No| Flag["Flag Violations / Regressions"]
+    Flag --> P1d
+    QAPass -->|Yes| Phase3
+
+    Phase3[Phase 3: Termination & Summarization]
+    Phase3 --> P3a["Zero-Defect Validation (Pass / Review Required)"]
+    P3a --> P3b[Final PR Summary]
+    P3b --> End([Objective Complete])
+
+    subgraph Guardrails [Continuous Guardrails]
+        direction TB
+        G1[Review-Only Enforcement: No Direct Code Changes]
+        G2[Problem + Resolution Guidance Required]
+        G3[Actionable Critique: High-Fidelity Snippets]
+        G4[Zero-Trust Security Envelope]
+        G5[Conceptual Integrity Guardian]
+        G6[Atomic Version Control Hygiene]
+    end
+
+    Phase1 -.governed by.-> G1
+    Feedback -.governed by.-> G2
+    P1d -.governed by.-> G3
+    P1b -.governed by.-> G4
+
+    classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
+    classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
+    classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
+    classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
+
+    class Phase0,Phase1,Phase2,Phase3 phaseNode
+    class B3,Cognitive,MRECheck,QAPass gateNode
+    class MRE,Feedback,MiniCP,Flag checkNode
+    class Start,End endNode
+    class G1,G2,G3,G4,G5,G6 guardNode

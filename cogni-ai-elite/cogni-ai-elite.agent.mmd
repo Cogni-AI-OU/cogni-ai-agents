@@ -1,0 +1,107 @@
+flowchart TD
+    Start([New Objective Received]) --> Boot[Initialization Sequence]
+
+    Boot --> B1["1- Agent Contract Alignment"]
+    B1 --> B2["2- Skill & Instruction Loading"]
+    B2 --> B3{"3- Submodules Initialized?"}
+    B3 -->|No| B3a["git submodule update --init"]
+    B3a --> B2
+    B3 -->|Yes| B4["4- Context Verification"]
+    B4 --> B5["5- Context Intake: Memory and Trackers"]
+    B5 --> B6["6- Pre-Flight Snapshot: Entropy-Minimized Sentence"]
+    B6 --> B7["7- Strategy Initialization: Design-It-Twice and #todos"]
+    B7 --> B8["8- Task Refinement: Atomic Decomposition"]
+
+    B8 --> Phase0[Phase 0: Intent and Architecture]
+
+    Phase0 --> P0a[Task Triage and Context Economy]
+    P0a --> P0b[Adversarial Constraint Analysis: Top-10 Risks]
+    P0b --> P0c[Pre-Flight Snapshot Broadcast]
+    P0c --> P0d[Session Resumption Engine]
+    P0d --> P0e[Tracer-Bullet Planning]
+    P0e --> P0f[Visual Architecture Charting]
+
+    P0f --> Phase1[Phase 1: Execution and Instrumentation]
+
+    Phase1 --> P1a[Atomic Implementation: Deep Modules and Info Hiding]
+    P1a --> P1b["Continuous State Inspection (DbC)"]
+    P1b --> P1c[Surgical Precision: Read-Match-Edit Pattern]
+    P1c --> P1d["Single-Variable Meta-Optimization"]
+
+    P1d --> Cognitive{Cognitive Checkpoint}
+    Cognitive -->|Per 8-Step Batch| MiniCP[Mini-Checkpoint: Verify Invariants]
+    Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint: Re-Serialize State]
+    MiniCP --> Contradiction{Contradiction Detected?}
+    HardCP --> Contradiction
+
+    Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate: Discard Downstream Trace]
+    Rewind --> P1a
+    Contradiction -->|No| EscalateCheck{Escalation Required?}
+
+    EscalateCheck -->|Yes| Escalate[Extrinsic Escalation: 10-Point Gate]
+    Escalate -->|User Input Received| Phase1
+    EscalateCheck -->|No| Phase2
+
+    Phase2[Phase 2: Verification and Assurance]
+    Phase2 --> P2a[Narrowest Scope Verification]
+    P2a --> P2b[Blast-Radius Audit: Regressions and Edge Cases]
+    P2b --> P2c[QA Perfection Gate: Lint, Format, Security]
+    P2c --> QAPass{All Gates Passed?}
+
+    QAPass -->|No| Signal[Signal Extraction: Root-Cause Ablation]
+    Signal --> P1a
+    QAPass -->|Yes| TodosCheck{"Empirical Completion: 100% #todos Verified?"}
+
+    TodosCheck -->|No| Phase1
+    TodosCheck -->|Yes| Phase3
+
+    Phase3[Phase 3: Termination and Memory Injection]
+    Phase3 --> P3a[Zero-Defect Validation at Target Fidelity]
+    P3a --> P3b[Context Synchronization: AGENTS.md / SKILL.md Sync]
+    P3b --> P3c[Commit-Message Resolution Summary]
+    P3c --> End([Objective Complete])
+
+    subgraph Guardrails [Continuous Guardrails]
+        direction TB
+        G1[Anti-Premature Termination]
+        G2[Explicit Tokenization: No Mental Leaps]
+        G3[Trust-but-Verify Protocol]
+        G4[Draft vs Committed State Firewall]
+        G5[Fix-Over-Create Bias]
+        G6[Zero-Trust Security Envelope]
+        G7[Two-Hats Discipline: Feature XOR Refactor]
+    end
+
+    subgraph Escalation [10-Point Escalation Gates]
+        direction TB
+        E1[1- Credential Lock]
+        E2[2- Milestone Validation]
+        E3[3- Environment Hard-Block]
+        E4[4- Requirement Contradiction]
+        E5[5- Irresolvable Ambiguity]
+        E6[6- Vector Exhaustion]
+        E7[7- High-Stakes Trade-Off]
+        E8[8- Destructive Confirmation]
+        E9[9- Persistent Regression]
+        E10[10- Network/Firewall Isolation]
+    end
+
+    Escalate -.routes to.-> E1
+    P1a -.governed by.-> G1
+    P1d -.governed by.-> G3
+    P2c -.governed by.-> G6
+    Rewind -.governed by.-> G2
+
+    classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
+    classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
+    classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
+    classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
+    classDef escalateNode fill:#4a2a2a,stroke:#c07070,stroke-width:1px,color:#eee
+
+    class Phase0,Phase1,Phase2,Phase3 phaseNode
+    class Contradiction,QAPass,TodosCheck,B3,Cognitive,EscalateCheck gateNode
+    class Rewind,Signal,Escalate checkNode
+    class Start,End endNode
+    class G1,G2,G3,G4,G5,G6,G7 guardNode
+    class E1,E2,E3,E4,E5,E6,E7,E8,E9,E10 escalateNode
