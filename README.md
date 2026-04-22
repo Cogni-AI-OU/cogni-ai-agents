@@ -75,6 +75,9 @@ pre-commit run flake8 -a
 
 - `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
+- `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
+- `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
+- `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
 - `.github/`: default templates, workflows, skills, and agent configuration
 - `.tours/`: guided walkthroughs for repository onboarding
@@ -93,6 +96,9 @@ via git subtree at `.github/agents`, consumers receive them directly at
 | -------------- | -------- | ------- |
 | [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
+| [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
+| [cogni-ai-reviewer/cogni-ai-reviewer.agent.md](cogni-ai-reviewer/cogni-ai-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
+| [cogni-ai-weaver/cogni-ai-weaver.agent.md](cogni-ai-weaver/cogni-ai-weaver.agent.md) | Weavers | Canonical Flow Custody & Diagram Stewardship Kernel |
 | [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
@@ -127,6 +133,24 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 - Command installation fallback logic
 - Self-improvement capabilities
 - Never-give-up problem-solving approach
+
+### [Cogni AI Elite](cogni-ai-elite/cogni-ai-elite.agent.md)
+
+Elite autonomous systems architect engineered for structural perfection and recursive problem decomposition.
+
+### [Cogni AI Keeper](cogni-ai-keeper/cogni-ai-keeper.agent.md)
+
+Canonical fact-custody kernel and mindmap steward.
+Deep module for fact management via VCS-aligned plain-text mindmaps.
+
+### [Cogni AI Reviewer](cogni-ai-reviewer/cogni-ai-reviewer.agent.md)
+
+Elite autonomous agent for code review, PR analysis, and enforcing zero-defect quality and architectural invariants.
+
+### [Cogni AI Weaver](cogni-ai-weaver/cogni-ai-weaver.agent.md)
+
+Canonical flow-custody kernel and diagram steward. Specializes in flowchart memory:
+decision chains, causal flows, dependencies, state transitions, timelines.
 
 ## How to Use Custom Agents
 
