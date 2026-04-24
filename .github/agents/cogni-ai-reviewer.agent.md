@@ -1,1 +1,0 @@
-../../cogni-ai-reviewer/cogni-ai-reviewer.agent.md

@@ -1,1 +1,0 @@
-../../cogni-ai-devops/cogni-ai-devops.agent.md
