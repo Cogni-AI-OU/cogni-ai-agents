@@ -152,9 +152,9 @@ celerybeat.pid
 # Environments
 .env
 .envrc
-/.github/agents/
-/.github/instructions/
-/.github/skills/
+/agents/
+/instructions/
+/skills/
 .venv
 env/
 venv/

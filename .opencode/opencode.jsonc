@@ -3,7 +3,7 @@
   "instructions": [
     "AGENTS.md",
     ".github/copilot-instructions.md",
-    ".github/skills/AGENTS.md"
+    "skills/AGENTS.md"
   ],
   "agent": {
     "cogni-ai-architect": {

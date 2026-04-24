@@ -8,7 +8,7 @@ For general project invariants see [README.md](README.md).
 
 This repository is the source of truth for Cogni AI agent files.
 Agent files live at the repository root so they are accessible directly when
-this repo is used via git subtree at `.github/agents`.
+this repo is used via git subtree at `agents`.
 
 | File | Purpose |
 | ---- | ------- |
@@ -24,7 +24,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
 - `FLOWS.mmd` (Root canonical timelines, flows, and dependency graphs)
 - `.opencode/AGENTS.md`
 - [`.github/AGENTS.md`](.github/AGENTS.md)
-- [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
+- [`skills/AGENTS.md`](skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
 - Any `AGENTS.md` or `SKILL.md` in ancestor, then current directory tree
@@ -32,8 +32,8 @@ Read and merge these when operating inside corresponding sub-directories or repo
 ## Mandatory Skill Loading Protocol
 
 - Before any tool invocation, code delta, or execution plan, MUST read
-  [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) when present.
-- Treat [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) as the
+  [`skills/AGENTS.md`](skills/AGENTS.md) when present.
+- Treat [`skills/AGENTS.md`](skills/AGENTS.md) as the
   authoritative catalog of available skills; follow its links to candidate
   `SKILL.md` files.
 - Deterministically route user intent to skills in this order: exact
@@ -295,7 +295,7 @@ pre-commit run yamllint -a
   performing complex regex parsing, or safely editing a few lines in-place within an automated script context.
   It is especially useful for large files where patching the whole file via MCP could take a lot of context
   processing for simple changes.
-- For detailed commands and examples, see `.github/skills/vim-ex/SKILL.md`.
+- For detailed commands and examples, see `skills/vim-ex/SKILL.md`.
 
 ### Renaming/removing files
 
@@ -360,7 +360,7 @@ on top of the updated target branch:
 5. Verify only your changes remain
 
 **For detailed step-by-step instructions with commands**, see:
-`.github/skills/git/SKILL.md`
+`skills/git/SKILL.md`
 
 ### Key Points
 
@@ -393,7 +393,7 @@ tries to auto-rebase (e.g., 113 commits), it encounters conflicts it cannot reso
 **Error Patterns:** `Rebasing (1/XXX)` with large numbers, `CONFLICT (content)`, session crash with `GitError`
 
 **For complete details**, see:
-`.github/skills/git/SKILL.md` - "Working with Automation Tools"
+`skills/git/SKILL.md` - "Working with Automation Tools"
 
 ## References
 
