@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       model:  # @docs: <https://opencode.ai/zen/v1/models>
-        default: opencode/gpt-5-codex
+        default: opencode/gemini-3-flash
         description: Model to use for OpenCode
         options:
           - opencode/big-pickle

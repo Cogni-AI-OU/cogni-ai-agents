@@ -29,6 +29,7 @@ on:
         required: false
         type: number
       model:
+        default: opencode/gemini-3-flash
         description: Model to use for OpenCode
         required: false
         type: string
@@ -47,6 +48,7 @@ on:
         required: false
         type: number
       model:
+        default: opencode/gemini-3-flash
         description: Model to use for OpenCode
         required: false
         type: string
