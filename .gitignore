@@ -152,18 +152,20 @@ celerybeat.pid
 # Environments
 .env
 .envrc
-/agents/
-/instructions/
-/skills/
-/.github/agents/
-/.github/instructions/
-/.github/skills/
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# CI/CD dynamic clones
+/agents/
+/instructions/
+/skills/
+/.github/agents/
+/.github/instructions/
+/.github/skills/
 
 # Spyder project settings
 .spyderproject
