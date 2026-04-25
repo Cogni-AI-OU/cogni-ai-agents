@@ -48,6 +48,15 @@ flowchart TD
         BS7 --> BS8[Push to Remote]
     end
 
+    subgraph Mandatory_Facts_Loading_Protocol
+        FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+        FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
+        FL3 --> FL4[Inject Core Context into Working Memory]
+        FL2 -->|No| FL5[Proceed Without Canonical Facts]
+        FL4 --> FL6[Align Strategy with Project Facts]
+        FL5 --> FL6
+    end
+
     subgraph Mandatory_Instructions_Loading_Protocol
         IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
         IL2 -->|Yes| IL3[Match Context to Instruction Scope]

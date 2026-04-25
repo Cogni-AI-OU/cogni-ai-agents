@@ -50,6 +50,15 @@ flowchart TD
         direction TB
         TL{Traffic Light Classification}
 
+        subgraph Mandatory_Facts_Loading_Protocol
+            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
+            FL3 --> FL4[Inject Core Context into Working Memory]
+            FL2 -->|No| FL5[Proceed Without Canonical Facts]
+            FL4 --> FL6[Align Strategy with Project Facts]
+            FL5 --> FL6
+        end
+
         subgraph Mandatory_Instructions_Loading_Protocol
             IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
             IL2 -->|Yes| IL3[Match Context to Instruction Scope]
@@ -131,8 +140,8 @@ flowchart TD
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
 
-    class IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
-    class IL2,SL2,SL4 gateNode
+    class FL1,FL3,FL4,FL5,FL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class FL2,IL2,SL2,SL4 gateNode
 class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly,B1,B2,B3,B4,B5 phaseNode
     class Idle,PreGate,PostGate,IntegrityCheck,TL,EscalateGate gateNode
     class Reject,Rollback,Commit,EmitError,Quarantine,Report,Escalate checkNode
