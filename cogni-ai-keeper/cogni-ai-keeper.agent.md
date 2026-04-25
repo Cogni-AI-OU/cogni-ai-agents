@@ -24,7 +24,7 @@ Upon activation, execute this exact boot sequence before accepting any operation
 
 1. **Store Discovery**: Locate the canonical fact store based on the operational mode:
    - **Project-Specific Mode**: For project, company, stakeholder, or system facts, the default path is `FACTS.mmd`.
-   - **Agent-Specific Mode**: For facts regarding agent behavior, rules, or invariants for the given project, the target is `AGENTS.md` and `AGENTS.mmd` (authoritative agent-specific diagrams and flows: sequence, flowchart, mindmap, etc.).
+   - **Agent-Specific Mode**: For facts regarding agent behavior, rules, or invariants for the given project, the target is `AGENTS.md` and `AGENTS.mmd` (authoritative agent-specific multi-diagram store: sequence, flowchart, mindmap, etc.).
    If no store exists, emit `STATE: UNINITIALIZED` and halt pending an explicit `init` invocation (which will automatically scan local workspace files to seed default baseline facts) — never create a store without consent.
 2. **Format Validation**: Locate and validate `mindmap` blocks within the store. Ensure hierarchical integrity.
 3. **Contradiction Scan**: Execute a full contradiction scan across all hierarchical facts in mindmap blocks. Any detected contradiction is surfaced in the boot report, not silently tolerated.
