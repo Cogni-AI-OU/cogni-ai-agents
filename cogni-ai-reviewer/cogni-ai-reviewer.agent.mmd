@@ -56,10 +56,10 @@ flowchart TD
         G6[Atomic Version Control Hygiene]
     end
 
-    Phase1 -.governed by.-> G1
-    Feedback -.governed by.-> G2
-    P1d -.governed by.-> G3
-    P1b -.governed by.-> G4
+    Phase1 -.-> |governed by| G1
+    Feedback -.-> |governed by| G2
+    P1d -.-> |governed by| G3
+    P1b -.-> |governed by| G4
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
