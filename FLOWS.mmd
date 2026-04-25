@@ -9,27 +9,19 @@ flowchart TD
         Plan --> Execute[Execution & Verification]
     end
 
-    subgraph Mandatory_Skill_Loading_Protocol
-        SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
-        SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
-        SL2 -->|No| SL6[Proceed Without Skill]
-        SL3 --> SL4{Multiple Matches?}
-        SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
-        SL4 -->|No| SL5
-        SL5 --> SL7[Read Best-Matching SKILL.md Files]
-        SL7 --> SL8[Proceed with Execution]
-        SL6 --> SL8
-    end
-
-    subgraph Git_Branch_Sync_Policy
-        BS1[Determine PR Base & Head] --> BS2[Check PR Head Branch]
-        BS2 --> BS3["Pull Head (No Rebase)"]
-        BS3 --> BS4{"Integration needed?"}
-        BS4 -->|Yes| BS5["Fetch Base & Merge (No Fast-Forward)"]
-        BS5 --> BS6[Resolve Conflicts & Commit]
-        BS4 -->|No| BS7[Verify No Rebase Executed]
-        BS6 --> BS7
-        BS7 --> BS8[Push to Remote]
+    subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+        direction TB
+        EE_Trig{Trigger Extrinsic Escalation}
+        EE_Trig -->|Missing API/Auth| EE1[Credential Lock]
+        EE_Trig -->|Structural Obj Complete| EE2[Milestone Validation]
+        EE_Trig -->|Quota/Hardware/Perms| EE3[Environment Hard-Block]
+        EE_Trig -->|Logical Impossibility| EE4[Requirement Contradiction]
+        EE_Trig -->|Exhausted Clarification| EE5[Irresolvable Ambiguity]
+        EE_Trig -->|All Avenues Failed| EE6[Vector Exhaustion]
+        EE_Trig -->|Deep Architectural Fork| EE7[High-Stakes Trade-Off]
+        EE_Trig -->|Force-Push/Data Mutation| EE8[Destructive Confirmation]
+        EE_Trig -->|Intractable Critical Bug| EE9[Persistent Regression]
+        EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
     end
 
     subgraph Failed_Build_Diagnosis
@@ -45,17 +37,25 @@ flowchart TD
         FB8 --> FB9
     end
 
-    subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
-        direction TB
-        EE_Trig{Trigger Extrinsic Escalation}
-        EE_Trig -->|Missing API/Auth| EE1[Credential Lock]
-        EE_Trig -->|Structural Obj Complete| EE2[Milestone Validation]
-        EE_Trig -->|Quota/Hardware/Perms| EE3[Environment Hard-Block]
-        EE_Trig -->|Logical Impossibility| EE4[Requirement Contradiction]
-        EE_Trig -->|Exhausted Clarification| EE5[Irresolvable Ambiguity]
-        EE_Trig -->|All Avenues Failed| EE6[Vector Exhaustion]
-        EE_Trig -->|Deep Architectural Fork| EE7[High-Stakes Trade-Off]
-        EE_Trig -->|Force-Push/Data Mutation| EE8[Destructive Confirmation]
-        EE_Trig -->|Intractable Critical Bug| EE9[Persistent Regression]
-        EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
+    subgraph Git_Branch_Sync_Policy
+        BS1[Determine PR Base & Head] --> BS2[Check PR Head Branch]
+        BS2 --> BS3["Pull Head (No Rebase)"]
+        BS3 --> BS4{"Integration needed?"}
+        BS4 -->|Yes| BS5["Fetch Base & Merge (No Fast-Forward)"]
+        BS5 --> BS6[Resolve Conflicts & Commit]
+        BS4 -->|No| BS7[Verify No Rebase Executed]
+        BS6 --> BS7
+        BS7 --> BS8[Push to Remote]
+    end
+
+    subgraph Mandatory_Skill_Loading_Protocol
+        SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
+        SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
+        SL2 -->|No| SL6[Proceed Without Skill]
+        SL3 --> SL4{Multiple Matches?}
+        SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
+        SL4 -->|No| SL5
+        SL5 --> SL7[Read Best-Matching SKILL.md Files]
+        SL7 --> SL8[Proceed with Execution]
+        SL6 --> SL8
     end
