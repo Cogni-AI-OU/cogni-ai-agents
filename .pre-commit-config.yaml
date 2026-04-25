@@ -96,3 +96,10 @@ repos:
     rev: v1.5.0
     hooks:
       - id: detect-secrets
+  - repo: local
+    hooks:
+      - id: mermaid-validation
+        name: Mermaid Validation
+        entry: npx -y @probelabs/maid
+        language: system
+        files: \.(md|mmd)$

@@ -8,7 +8,7 @@ flowchart TD
     B4 --> B5["5- Emit Boot Report"]
     B5 --> Idle{"6- Await Invocation"}
 
-    Idle -->|"@Keeper verb: command"| Input[Parse Invocation]
+    Idle -->|Keeper verb command| Input[Parse Invocation]
 
     Input --> PreGate{"Pre-Conditions Valid?"}
     PreGate -->|No| Reject["Reject: INVOCATION_ERROR"]
@@ -55,12 +55,12 @@ flowchart TD
         I8["VCS Alignment"]
     end
 
-    Input -.governed by.-> I5
-    Mutate -.governed by.-> I1
-    Mutate -.governed by.-> I2
-    PostGate -.governed by.-> I8
-    Quarantine -.governed by.-> I4
-    Output -.governed by.-> I3
+    Input -.-> |governed by| I5
+    Mutate -.-> |governed by| I1
+    Mutate -.-> |governed by| I2
+    PostGate -.-> |governed by| I8
+    Quarantine -.-> |governed by| I4
+    Output -.-> |governed by| I3
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
