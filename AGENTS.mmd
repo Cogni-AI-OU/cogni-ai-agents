@@ -9,33 +9,31 @@ sequenceDiagram
     Note over Agent,Root: 1. Mandatory Core Initialization (Booting Sequence)
     Note right of Agent: This sequence MUST be followed upon every activation.
     Agent->>Root: Read /AGENTS.md (Must)
-    Agent->>Root: Read /FLOWS.mmd (Must)
     Agent->>Root: Read /AGENTS.mmd (Must)
-    
+
     Note over Agent,CWD: 2. Directory-Specific Context
     opt When operating inside sub-directories
-        Agent->>CWD: Read $CWD/AGENTS.md (When relevant)
-        Agent->>CWD: Read $CWD/FLOWS.mmd (When relevant)
-        Agent->>CWD: Read $CWD/AGENTS.mmd (When relevant)
+        Agent->>CWD: Read $CWD/AGENTS.md (if exist)
+        Agent->>CWD: Read $CWD/AGENTS.mmd (if exist)
     end
-    
+
     Note over Agent,Root: 3. Project Fundamentals
     Agent->>Root: Read README.md (Project overview)
-    
+
     opt When deeper domain knowledge is needed
         Agent->>Root: Read docs/* (Optional)
     end
-    
+
     Note over Agent,Skills: 4. Task-Specific Skill Loading
     opt When task matches skill catalog
         Agent->>Skills: Dynamically load relevant SKILL.md files
     end
-    
+
     Note over Agent,Context: 5. Pattern & Query Specifics
     opt When working with pattern matching files
         Agent->>Context: MUST load specific instructions files (e.g., .instructions.md)
     end
-    
+
     opt When requested by relevant user queries
         Agent->>Context: Load specific prompts/context
     end

@@ -21,13 +21,13 @@ this repo is cloned into `.github/agents`.
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
-- `FLOWS.mmd` (Root canonical timelines, flows, and dependency graphs)
 - `AGENTS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
 - [`.github/AGENTS.md`](.github/AGENTS.md)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any `AGENTS.md`, `FLOWS.mmd` or `AGENTS.mmd` (if they exist, containing supplemental project diagrams, flows, and the booting sequence), or `SKILL.md` in ancestor, then current directory tree
+- Any `AGENTS.md` or `AGENTS.mmd` (which must be followed for sequence booting instructions),
+  or `SKILL.md` in ancestor, then current directory tree
 
 ## Mandatory Skill Loading Protocol
 
@@ -93,7 +93,9 @@ Read and merge these when operating inside corresponding sub-directories or repo
   environment and upstream dependencies. If the root cause originates outside the repository scope,
   state the required upstream fix clearly and halt rather than introducing local entropy.
 - Read, assimilate, and strictly enforce the invariants defined in the main `AGENTS.md`,
-  along with any directory-specific `AGENTS.md`, `FLOWS.mmd` and `AGENTS.mmd` (if it exists, containing supplemental project diagrams, flows, and the booting sequence), related files, `.github/copilot-instructions.md`,
+  along with any directory-specific `AGENTS.md` and `AGENTS.mmd` (if it exists, containing
+  supplemental project diagrams, flows, and the booting sequence), related files,
+  `.github/copilot-instructions.md`,
   and autonomously load any relevant `.instructions.md` rules, `FACTS.mmd` context,
   or `SKILL.md` workflows before formulating a strategy.
 - Declare required inputs, missing context, edge cases, and optimal strategy before any tool invocation or code delta.
