@@ -1,66 +1,121 @@
 flowchart TD
     Start([Activation]) --> Boot[Initialization Sequence]
 
-    Boot --> B1["1- Store Discovery"]
-    B1 --> B2["2- Schema Validation"]
-    B2 --> B3["3- Contradiction Scan"]
-    B3 --> B4["4- Provenance Completeness Audit"]
-    B4 --> B5["5- Emit Boot Report"]
-    B5 --> Idle{"6- Await Invocation"}
-
-    Idle -->|Keeper verb command| Input[Parse Invocation]
-
-    Input --> PreGate{"Pre-Conditions Valid?"}
-    PreGate -->|No| Reject["Reject: INVOCATION_ERROR"]
-    Reject --> Idle
-
-    PreGate -->|Yes| Operation[Route to Specific Contract Verb]
-
-    Operation -->|Mutating Verbs| O1("ingest | update | reconcile | snapshot")
-    Operation -->|Read-Only Verbs| O2("query | export | verify | diff")
-
-    O1 --> Mutate[Apply Delta / Atomic Mutation]
-    Mutate --> PostGate{"Post-Conditions Valid? (CoV, Syntax)"}
-
-    PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
-    Rollback --> EmitError["Emit: STATUS: ERROR"]
-    EmitError --> Finalize
-
-    PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
-    Commit --> ContradictionCheck{"Contradictions Detected?"}
-
-    ContradictionCheck -->|Yes| Quarantine["Quarantine Fact"]
-    Quarantine --> Report["Emit CONTRADICTION_REPORT"]
-    Report --> Finalize
-
-    ContradictionCheck -->|No| Entropy["Entropy Pruning Pass"]
-    Entropy --> Finalize
-
-    O2 --> ReadOnly[Execute Read/Export Operation]
-    ReadOnly --> Finalize
-
-    Finalize[Format against Rigid Output Schema]
-    Finalize --> Output["Emit: KEEPER RESPONSE"]
-    Output --> Idle
-
-    subgraph Invariants ["Primary Invariants (Crash-Early)"]
+    subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        I1["Single Source of Truth"]
-        I2["Provenance-Bearing Facts"]
-        I3["Zero-Hallucination Mandate"]
-        I4["Contradiction Transparency"]
-        I5["Rigid Output Schema"]
-        I6["Orthogonality (Own State, Not Behavior)"]
-        I7["Reversibility via VCS"]
-        I8["VCS Alignment"]
+        B1["1- Store Discovery"]
+        B2["2- Schema Validation"]
+        B3["3- Contradiction & Integrity Scan"]
+        B4["4- Provenance Audit"]
     end
 
-    Input -.-> |governed by| I5
-    Mutate -.-> |governed by| I1
-    Mutate -.-> |governed by| I2
-    PostGate -.-> |governed by| I8
-    Quarantine -.-> |governed by| I4
-    Output -.-> |governed by| I3
+    subgraph LOCAL_CONTRACT [keeper.agent.md: Local Framework]
+        B5["5- Emit Boot Report"]
+        Idle{"6- Await Action"}
+
+        Idle -->|"Command / Trigger"| Input[Parse Invocation]
+
+        Input --> Gate{"Is Operation Authorized?"}
+        Gate -->|No| Reject["Emit: UNAUTHORIZED_OPERATION"]
+        Reject --> Idle
+
+        Gate -->|Yes| Mode{Select Mode}
+
+        Mode -->|Ingest/Add| P1[Extract Provenance & Facts]
+        Mode -->|Sync/Reconcile| P2[Compare Memory vs Reality]
+        Mode -->|Prune/Audit| P3[Identify Stale/Orphaned Nodes]
+
+        P1 & P2 & P3 --> Core[Apply Logic Engine]
+
+        Core --> Mutation{"State Change Required?"}
+
+        Mutation -->|No| Report["Generate Status Report"]
+        Mutation -->|Yes| Commit["Write to [FACTS.mmd / AGENTS.md]"]
+
+        Commit & Report --> Finalize[Self-Consistency Pass]
+        Finalize --> Output["Emit: KEEPER SUCCESS"]
+    end
+
+    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+        direction TB
+        TL{Traffic Light Classification}
+
+        subgraph Mandatory_Facts_Loading_Protocol
+            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
+            FL3 --> FL4[Inject Core Context into Working Memory]
+            FL2 -->|No| FL5[Proceed Without Canonical Facts]
+            FL4 --> FL6[Align Strategy with Project Facts]
+            FL5 --> FL6
+        end
+
+        subgraph Mandatory_Instructions_Loading_Protocol
+            IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
+            IL2 -->|Yes| IL3[Match Context to Instruction Scope]
+            IL3 --> IL4[Read Relevant .instructions.md Files]
+            IL2 -->|No| IL5[Proceed Without Domain Instructions]
+            IL4 --> IL6[Apply Instruction Rules to Execution]
+            IL5 --> IL6
+        end
+
+        subgraph Mandatory_Skill_Loading_Protocol
+            SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
+            SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
+            SL2 -->|No| SL6[Proceed Without Skill]
+            SL3 --> SL4{Multiple Matches?}
+            SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
+            SL4 -->|No| SL5
+            SL5 --> SL7[Read Best-Matching SKILL.md Files]
+            SL7 --> SL8[Proceed with Execution]
+            SL6 --> SL8
+        end
+
+        subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+            direction TB
+            EE_Trig{Trigger Extrinsic Escalation}
+            EE_Trig -->|Missing API/Auth| EE1[Credential Lock]
+            EE_Trig -->|Structural Obj Complete| EE2[Milestone Validation]
+            EE_Trig -->|Quota/Hardware/Perms| EE3[Environment Hard-Block]
+            EE_Trig -->|Logical Impossibility| EE4[Requirement Contradiction]
+            EE_Trig -->|Exhausted Clarification| EE5[Irresolvable Ambiguity]
+            EE_Trig -->|All Avenues Failed| EE6[Vector Exhaustion]
+            EE_Trig -->|Deep Architectural Fork| EE7[High-Stakes Trade-Off]
+            EE_Trig -->|Force-Push/Data Mutation| EE8[Destructive Confirmation]
+            EE_Trig -->|Intractable Critical Bug| EE9[Persistent Regression]
+            EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
+        end
+
+        EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
+    end
+
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B5
+
+    Core --> TL
+    TL -->|Green: Autonomous| Mutation
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    EscalateGate -->|Yes| EE_Trig
+    Escalate -->|User Input Received| Mutation
+    EscalateGate -->|No| Mutation
+
+    Output --> Idle
+
+    subgraph Invariants ["Keeper Invariants"]
+        direction TB
+        I1["Canonical Truth Only"]
+        I2["Atomic Integrity"]
+        I3["Zero Ambiguity"]
+        I4["Entropy Resistance"]
+        I5["Non-Destructive SCM First"]
+        I6["Provenance-Linked Facts"]
+    end
+
+    Input -.governed by.-> I3
+    Commit -.governed by.-> I1
+    Commit -.governed by.-> I2
+    P1 -.governed by.-> I6
+    P3 -.governed by.-> I4
+    Output -.governed by.-> I5
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -68,8 +123,11 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly phaseNode
-    class Idle,PreGate,PostGate,ContradictionCheck gateNode
-    class Reject,Rollback,Commit,EmitError,Quarantine,Report checkNode
+
+    class FL1,FL3,FL4,FL5,FL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class FL2,IL2,SL2,SL4 gateNode
+class Boot,Input,Core,Finalize,B1,B2,B3,B4,B5 phaseNode
+    class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
+    class Reject,Commit,Report,Escalate checkNode
     class Start,Output endNode
-    class I1,I2,I3,I4,I5,I6,I7,I8 guardNode
+    class I1,I2,I3,I4,I5,I6 guardNode

@@ -1,56 +1,128 @@
 flowchart TD
     Start([New Objective Received]) --> Boot[Initialization Sequence]
 
-    Boot --> B1["1- Agent Contract Alignment"]
-    B1 --> B2["2- Skill & Instruction Loading"]
-    B2 --> B3{"3- Submodules Initialized?"}
-    B3 -->|No| B3a["git submodule update --init"]
-    B3a --> B2
-    B3 -->|Yes| B4["4- Context Verification"]
-    B4 --> B5["5- Context Intake: Configs, CI/CD & Runbooks"]
-    B5 --> B6["6- Pre-Flight Snapshot: Environment Scope"]
-    B6 --> B7["7- Strategy Initialization: Design-It-Twice & #todos"]
-    B7 --> B8["8- Task Refinement: Atomic Decomposition"]
+    subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
+        direction TB
+        B1["1- Agent Contract Alignment"]
+        B2["2- Skill & Instruction Loading"]
+        B3{"3- Submodules Initialized?"}
+        B3 -->|No| B3a["git submodule update --init"]
+        B3a --> B2
+        B2 --> FL1
+    FL6 --> IL1
+        IL6 --> SL1
+        SL8 --> B3
+    end
 
-    B8 --> Phase0[Phase 0: Infrastructure Discovery & Scope Alignment]
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
 
-    Phase0 --> P0a[Environment Triage and Context Economy]
-    P0a --> P0b[Adversarial Constraint Analysis]
-    P0b --> Phase1[Phase 1: Pipeline Execution & Automation]
+    subgraph LOCAL_CONTRACT [devops.agent.md: Local Framework]
+        B4["4- Context Verification"]
+        B5["5- Context Intake: Configs, CI/CD & Runbooks"]
+        B6["6- Pre-Flight Snapshot: Environment Scope"]
+        B7["7- Strategy Initialization: Design-It-Twice & #todos"]
+        B8["8- Task Refinement: Atomic Decomposition"]
 
-    Phase1 --> P1a[Atomic File Analysis & Automation Crafting]
-    P1a --> P1b[Vulnerability & Drift Tracing]
-    P1b --> P1c[Signal-to-Noise Minimization]
-    P1c --> Cognitive{Cognitive Checkpoint}
+        B8 --> Phase0[Phase 0: Infrastructure Discovery & Scope Alignment]
 
-    Cognitive -->|Per 8-Step Batch| MiniCP[Mini-Checkpoint: Verify Invariants]
-    Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint: Re-Serialize State]
-    MiniCP --> Contradiction{Contradiction Detected?}
-    HardCP --> Contradiction
+        Phase0 --> P0a[Environment Triage and Context Economy]
+        Phase0 --> P0b[Adversarial Constraint Analysis]
 
-    Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate: Discard Downstream Trace]
-    Rewind --> P1a
-    Contradiction -->|No| EscalateCheck{Escalation Required?}
+        Phase1[Phase 1: Pipeline Execution & Automation]
+        Phase1 --> P1a[Atomic File Analysis & Automation Crafting]
+        Phase1 --> P1b[Vulnerability & Drift Tracing]
+        P1b --> P1c[Signal-to-Noise Minimization]
+        P1c --> Cognitive{Cognitive Checkpoint}
 
-    EscalateCheck -->|Yes| Escalate[Extrinsic Escalation: 10-Point Gate]
+        Cognitive -->|Per 8-Step Batch| MiniCP[Mini-Checkpoint: Verify Invariants]
+        Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint: Re-Serialize State]
+        MiniCP --> Contradiction{Contradiction Detected?}
+        HardCP --> Contradiction
+
+        Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate: Discard Downstream Trace]
+        Rewind --> P1a
+        Contradiction -->|No| EscalateCheck{Escalation Required?}
+
+        Phase2[Phase 2: Reliability Verification & Security Gates]
+        Phase2 --> P2a[Test-Driven Audit: Smoke Tests & Health Checks]
+        Phase2 --> P2b[Security & Quality Gates Check: Lint, Policy-as-Code]
+        P2b --> QAPass{All Gates Passed?}
+
+        QAPass -->|No| Signal[Signal Extraction: Root-Cause Ablation & MRE]
+        Signal --> P1a
+        QAPass -->|Yes| TodosCheck{"Empirical Completion: 100% #todos Verified?"}
+
+        TodosCheck -->|No| Phase1
+        TodosCheck -->|Yes| Phase3
+
+        Phase3[Phase 3: Termination & Runbook Summarization]
+        Phase3 --> P3a[Zero-Defect Validation]
+        Phase3 --> P3b[Final Automation Summary & Generated Runbooks]
+    end
+
+    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+        direction TB
+        TL{Traffic Light Classification}
+
+        subgraph Mandatory_Facts_Loading_Protocol
+            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
+            FL3 --> FL4[Inject Core Context into Working Memory]
+            FL2 -->|No| FL5[Proceed Without Canonical Facts]
+            FL4 --> FL6[Align Strategy with Project Facts]
+            FL5 --> FL6
+        end
+
+        subgraph Mandatory_Instructions_Loading_Protocol
+            IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
+            IL2 -->|Yes| IL3[Match Context to Instruction Scope]
+            IL3 --> IL4[Read Relevant .instructions.md Files]
+            IL2 -->|No| IL5[Proceed Without Domain Instructions]
+            IL4 --> IL6[Apply Instruction Rules to Execution]
+            IL5 --> IL6
+        end
+
+        subgraph Mandatory_Skill_Loading_Protocol
+            SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
+            SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
+            SL2 -->|No| SL6[Proceed Without Skill]
+            SL3 --> SL4{Multiple Matches?}
+            SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
+            SL4 -->|No| SL5
+            SL5 --> SL7[Read Best-Matching SKILL.md Files]
+            SL7 --> SL8[Proceed with Execution]
+            SL6 --> SL8
+        end
+
+        subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+            direction TB
+            EE_Trig{Trigger Extrinsic Escalation}
+            EE_Trig -->|Missing API/Auth| EE1[Credential Lock]
+            EE_Trig -->|Structural Obj Complete| EE2[Milestone Validation]
+            EE_Trig -->|Quota/Hardware/Perms| EE3[Environment Hard-Block]
+            EE_Trig -->|Logical Impossibility| EE4[Requirement Contradiction]
+            EE_Trig -->|Exhausted Clarification| EE5[Irresolvable Ambiguity]
+            EE_Trig -->|All Avenues Failed| EE6[Vector Exhaustion]
+            EE_Trig -->|Deep Architectural Fork| EE7[High-Stakes Trade-Off]
+            EE_Trig -->|Force-Push/Data Mutation| EE8[Destructive Confirmation]
+            EE_Trig -->|Intractable Critical Bug| EE9[Persistent Regression]
+            EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
+        end
+
+        EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
+    end
+
+    P0b --> TL
+    TL -->|Green: Autonomous| Phase1
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Phase1
+    EscalateGate -->|No| Phase1
+
+    EscalateCheck -->|Yes| EE_Trig
     EscalateCheck -->|No| Phase2
 
-    Phase2[Phase 2: Reliability Verification & Security Gates]
-    Phase2 --> P2a[Test-Driven Audit: Smoke Tests & Health Checks]
-    P2a --> P2b[Security & Quality Gates Check: Lint, Policy-as-Code]
-    P2b --> QAPass{All Gates Passed?}
-
-    QAPass -->|No| Signal[Signal Extraction: Root-Cause Ablation & MRE]
-    Signal --> P1a
-    QAPass -->|Yes| TodosCheck{"Empirical Completion: 100% #todos Verified?"}
-
-    TodosCheck -->|No| Phase1
-    TodosCheck -->|Yes| Phase3
-
-    Phase3[Phase 3: Termination & Runbook Summarization]
-    Phase3 --> P3a[Zero-Defect Validation]
-    P3a --> P3b[Final Automation Summary & Generated Runbooks]
     P3b --> End([Objective Complete])
 
     subgraph Guardrails [Continuous Guardrails]
@@ -63,21 +135,6 @@ flowchart TD
         G6[Atomic Sequence Hygiene]
     end
 
-    subgraph Escalation [10-Point Escalation Gates]
-        direction TB
-        E1[1- Credential Lock]
-        E2[2- Milestone Validation]
-        E3[3- Environment Hard-Block]
-        E4[4- Requirement Contradiction]
-        E5[5- Irresolvable Ambiguity]
-        E6[6- Vector Exhaustion]
-        E7[7- High-Stakes Trade-Off]
-        E8[8- Destructive Confirmation]
-        E9[9- Persistent Regression]
-        E10[10- Network/Firewall Isolation]
-    end
-
-    Escalate -.routes to.-> E1
     P1a -.governed by.-> G1
     Phase1 -.governed by.-> G2
     P1b -.governed by.-> G4
@@ -89,11 +146,9 @@ flowchart TD
     classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
-    classDef escalateNode fill:#4a2a2a,stroke:#c07070,stroke-width:1px,color:#eee
 
-    class Phase0,Phase1,Phase2,Phase3 phaseNode
-    class Contradiction,QAPass,TodosCheck,B3,Cognitive,EscalateCheck gateNode
+    class Phase0,Phase1,Phase2,Phase3,B1,B2,B3,B3a,B4,B5,B6,B7,B8 phaseNode
+    class Contradiction,QAPass,TodosCheck,B3,Cognitive,EscalateCheck,TL,EscalateGate gateNode
     class Rewind,Signal,Escalate checkNode
     class Start,End endNode
     class G1,G2,G3,G4,G5,G6 guardNode
-    class E1,E2,E3,E4,E5,E6,E7,E8,E9,E10 escalateNode

@@ -1,12 +1,69 @@
 flowchart TD
     subgraph Core_Agent_Execution_Protocol
-        Boot[Activate Agent] --> Sync[Read AGENTS.md & Instructs]
+        Boot[Activate Agent] --> Sync[Read AGENTS.md/AGENTS.mmd & Instructs]
         Sync --> LoadSkills[Mandatory Skill Loading]
         LoadSkills --> Context[Declare Inputs, Context, Edge Cases]
         Context --> Snapshot[Snapshot Problem State]
         Snapshot --> Risk[Enumerate Risks]
         Risk --> Plan[Formulate Strategy]
         Plan --> Execute[Execution & Verification]
+    end
+
+    subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+        direction TB
+        EE_Trig{Trigger Extrinsic Escalation}
+        EE_Trig -->|Missing API/Auth| EE1[Credential Lock]
+        EE_Trig -->|Structural Obj Complete| EE2[Milestone Validation]
+        EE_Trig -->|Quota/Hardware/Perms| EE3[Environment Hard-Block]
+        EE_Trig -->|Logical Impossibility| EE4[Requirement Contradiction]
+        EE_Trig -->|Exhausted Clarification| EE5[Irresolvable Ambiguity]
+        EE_Trig -->|All Avenues Failed| EE6[Vector Exhaustion]
+        EE_Trig -->|Deep Architectural Fork| EE7[High-Stakes Trade-Off]
+        EE_Trig -->|Force-Push/Data Mutation| EE8[Destructive Confirmation]
+        EE_Trig -->|Intractable Critical Bug| EE9[Persistent Regression]
+        EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
+    end
+
+    subgraph Failed_Build_Diagnosis
+        FB1[Trigger: Build Failure] --> FB2[Identify Last Green Build]
+        FB2 --> FB3[Compare Changes: git diff/log]
+        FB3 --> FB4[Analyze Logs: gh run view --log-failed]
+        FB4 --> FB5{Identify Cause}
+        FB5 -->|Syntax| FB6[Validate Syntax: lint/actionlint]
+        FB5 -->|Regression| FB7[Trace to Recent Change]
+        FB5 -->|Timeout/Temp| FB8[Retry or Optimize]
+        FB6 --> FB9[Propose & Implement Fix]
+        FB7 --> FB9
+        FB8 --> FB9
+    end
+
+    subgraph Git_Branch_Sync_Policy
+        BS1[Determine PR Base & Head] --> BS2[Check PR Head Branch]
+        BS2 --> BS3["Pull Head (No Rebase)"]
+        BS3 --> BS4{"Integration needed?"}
+        BS4 -->|Yes| BS5["Fetch Base & Merge (No Fast-Forward)"]
+        BS5 --> BS6[Resolve Conflicts & Commit]
+        BS4 -->|No| BS7[Verify No Rebase Executed]
+        BS6 --> BS7
+        BS7 --> BS8[Push to Remote]
+    end
+
+    subgraph Mandatory_Facts_Loading_Protocol
+        FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+        FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
+        FL3 --> FL4[Inject Core Context into Working Memory]
+        FL2 -->|No| FL5[Proceed Without Canonical Facts]
+        FL4 --> FL6[Align Strategy with Project Facts]
+        FL5 --> FL6
+    end
+
+    subgraph Mandatory_Instructions_Loading_Protocol
+        IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
+        IL2 -->|Yes| IL3[Match Context to Instruction Scope]
+        IL3 --> IL4[Read Relevant .instructions.md Files]
+        IL2 -->|No| IL5[Proceed Without Domain Instructions]
+        IL4 --> IL6[Apply Instruction Rules to Execution]
+        IL5 --> IL6
     end
 
     subgraph Mandatory_Skill_Loading_Protocol
@@ -19,15 +76,4 @@ flowchart TD
         SL5 --> SL7[Read Best-Matching SKILL.md Files]
         SL7 --> SL8[Proceed with Execution]
         SL6 --> SL8
-    end
-
-    subgraph Git_Branch_Sync_Policy
-        BS1[Determine PR Base & Head] --> BS2[Check PR Head Branch]
-        BS2 --> BS3["Pull Head (No Rebase)"]
-        BS3 --> BS4{"Integration needed?"}
-        BS4 -->|Yes| BS5["Fetch Base & Merge (No Fast-Forward)"]
-        BS5 --> BS6[Resolve Conflicts & Commit]
-        BS4 -->|No| BS7[Verify No Rebase Executed]
-        BS6 --> BS7
-        BS7 --> BS8[Push to Remote]
     end

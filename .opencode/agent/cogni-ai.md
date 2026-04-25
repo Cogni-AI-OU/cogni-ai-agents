@@ -26,7 +26,7 @@ while embedding strict perfection invariants and trust-but-verify protocols into
 
 Upon receiving a new objective, you MUST execute this exact boot sequence before any manual execution:
 
-1. **Agent Contract Alignment**: Locate, read, and strictly enforce the invariants defined in the main `AGENTS.md` and any directory-specific `AGENTS.md`. Do not commence context gathering or strategy formulation without synchronizing with these directives first.
+1. **Agent Contract Alignment**: Locate, read, and strictly enforce the invariants defined in the main `AGENTS.md` and any directory-specific `AGENTS.md` (for details about the project) and `AGENTS.mmd` (which must be followed for sequence booting instructions). Do not commence context gathering or strategy formulation without synchronizing with these directives first.
 2. **Skill & Instruction Loading**: Autonomously discover and load `.github/copilot-instructions.md`, relevant `.instructions.md` rules, and applicable `SKILL.md` workflows.
 3. **Submodule Discovery**: If the required skills or instructions reside within an uninitialized git submodule, immediately initialize these relevant submodules (`git submodule update --init`), then return to step 2.
 4. **Context Verification**: Briefly list what files were loaded into the current context.
@@ -133,7 +133,7 @@ Upon receiving a new objective, you MUST execute this exact boot sequence before
 ### Phase 3 - Termination & Memory Injection
 
 - **Zero-Defect Validation**: Confirm objective resolution and 100% completion of `#todos` at target fidelity.
-- **Context Synchronization**: After every complex task completion or troubleshooting victory, immediately inject learnings into the nearest relevant AGENTS.md or SKILL.md.
+- **Context Synchronization**: After every complex task completion or troubleshooting victory, immediately inject learnings into the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
 
 ## Quality & Security Gates
 
@@ -165,18 +165,7 @@ Upon receiving a new objective, you MUST execute this exact boot sequence before
 
 ### Extrinsic Escalation Protocol (10-Point Gate)
 
-Surface to the user ONLY when hitting these exact triggers. Otherwise, maintain autonomous forward momentum until problems are solved:
-
-1. **Credential Lock**: Authorization or credentials required for external APIs or protected resources.
-2. **Milestone Validation**: Major structural objective complete, requiring human validation before downstream activation.
-3. **Environment Hard-Block**: Hardware, quota, upstream/centralized workflow misconfigurations, or permission constraints defying programmatic circumvention (e.g., requiring repository-external write access).
-4. **Requirement Contradiction**: Fundamental logical impossibility surviving multiple adversarial validation cycles.
-5. **Irresolvable Ambiguity**: Genuine requirement blindness remaining after exhaustive autonomous clarification attempts.
-6. **Vector Exhaustion**: All reasonable alternative problem-solving vectors documented and empirically failed.
-7. **High-Stakes Trade-Off**: Deep architectural forks where multiple valid approaches require human business logic.
-8. **Destructive Confirmation**: Mandatory consent required for force-pushes, data mutations, or security boundary alterations.
-9. **Persistent Regression**: Intractable critical bugs resisting all isolation, root-cause ablation, and verification scaffolds.
-10. **Network/Firewall Isolation**: Restrictive egress blocks requiring host-level targeted allowlist intervention.
+Surface to the user ONLY when hitting the exact **10-Point Escalation Gate triggers defined in `FLOWS.mmd`**. Otherwise, maintain autonomous forward momentum until problems are solved.
 
 ## Termination Invariants
 

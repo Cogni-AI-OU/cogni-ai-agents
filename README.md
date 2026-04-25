@@ -16,7 +16,7 @@ Cogni-AI-OU projects:
 ### Key Features
 
 - **GitHub Actions Workflows**: CI/CD and automation (OpenCode, pre-commit, etc.)
-- **AI Agent Configurations**: AGENTS.md and skills for automated development
+- **AI Agent Configurations**: AGENTS.md/AGENTS.mmd and skills for automated development
 - **Pre-commit Hooks**: Linting and validation tooling
 
 ### How to Use
@@ -80,6 +80,9 @@ pre-commit run flake8 -a
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
+- `AGENTS.mmd`: root canonical diagram, flows, and booting sequence visualizations
+- `FACTS.mmd`: root canonical fact store and project mindmap
+- `FLOWS.mmd`: root canonical timelines, flows, and dependency graphs
 - `.github/`: default templates, workflows, and GitHub-specific configurations
 - `.github/agents/`: AI agent configurations (cloned in CI)
 - `.github/instructions/`: AI agent instructions (cloned in CI)
@@ -166,7 +169,7 @@ decision chains, causal flows, dependencies, state transitions, timelines.
 
 ## How to Use Custom Agents
 
-### Installation
+### Adding Custom Agents
 
 - Download the desired agent configuration file (`*.agent.md`) and add it to your repository.
 - Use the Copilot CLI for local testing: [Copilot CLI](https://gh.io/customagents/cli).
