@@ -31,3 +31,16 @@ flowchart TD
         BS6 --> BS7
         BS7 --> BS8[Push to Remote]
     end
+
+    subgraph Failed_Build_Diagnosis
+        FB1[Trigger: Build Failure] --> FB2[Identify Last Green Build]
+        FB2 --> FB3[Compare Changes: git diff/log]
+        FB3 --> FB4[Analyze Logs: gh run view --log-failed]
+        FB4 --> FB5{Identify Cause}
+        FB5 -->|Syntax| FB6[Validate Syntax: lint/actionlint]
+        FB5 -->|Regression| FB7[Trace to Recent Change]
+        FB5 -->|Timeout/Temp| FB8[Retry or Optimize]
+        FB6 --> FB9[Propose & Implement Fix]
+        FB7 --> FB9
+        FB8 --> FB9
+    end
