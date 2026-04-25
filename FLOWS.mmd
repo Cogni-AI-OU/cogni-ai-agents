@@ -19,10 +19,12 @@ flowchart TD
         CFR8 -->|No| CFR10["Retry Execution"]
         CFR10 --> CFR11["Re-execute Command"]
         CFR11 -->|Failure| CFR7
+        CFR11 -->|Success| CFR12(["Recovery Complete"])
     end
 
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
+        %% Note: FL6, IL6, and SL8 are the contractual terminal nodes relied on by this sequence
         IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
 
         IS_FL --> FL1
