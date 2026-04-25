@@ -1,12 +1,86 @@
 flowchart TD
-    subgraph Core_Agent_Execution_Protocol
-        Boot[Activate Agent] --> Sync[Read AGENTS.md/AGENTS.mmd & Instructs]
-        Sync --> LoadSkills[Mandatory Skill Loading]
-        LoadSkills --> Context[Declare Inputs, Context, Edge Cases]
-        Context --> Snapshot[Snapshot Problem State]
-        Snapshot --> Risk[Enumerate Risks]
-        Risk --> Plan[Formulate Strategy]
-        Plan --> Execute[Execution & Verification]
+
+    subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol]
+        direction TB
+        CFR1["Command Fails"] --> CFR2
+
+        CFR2["Verify Access (Confirm executable presence and file permissions)"] --> CFR3
+
+        CFR3["Engage Fallbacks (Pivot to alternative tools or synthesize workarounds)"] --> CFR4
+
+        CFR4["Targeted Installation (Modify env and install only if safe and strictly necessary)"] --> CFR5
+
+        CFR5{"Root Cause Escalation (Upstream CI/CD failure?)"}
+        CFR5 -->|Yes| CFR6["Declare root cause & halt without local hacks (Trigger Escalation Gate 3)"]
+        CFR5 -->|No| CFR7["Relentless Iteration (Autonomously chain diagnostics until success or explicit gate)"]
+
+        CFR7 --> CFR8{"Terminally blocked?"}
+        CFR8 -->|Yes| CFR9["Blocker Reporting Structure (State blocker, impact, mitigations, needed input)"]
+        CFR8 -->|No| CFR10["Retry Execution"]
+        CFR10 --> CFR11["Re-execute Command"]
+        CFR11 -->|Failure| CFR7
+        CFR11 -->|Success| CFR12(["Recovery Complete"])
+    end
+
+    subgraph Core_Initialization_Sequence [Initialization Sequence]
+        direction TB
+        %% Note: FL6, IL6, and SL8 are the contractual terminal nodes relied on by this sequence
+        IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
+
+        IS_FL --> FL1
+        FL6 --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
+        IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
+        IS_IL --> IL1
+        IL6 --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
+        IS_SL --> SL1
+        SL8 --> IS5
+
+        IS5["Context Intake (Read project memory, trackers, and docs guided by loaded instructions)"] --> IS6
+
+        IS6["Pre-Flight Snapshot (Synthesize into single entropy-minimized sentence)"] --> IS7
+
+        IS7["Strategy Initialization (Design-It-Twice & sequence-linked #todos)"] --> IS8
+
+        IS8["Task Refinement (Decompose into atomic sub-tasks, no artificial grouping)"] --> IS9
+
+        IS9["Autonomous Engagement (Immediately transition to Workflow Contract execution)"]
+    end
+
+    subgraph DbC_Enforcement_Protocol [Design-by-Contract Enforcement]
+        direction TB
+        DbC1["Intend State Mutation"] --> DbC2
+        DbC2["Emit Precondition Assertion (Pre: constraints_satisfied)"] --> DbC3
+        DbC3["Perform Mutation"] --> DbC4
+        DbC4["Emit Postcondition Assertion (Post: verified)"] --> DbC5
+        DbC5["Perform Chain-of-Verification (Crash-early semantics)"] --> DbC6
+        DbC6{"Hard Checkpoint reached?"}
+        DbC6 -->|Yes| DbC7["Emit Invariant Checksum Vectors"]
+        DbC7 --> DbC8{"Mismatch with prior checkpoints?"}
+        DbC8 -->|Yes| DbC9["Trigger Metacognitive Rewind Protocol"]
+        DbC8 -->|No| DbC10(["Continue Execution"])
+        DbC6 -->|No| DbC10
+    end
+
+    subgraph Defensive_Blast_Radius_Containment_Protocol [Defensive Blast-Radius Containment Protocol]
+        direction TB
+        BR1["Identify wide-ranging, destructive, or high-risk modification"] --> BR2
+        BR2["Perform strict impact assessment (Explicitly model the blast radius)"] --> BR3
+        BR3["Define robust rollback strategy and ensure state backup"] --> BR4
+        BR4{"High-risk vector?"}
+        BR4 -->|Yes| BR5["Pause for explicit validation (Trigger Escalation Gate as needed)"]
+        BR4 -->|No| BR6["Commit to execution"]
+        BR5 -->|Validation Received| BR6
+        BR6 --> BR7["Execute operation"]
+        BR7 --> BR8["Verify target environments and corresponding tests"]
+    end
+
+    subgraph Design_It_Twice_Protocol [Design-It-Twice Protocol]
+        direction TB
+        DT1["Identify non-trivial strategy/component"] --> DT2
+        DT2["Generate Design A"] --> DT3
+        DT3["Generate Design B (substantially different)"] --> DT4
+        DT4["Rigorously compare via explicit trade-off matrix"] --> DT5
+        DT5["Select and commit to optimal path"]
     end
 
     subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
@@ -76,4 +150,57 @@ flowchart TD
         SL5 --> SL7[Read Best-Matching SKILL.md Files]
         SL7 --> SL8[Proceed with Execution]
         SL6 --> SL8
+    end
+
+    subgraph Metacognitive_Rewind_Protocol [Metacognitive Rewind Protocol]
+        direction TB
+        MR1["Contradiction Detected"] --> MR2
+        MR2["Emit 'CONTRADICTION at step N' (No in-place patching)"] --> MR3
+        MR3["Rewind to last matching Pre/Post pair"] --> MR4
+        MR4["Discard all downstream derivations"] --> MR5
+        MR5["Restart the proof/logic chain"] --> MR6
+        MR6["Verify every step anomaly-free before claiming solution"]
+    end
+
+    subgraph Reasoning_Activation_Protocol [Reasoning Activation Protocol: Constraint Mapping]
+        direction TB
+        RAV1["Confront reasoning/constraint task"] --> RAV2
+        RAV2(["HARD STOP"]) --> RAV3
+        RAV3["Write formal constraint declaration (e.g. MiniZinc)"] --> RAV4
+        RAV4["Evaluate next alternative"] --> RAV5
+        RAV5{"Lacks traceable constraint?"}
+        RAV5 -->|Yes| RAV6["Reject and trigger Metacognitive Rewind Protocol"]
+        RAV6 --> RAV4
+        RAV5 -->|No| RAV7["Execute elimination trace"]
+        RAV7 --> RAV8{"More alternatives?"}
+        RAV8 -->|Yes| RAV4
+        RAV8 -->|No| RAV9(["Generate final solution"])
+    end
+
+    subgraph Scratchpad_Protocol [Drafting & Commitment Partitioning: Scratchpad Protocol]
+        direction TB
+        SP1["Idea/Candidate Generated"] --> SP2
+        SP2["Place in 'Draft Memory' (Scratchpad)"] --> SP3
+        SP3["Evaluate formal logical forcing functions"] --> SP4
+        SP4{"Explicitly triggered? (e.g., all others eliminated)"}
+        SP4 -->|Yes| SP5["Promote to 'Committed State'"]
+        SP4 -->|No| SP6["Keep isolated as unverified projection"]
+    end
+
+    subgraph State_Compression_Protocol [State-Compression Protocol]
+        direction TB
+        CP1["Partition task into <= 8 steps"] --> CP2
+        CP2["Execute single step"] --> CP3
+        CP3["Emit Mini-Checkpoint"] --> CP4
+        CP4["Verify Invariants"] --> CP5
+        CP5{"Step count?"}
+        CP5 -->|>= 5 steps| CP6["Emit Hard Checkpoint"]
+        CP6 --> CP7["Clean Re-serialization"]
+        CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
+        CP7 --> CP8
+        CP8 -->|Yes| CP9["Metacognitive Rewind Protocol"]
+        CP9 --> CP2
+        CP8 -->|No| CP10{"More steps?"}
+        CP10 -->|Yes| CP2
+        CP10 -->|No| CP11(["Batch Complete"])
     end

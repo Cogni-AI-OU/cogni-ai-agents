@@ -45,7 +45,7 @@ flowchart TD
         MiniCP --> Contradiction{Contradiction Detected?}
         HardCP --> Contradiction
 
-        Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate: Discard Downstream Trace]
+        Contradiction -->|Yes| Rewind[Metacognitive Rewind Protocol: Discard Downstream Trace]
         Rewind --> P1a
         Contradiction -->|No| EscalateCheck{Escalation Required?}
 
