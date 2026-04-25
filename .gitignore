@@ -160,9 +160,6 @@ env.bak/
 venv.bak/
 
 # CI/CD dynamic clones
-/agents/
-/instructions/
-/skills/
 /.github/agents/
 /.github/instructions/
 /.github/skills/
