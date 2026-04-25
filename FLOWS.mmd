@@ -19,6 +19,15 @@ flowchart TD
         IS9["Autonomous Engagement (Immediately transition to Workflow Contract execution)"]
     end
 
+    subgraph Design_It_Twice_Protocol [Design-It-Twice Protocol]
+        direction TB
+        DT1["Identify non-trivial strategy/component"] --> DT2
+        DT2["Generate Design A"] --> DT3
+        DT3["Generate Design B (substantially different)"] --> DT4
+        DT4["Rigorously compare via explicit trade-off matrix"] --> DT5
+        DT5["Select and commit to optimal path"]
+    end
+
     subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
         direction TB
         EE_Trig{Trigger Extrinsic Escalation}
@@ -58,24 +67,6 @@ flowchart TD
         BS7 --> BS8[Push to Remote]
     end
 
-    subgraph State_Compression_Protocol [State-Compression Protocol]
-        direction TB
-        CP1["Partition task into <= 8 steps"] --> CP2
-        CP2["Execute single step"] --> CP3
-        CP3["Emit Mini-Checkpoint"] --> CP4
-        CP4["Verify Invariants"] --> CP5
-        CP5{"Step count?"}
-        CP5 -->|Every 5-8 steps| CP6["Emit Hard Checkpoint"]
-        CP6 --> CP7["Clean Re-serialization"]
-        CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
-        CP7 --> CP8
-        CP8 -->|Yes| CP9["Metacognitive Rewind Gate"]
-        CP9 --> CP2
-        CP8 -->|No| CP10{"More steps?"}
-        CP10 -->|Yes| CP2
-        CP10 -->|No| CP11(["Batch Complete"])
-    end
-
     subgraph Mandatory_Facts_Loading_Protocol
         FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
         FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
@@ -104,4 +95,22 @@ flowchart TD
         SL5 --> SL7[Read Best-Matching SKILL.md Files]
         SL7 --> SL8[Proceed with Execution]
         SL6 --> SL8
+    end
+
+    subgraph State_Compression_Protocol [State-Compression Protocol]
+        direction TB
+        CP1["Partition task into <= 8 steps"] --> CP2
+        CP2["Execute single step"] --> CP3
+        CP3["Emit Mini-Checkpoint"] --> CP4
+        CP4["Verify Invariants"] --> CP5
+        CP5{"Step count?"}
+        CP5 -->|Every 5-8 steps| CP6["Emit Hard Checkpoint"]
+        CP6 --> CP7["Clean Re-serialization"]
+        CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
+        CP7 --> CP8
+        CP8 -->|Yes| CP9["Metacognitive Rewind Gate"]
+        CP9 --> CP2
+        CP8 -->|No| CP10{"More steps?"}
+        CP10 -->|Yes| CP2
+        CP10 -->|No| CP11(["Batch Complete"])
     end
