@@ -19,6 +19,21 @@ flowchart TD
         IS9["Autonomous Engagement (Immediately transition to Workflow Contract execution)"]
     end
 
+    subgraph DbC_Enforcement_Protocol [Design-by-Contract Enforcement]
+        direction TB
+        DbC1["Intend State Mutation"] --> DbC2
+        DbC2["Emit Precondition Assertion (Pre: constraints_satisfied)"] --> DbC3
+        DbC3["Perform Mutation"] --> DbC4
+        DbC4["Emit Postcondition Assertion (Post: verified)"] --> DbC5
+        DbC5["Perform Chain-of-Verification (Crash-early semantics)"] --> DbC6
+        DbC6{"Hard Checkpoint reached?"}
+        DbC6 -->|Yes| DbC7["Emit Invariant Checksum Vectors"]
+        DbC7 --> DbC8{"Mismatch with prior checkpoints?"}
+        DbC8 -->|Yes| DbC9["Trigger Metacognitive Rewind Gate"]
+        DbC8 -->|No| DbC10(["Continue Execution"])
+        DbC6 -->|No| DbC10
+    end
+
     subgraph Design_It_Twice_Protocol [Design-It-Twice Protocol]
         direction TB
         DT1["Identify non-trivial strategy/component"] --> DT2
