@@ -9,7 +9,7 @@ flowchart TD
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
         B2 --> FL1
-    FL6 --> IL1
+        FL6 --> IL1
         IL6 --> SL1
         SL8 --> B3
     end
@@ -19,7 +19,7 @@ flowchart TD
     B5 --> Idle
         Idle{"6- Await PR/Code Input"}
 
-        Idle -->|"New PR / Code Diff"| Input[Gather Context]
+        Idle -->|&quot;New PR / Code Diff&quot;| Input[Gather Context]
 
         Input --> Rules{"Relevant Rules Found? (Global + Local)"}
         Rules -->|No| Generic[Load Base Coding Standards]
@@ -50,7 +50,6 @@ flowchart TD
 
         Approve & Suggest & Request --> Finalize[Log Meta-Analysis for AI Learning]
         Finalize --> Output["Finalize Review Action"]
-    end
 
     subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
         direction TB
@@ -123,11 +122,11 @@ flowchart TD
         I6["No Trivia / Pedanticism"]
     end
 
-    Analysis -.governed by.-> I5
-    Flag -.governed by.-> I2
-    Flag -.governed by.-> I3
-    Approve -.governed by.-> I4
-    Output -.governed by.-> I1
+    Analysis -.->|governed by| I5
+    Flag -.->|governed by| I2
+    Flag -.->|governed by| I3
+    Approve -.->|governed by| I4
+    Output -.->|governed by| I1
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -138,7 +137,7 @@ flowchart TD
 
     class FL1,FL3,FL4,FL5,FL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a phaseNode
     class FL2,IL2,SL2,SL4,B3 gateNode
-class Boot,Input,Analysis,Finalize,B1,B2,B3,B5 phaseNode
+    class Boot,Input,Analysis,Finalize,B5 phaseNode
     class Idle,Rules,Assessment,Severity,TL,EscalateGate gateNode
     class Generic,Specific,Flag,Suggest,Request,Approve,Escalate checkNode
     class Start,Output endNode
