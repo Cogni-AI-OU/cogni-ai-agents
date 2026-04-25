@@ -3,7 +3,7 @@ flowchart TD
 
     subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        B1["1- Agent Contract Alignment"]
+        B1["1- Agent Contract Alignment"] --> B2
         B2["2- Skill & Instruction Loading"]
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
@@ -104,8 +104,7 @@ flowchart TD
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
     end
 
-    Boot --> GLOBAL_AGENTS_md
-    GLOBAL_AGENTS_md --> B5
+    Output --> Idle
 
     Analysis --> TL
     TL -->|Green: Autonomous| Assessment
@@ -113,8 +112,6 @@ flowchart TD
     EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Assessment
     EscalateGate -->|No| Assessment
-
-    Output --> Idle
 
     subgraph Invariants ["Reviewer Invariants"]
         direction TB

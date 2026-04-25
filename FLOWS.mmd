@@ -194,7 +194,7 @@ flowchart TD
         CP3["Emit Mini-Checkpoint"] --> CP4
         CP4["Verify Invariants"] --> CP5
         CP5{"Step count?"}
-        CP5 -->|5-8 steps| CP6["Emit Hard Checkpoint"]
+        CP5 -->|>= 5 steps| CP6["Emit Hard Checkpoint"]
         CP6 --> CP7["Clean Re-serialization"]
         CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
         CP7 --> CP8
