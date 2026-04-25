@@ -9,6 +9,14 @@ on:
   pull_request_review_comment:
     types:
       - created
+  issues:
+    types:
+      - opened
+      - edited
+  pull_request:
+    types:
+      - opened
+      - edited
   workflow_dispatch:
     inputs:
       model:  # @docs: <https://opencode.ai/zen/v1/models>
@@ -115,4 +123,8 @@ jobs:
               touch*: allow
               true*: allow
               vim*: allow
-          prompt: ${{ github.event.comment.body || inputs.prompt }}
+          prompt: >-
+            ${{ github.event.comment.body ||
+                github.event.issue.body ||
+                github.event.pull_request.body ||
+                inputs.prompt }}
