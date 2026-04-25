@@ -1,46 +1,86 @@
 flowchart TD
     Start([Activation]) --> Boot[Initialization Sequence]
 
-    Boot --> B1["1- Store Discovery"]
-    B1 --> B2["2- Schema Validation"]
-    B2 --> B3["3- Contradiction & Integrity Scan"]
-    B3 --> B4["4- Provenance Audit"]
-    B4 --> B5["5- Emit Boot Report"]
-    B5 --> Idle{"6- Await Invocation"}
+    subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
+        direction TB
+        B1["1- Store Discovery"]
+        B2["2- Schema Validation"]
+        B3["3- Contradiction & Integrity Scan"]
+        B4["4- Provenance Audit"]
+    end
 
-    Idle -->|"@Weaver verb: command"| Input[Parse Invocation]
+    subgraph LOCAL_CONTRACT [weaver.agent.md: Local Framework]
+        B5["5- Emit Boot Report"]
+        Idle{"6- Await Invocation"}
 
-    Input --> PreGate{"Pre-Flight Checklist Valid?"}
+        Idle -->|"@Weaver verb: command"| Input[Parse Invocation]
+
+        Input --> PreGate{"Pre-Flight Checklist Valid?"}
+
+        Operation[Route to Specific Contract Verb]
+
+        Operation -->|Mutating Verbs| O1("ingest | update")
+        Operation -->|Read-Only Verbs| O2("query | export | verify")
+
+        O1 --> Mutate[Apply Delta / Weave Flow]
+        Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
+
+        PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
+        Rollback --> EmitError["Emit: STATUS: ERROR"]
+        EmitError --> Finalize
+
+        PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
+        Commit --> IntegrityCheck{"Anomalies Detected? (Cycles, Dangling, Inversions)"}
+
+        IntegrityCheck -->|Yes| Quarantine["Flag / Quarantine Elements"]
+        Quarantine --> Report["Emit [ANOMALY]_REPORT"]
+        Report --> Finalize
+
+        IntegrityCheck -->|No| Entropy["Entropy Pruning Pass"]
+        Entropy --> Finalize
+
+        O2 --> ReadOnly[Execute Read/Export/Verify Operation]
+        ReadOnly --> Finalize
+
+        Finalize[Format against Rigid Output Schema]
+        Finalize --> Output["Emit: WEAVER RESPONSE"]
+    end
+
+    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+        direction TB
+        TL{Traffic Light Classification}
+
+        subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+            direction TB
+            EE_Trig{Trigger Extrinsic Escalation}
+            EE_Trig -->|Credential/Auth Required| EE1[Credential Lock]
+            EE_Trig -->|Milestone Validation| EE2[Milestone Approval]
+            EE_Trig -->|Platform/Quota/Permissions| EE3[Environment Hard-Block]
+            EE_Trig -->|Logical Contradiction| EE4[Requirement Impossibility]
+            EE_Trig -->|Ambiguity Exhaustion| EE5[Requirement Blindness]
+            EE_Trig -->|All Vectors Failed| EE6[Vector Exhaustion]
+            EE_Trig -->|Architectural Fork| EE7[High-Stakes Trade-Off]
+            EE_Trig -->|Force/Destructive Mutation| EE8[Safety Confirmation]
+            EE_Trig -->|Intractable Regression| EE9[Persistent Failure]
+            EE_Trig -->|Egress/Firewall Block| EE10[Network Isolation]
+        end
+
+        EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
+    end
+
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B5
+
     PreGate -->|No| Reject["Reject: INVOCATION_ERROR"]
     Reject --> Idle
 
-    PreGate -->|Yes| Operation[Route to Specific Contract Verb]
+    PreGate -->|Yes| TL
+    TL -->|Green: Autonomous| Operation
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    EscalateGate -->|Yes| EE_Trig
+    Escalate -->|User Input Received| Operation
+    EscalateGate -->|No| Operation
 
-    Operation -->|Mutating Verbs| O1("ingest | update")
-    Operation -->|Read-Only Verbs| O2("query | export | verify")
-
-    O1 --> Mutate[Apply Delta / Weave Flow]
-    Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
-
-    PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
-    Rollback --> EmitError["Emit: STATUS: ERROR"]
-    EmitError --> Finalize
-
-    PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
-    Commit --> IntegrityCheck{"Anomalies Detected? (Cycles, Dangling, Inversions)"}
-
-    IntegrityCheck -->|Yes| Quarantine["Flag / Quarantine Elements"]
-    Quarantine --> Report["Emit [ANOMALY]_REPORT"]
-    Report --> Finalize
-
-    IntegrityCheck -->|No| Entropy["Entropy Pruning Pass"]
-    Entropy --> Finalize
-
-    O2 --> ReadOnly[Execute Read/Export/Verify Operation]
-    ReadOnly --> Finalize
-
-    Finalize[Format against Rigid Output Schema]
-    Finalize --> Output["Emit: WEAVER RESPONSE"]
     Output --> Idle
 
     subgraph Invariants ["Primary Invariants (Crash-Early)"]
@@ -69,8 +109,8 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly phaseNode
-    class Idle,PreGate,PostGate,IntegrityCheck gateNode
-    class Reject,Rollback,Commit,EmitError,Quarantine,Report checkNode
+    class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly,B1,B2,B3,B4,B5 phaseNode
+    class Idle,PreGate,PostGate,IntegrityCheck,TL,EscalateGate gateNode
+    class Reject,Rollback,Commit,EmitError,Quarantine,Report,Escalate checkNode
     class Start,Output endNode
     class I1,I2,I3,I4,I5,I6,I7,I8 guardNode

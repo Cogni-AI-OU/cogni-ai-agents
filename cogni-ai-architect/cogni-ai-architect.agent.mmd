@@ -1,64 +1,98 @@
 flowchart TD
     Start([New Objective Received]) --> Boot[Initialization Sequence]
 
-    Boot --> B1["1- AGENTS.md Contract Alignment"]
-    B1 --> B2["2- Load SKILL.md and .instructions.md"]
-    B2 --> B3{"3- Submodules Initialized?"}
-    B3 -->|No| B3a["git submodule update --init"]
-    B3a --> B2
-    B3 -->|Yes| B4["4- Context Verification"]
-    B4 --> B5["5- Context Intake: Memory and Trackers"]
-    B5 --> B6["6- Pre-Flight Snapshot: Entropy-Minimized Sentence"]
-    B6 --> B7["7- Design-It-Twice and #todos Formulation"]
-    B7 --> B8["8- Task Refinement: Atomic Decomposition"]
+    subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
+        direction TB
+        B1["1- AGENTS.md Contract Alignment"]
+        B2["2- Load SKILL.md and .instructions.md"]
+        B3{"3- Submodules Initialized?"}
+        B3 -->|No| B3a["git submodule update --init"]
+        B3a --> B2
+    end
 
-    B8 --> Phase0[Phase 0: Intent and Architecture]
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
 
-    Phase0 --> P0a[Task Triage and Context Economy]
-    P0a --> P0b[Adversarial Constraint Analysis: Top-10 Risks]
-    P0b --> P0c[Adversarial Self-Inquiry: Devil's Advocate Pass]
-    P0c --> P0d[Tracer-Bullet Planning]
-    P0d --> P0e[Visual Architecture Charting: Mermaid]
-    P0e --> TL{Traffic Light Classification}
+    subgraph LOCAL_CONTRACT [architect.agent.md: Local Framework]
+        B4["4- Context Verification"]
+        B5["5- Context Intake: Memory and Trackers"]
+        B6["6- Pre-Flight Snapshot: Entropy-Minimized Sentence"]
+        B7["7- Design-It-Twice and #todos Formulation"]
+        B8["8- Task Refinement: Atomic Decomposition"]
 
+        B8 --> Phase0[Phase 0: Intent and Architecture]
+
+        Phase0 --> P0a[Task Triage and Context Economy]
+        P0a --> P0b[Adversarial Constraint Analysis: Top-10 Risks]
+        P0b --> P0c[Adversarial Self-Inquiry: Devil's Advocate Pass]
+        P0c --> P0d[Tracer-Bullet Planning]
+        P0d --> P0e[Visual Architecture Charting: Mermaid]
+
+        Phase1[Phase 1: Execution and Instrumentation]
+        Phase1 --> P1a[Atomic Implementation: Deep Modules and Info Hiding]
+        P1a --> P1b["Pre: Precondition Assertion (DbC)"]
+        P1b --> P1c[Surgical Edit: Read-Match-Edit Pattern]
+        P1c --> P1d["Post: Chain-of-Verification"]
+
+        P1d --> Cognitive{Cognitive Checkpoint}
+        Cognitive -->|Per 8-Step Batch| MiniCP[Mini-Checkpoint: Verify Invariants]
+        Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint: Re-Serialize State]
+        MiniCP --> Contradiction{Contradiction Detected?}
+        HardCP --> Contradiction
+
+        Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate: Discard Downstream Trace]
+        Rewind --> P1a
+        Contradiction -->|No| Phase2
+
+        Phase2[Phase 2: Verification and Assurance]
+        Phase2 --> P2a[Narrowest Scope Verification]
+        P2a --> P2b[Blast-Radius Audit: Regressions and Edge Cases]
+        P2b --> P2c[QA Perfection Gate: Lint, Format, Security]
+        P2c --> QAPass{All Gates Passed?}
+
+        QAPass -->|No| Signal[Signal Extraction: Root-Cause Ablation]
+        Signal --> P1a
+        QAPass -->|Yes| TodosCheck{"Exhaustive Enumeration: 100% #todos Verified?"}
+
+        TodosCheck -->|No| Phase1
+        TodosCheck -->|Yes| Phase3
+
+        Phase3[Phase 3: Termination and Memory Injection]
+        Phase3 --> P3a[Zero-Defect Validation]
+        Phase3 --> P3b[Memory Injection: AGENTS.md / AGENTS.mmd / SKILL.md Sync]
+        Phase3 --> P3c[Living Documentation Sync]
+        Phase3 --> P3d[Commit-Message Resolution Summary]
+    end
+
+    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+        direction TB
+        TL{Traffic Light Classification}
+
+        subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+            direction TB
+            EE_Trig{Trigger Extrinsic Escalation}
+            EE_Trig -->|Credential/Auth Required| EE1[Credential Lock]
+            EE_Trig -->|Milestone Validation| EE2[Milestone Approval]
+            EE_Trig -->|Platform/Quota/Permissions| EE3[Environment Hard-Block]
+            EE_Trig -->|Logical Contradiction| EE4[Requirement Impossibility]
+            EE_Trig -->|Ambiguity Exhaustion| EE5[Requirement Blindness]
+            EE_Trig -->|All Vectors Failed| EE6[Vector Exhaustion]
+            EE_Trig -->|Architectural Fork| EE7[High-Stakes Trade-Off]
+            EE_Trig -->|Force/Destructive Mutation| EE8[Safety Confirmation]
+            EE_Trig -->|Intractable Regression| EE9[Persistent Failure]
+            EE_Trig -->|Egress/Firewall Block| EE10[Network Isolation]
+        end
+
+        EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
+    end
+
+    P0e --> TL
     TL -->|Green: Autonomous| Phase1
-    TL -->|Yellow: Collaborative| Escalate[Extrinsic Escalation: 10-Point Gate]
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Phase1
+    EscalateGate -->|No| Phase1
 
-    Phase1[Phase 1: Execution and Instrumentation]
-    Phase1 --> P1a[Atomic Implementation: Deep Modules and Info Hiding]
-    P1a --> P1b["Pre: Precondition Assertion (DbC)"]
-    P1b --> P1c[Surgical Edit: Read-Match-Edit Pattern]
-    P1c --> P1d["Post: Chain-of-Verification"]
-
-    P1d --> Cognitive{Cognitive Checkpoint}
-    Cognitive -->|Per 8-Step Batch| MiniCP[Mini-Checkpoint: Verify Invariants]
-    Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint: Re-Serialize State]
-    MiniCP --> Contradiction{Contradiction Detected?}
-    HardCP --> Contradiction
-
-    Contradiction -->|Yes| Rewind[Metacognitive Rewind Gate: Discard Downstream Trace]
-    Rewind --> P1a
-    Contradiction -->|No| Phase2
-
-    Phase2[Phase 2: Verification and Assurance]
-    Phase2 --> P2a[Narrowest Scope Verification]
-    P2a --> P2b[Blast-Radius Audit: Regressions and Edge Cases]
-    P2b --> P2c[QA Perfection Gate: Lint, Format, Security]
-    P2c --> QAPass{All Gates Passed?}
-
-    QAPass -->|No| Signal[Signal Extraction: Root-Cause Ablation]
-    Signal --> P1a
-    QAPass -->|Yes| TodosCheck{"Exhaustive Enumeration: 100% #todos Verified?"}
-
-    TodosCheck -->|No| Phase1
-    TodosCheck -->|Yes| Phase3
-
-    Phase3[Phase 3: Termination and Memory Injection]
-    Phase3 --> P3a[Zero-Defect Validation]
-    P3a --> P3b[Memory Injection: AGENTS.md / AGENTS.mmd / SKILL.md Sync]
-    P3b --> P3c[Living Documentation Sync]
-    P3c --> P3d[Commit-Message Resolution Summary]
     P3d --> End([Objective Complete])
 
     subgraph Guardrails [Continuous Guardrails]
@@ -72,21 +106,6 @@ flowchart TD
         G7[Two-Hats Discipline: Feature XOR Refactor]
     end
 
-    subgraph Escalation [10-Point Escalation Gates]
-        direction TB
-        E1[1- Credential Lock]
-        E2[2- Milestone Validation]
-        E3[3- Environment Hard-Block]
-        E4[4- Requirement Contradiction]
-        E5[5- Irresolvable Ambiguity]
-        E6[6- Vector Exhaustion]
-        E7[7- High-Stakes Trade-Off]
-        E8[8- Destructive Confirmation]
-        E9[9- Persistent Regression]
-        E10[10- Network/Firewall Isolation]
-    end
-
-    Escalate -.routes to.-> E1
     P1a -.governed by.-> G1
     P1d -.governed by.-> G3
     P2c -.governed by.-> G6
@@ -97,11 +116,9 @@ flowchart TD
     classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
-    classDef escalateNode fill:#4a2a2a,stroke:#c07070,stroke-width:1px,color:#eee
 
-    class Phase0,Phase1,Phase2,Phase3 phaseNode
-    class Contradiction,QAPass,TodosCheck,TL,B3,Cognitive gateNode
+    class Phase0,Phase1,Phase2,Phase3,B1,B2,B3,B3a,B4,B5,B6,B7,B8 phaseNode
+    class Contradiction,QAPass,TodosCheck,TL,B3,Cognitive,EscalateGate gateNode
     class Rewind,Signal,Escalate checkNode
     class Start,End endNode
     class G1,G2,G3,G4,G5,G6,G7 guardNode
-    class E1,E2,E3,E4,E5,E6,E7,E8,E9,E10 escalateNode

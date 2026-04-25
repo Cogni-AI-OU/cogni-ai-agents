@@ -1,65 +1,100 @@
 flowchart TD
-    Start([New Objective Received]) --> Boot[Initialization Sequence]
+    Start([Activation]) --> Boot[Initialization Sequence]
 
-    Boot --> B1["1- Agent Contract Alignment"]
-    B1 --> B2["2- Skill & Instruction Loading"]
-    B2 --> B3{"3- Submodules Initialized?"}
-    B3 -->|No| B3a["git submodule update --init"]
-    B3a --> B2
-    B3 -->|Yes| B4["4- Context Verification"]
-    B4 --> B5["5- Context Intake: Memory, Trackers, Docs"]
-    B5 --> B6["6- Pre-Flight Snapshot: PR Context & Scope"]
-    B6 --> B7["7- Strategy Initialization: Review Path & #todos"]
-    B7 --> B8["8- Autonomous Engagement"]
-
-    B8 --> Phase0[Phase 0: Discovery & Scope Alignment]
-
-    Phase0 --> P0a[PR Triage and Context Economy]
-    P0a --> P0b[Adversarial Constraint Analysis]
-    P0b --> Phase1[Phase 1: Deep Code Review & Execution]
-
-    Phase1 --> P1a[Atomic File Analysis: Step-by-Step]
-    P1a --> P1b[Vulnerability Tracing & Security Sweep]
-    P1b --> P1c[Regression Detection]
-    P1c --> P1d[Feedback Formulation: Actionable Critique]
-
-    P1d --> Cognitive{Cognitive Checkpoint}
-    Cognitive -->|Per Batch| MiniCP["Mini-Checkpoint (Attention Fencing)"]
-
-    MiniCP --> MRECheck{"Issue Detected?"}
-    MRECheck -->|Yes| MRE["Construct MRE / Preemptive Simulation"]
-    MRE --> Feedback["Draft Problem + Resolution Guidance"]
-    Feedback --> P1a
-    MRECheck -->|No| Phase2
-
-    Phase2[Phase 2: Verification & Assurance]
-    Phase2 --> P2a[Test-Driven Audit: Unit/Integration]
-    P2a --> P2b[Security & Quality Gates Check]
-    P2b --> QAPass{All Gates Passed?}
-
-    QAPass -->|No| Flag["Flag Violations / Regressions"]
-    Flag --> P1d
-    QAPass -->|Yes| Phase3
-
-    Phase3[Phase 3: Termination & Summarization]
-    Phase3 --> P3a["Zero-Defect Validation (Pass / Review Required)"]
-    P3a --> P3b[Final PR Summary]
-    P3b --> End([Objective Complete])
-
-    subgraph Guardrails [Continuous Guardrails]
+    subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        G1[Review-Only Enforcement: No Direct Code Changes]
-        G2[Problem + Resolution Guidance Required]
-        G3[Actionable Critique: High-Fidelity Snippets]
-        G4[Zero-Trust Security Envelope]
-        G5[Conceptual Integrity Guardian]
-        G6[Atomic Version Control Hygiene]
+        B1["1- Store Discovery"]
+        B2["2- Schema Validation"]
+        B3["3- Contradiction & Integrity Scan"]
+        B4["4- Provenance Audit"]
     end
 
-    Phase1 -.governed by.-> G1
-    Feedback -.governed by.-> G2
-    P1d -.governed by.-> G3
-    P1b -.governed by.-> G4
+    subgraph LOCAL_CONTRACT [reviewer.agent.md: Local Framework]
+        B5["5- Emit Boot Report"]
+        Idle{"6- Await PR/Code Input"}
+
+        Idle -->|"New PR / Code Diff"| Input[Gather Context]
+
+        Input --> Rules{"Relevant Rules Found? (Global + Local)"}
+        Rules -->|No| Generic[Load Base Coding Standards]
+        Rules -->|Yes| Specific[Load Context-Specific Instructions]
+
+        Generic & Specific --> Analysis[Perform Deep Static/Logical Analysis]
+
+        subgraph Review_Dimensions [Mandatory Review Dimensions]
+            direction TB
+            D1["Correctness / Logic"]
+            D2["Security / Vulnerability"]
+            D3["Maintainability / Clean Code"]
+            D4["Performance / Complexity"]
+            D5["Alignment with AGENTS.md/FACTS.mmd"]
+        end
+
+        Analysis --> Review_Dimensions
+
+        Review_Dimensions --> Assessment{"Issues Found?"}
+
+        Assessment -->|No| Approve["Emit: APPROVAL + Positive Feedback"]
+        Assessment -->|Yes| Flag["Generate Critical Feedback"]
+
+        Flag --> Severity{"Critical / Blocking?"}
+
+        Severity -->|No| Suggest["Emit: COMMENT / SUGGESTION"]
+        Severity -->|Yes| Request["Emit: REQUEST CHANGES"]
+
+        Approve & Suggest & Request --> Finalize[Log Meta-Analysis for AI Learning]
+        Finalize --> Output["Finalize Review Action"]
+    end
+
+    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+        direction TB
+        TL{Traffic Light Classification}
+
+        subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
+            direction TB
+            EE_Trig{Trigger Extrinsic Escalation}
+            EE_Trig -->|Credential/Auth Required| EE1[Credential Lock]
+            EE_Trig -->|Milestone Validation| EE2[Milestone Approval]
+            EE_Trig -->|Platform/Quota/Permissions| EE3[Environment Hard-Block]
+            EE_Trig -->|Logical Contradiction| EE4[Requirement Impossibility]
+            EE_Trig -->|Ambiguity Exhaustion| EE5[Requirement Blindness]
+            EE_Trig -->|All Vectors Failed| EE6[Vector Exhaustion]
+            EE_Trig -->|Architectural Fork| EE7[High-Stakes Trade-Off]
+            EE_Trig -->|Force/Destructive Mutation| EE8[Safety Confirmation]
+            EE_Trig -->|Intractable Regression| EE9[Persistent Failure]
+            EE_Trig -->|Egress/Firewall Block| EE10[Network Isolation]
+        end
+
+        EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
+    end
+
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B5
+
+    Analysis --> TL
+    TL -->|Green: Autonomous| Assessment
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    EscalateGate -->|Yes| EE_Trig
+    Escalate -->|User Input Received| Assessment
+    EscalateGate -->|No| Assessment
+
+    Output --> Idle
+
+    subgraph Invariants ["Reviewer Invariants"]
+        direction TB
+        I1["Zero False Positives"]
+        I2["Imperative Feedback Syntax"]
+        I3["Solution-Oriented Comments"]
+        I4["Strict Project Alignment"]
+        I5["Neurosymbolic Verification (CoV)"]
+        I6["No Trivia / Pedanticism"]
+    end
+
+    Analysis -.governed by.-> I5
+    Flag -.governed by.-> I2
+    Flag -.governed by.-> I3
+    Approve -.governed by.-> I4
+    Output -.governed by.-> I1
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -67,8 +102,8 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class Phase0,Phase1,Phase2,Phase3 phaseNode
-    class B3,Cognitive,MRECheck,QAPass gateNode
-    class MRE,Feedback,MiniCP,Flag checkNode
-    class Start,End endNode
-    class G1,G2,G3,G4,G5,G6 guardNode
+    class Boot,Input,Analysis,Finalize,B1,B2,B3,B4,B5 phaseNode
+    class Idle,Rules,Assessment,Severity,TL,EscalateGate gateNode
+    class Generic,Specific,Flag,Suggest,Request,Approve,Escalate checkNode
+    class Start,Output endNode
+    class I1,I2,I3,I4,I5,I6 guardNode

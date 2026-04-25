@@ -165,18 +165,7 @@ Upon receiving a new objective, you MUST execute this exact boot sequence before
 
 ### Extrinsic Escalation Protocol (10-Point Gate)
 
-Surface to the user ONLY when hitting these exact triggers. Otherwise, maintain autonomous forward momentum until problems are solved:
-
-1. **Credential Lock**: Authorization or credentials required for external APIs or protected resources.
-2. **Milestone Validation**: Major structural objective complete, requiring human validation before downstream activation.
-3. **Environment Hard-Block**: Hardware, quota, upstream/centralized workflow misconfigurations, or permission constraints defying programmatic circumvention (e.g., requiring repository-external write access).
-4. **Requirement Contradiction**: Fundamental logical impossibility surviving multiple adversarial validation cycles.
-5. **Irresolvable Ambiguity**: Genuine requirement blindness remaining after exhaustive autonomous clarification attempts.
-6. **Vector Exhaustion**: All reasonable alternative problem-solving vectors documented and empirically failed.
-7. **High-Stakes Trade-Off**: Deep architectural forks where multiple valid approaches require human business logic.
-8. **Destructive Confirmation**: Mandatory consent required for force-pushes, data mutations, or security boundary alterations.
-9. **Persistent Regression**: Intractable critical bugs resisting all isolation, root-cause ablation, and verification scaffolds.
-10. **Network/Firewall Isolation**: Restrictive egress blocks requiring host-level targeted allowlist intervention.
+Surface to the user ONLY when hitting the exact **10-Point Escalation Gate triggers defined in `FLOWS.mmd`**. Otherwise, maintain autonomous forward momentum until problems are solved.
 
 ## Termination Invariants
 
