@@ -51,7 +51,7 @@ flowchart TD
         DbC6{"Hard Checkpoint reached?"}
         DbC6 -->|Yes| DbC7["Emit Invariant Checksum Vectors"]
         DbC7 --> DbC8{"Mismatch with prior checkpoints?"}
-        DbC8 -->|Yes| DbC9["Trigger Metacognitive Rewind Gate"]
+        DbC8 -->|Yes| DbC9["Trigger Metacognitive Rewind Protocol"]
         DbC8 -->|No| DbC10(["Continue Execution"])
         DbC6 -->|No| DbC10
     end
@@ -147,7 +147,7 @@ flowchart TD
         SL6 --> SL8
     end
 
-    subgraph Metacognitive_Rewind_Gate [Metacognitive Rewind Gate]
+    subgraph Metacognitive_Rewind_Protocol [Metacognitive Rewind Protocol]
         direction TB
         MR1["Contradiction Detected"] --> MR2
         MR2["Emit 'CONTRADICTION at step N' (No in-place patching)"] --> MR3
@@ -155,6 +155,20 @@ flowchart TD
         MR4["Discard all downstream derivations"] --> MR5
         MR5["Restart the proof/logic chain"] --> MR6
         MR6["Verify every step anomaly-free before claiming solution"]
+    end
+
+    subgraph Reasoning_Activation_Protocol [Reasoning Activation Protocol: Constraint Mapping]
+        direction TB
+        RAV1["Confront reasoning/constraint task"] --> RAV2
+        RAV2(["HARD STOP"]) --> RAV3
+        RAV3["Write formal constraint declaration (e.g. Mini Zinc)"] --> RAV4
+        RAV4["Evaluate next alternative"] --> RAV5
+        RAV5{"Lacks traceable constraint?"}
+        RAV5 -->|Yes| RAV6["Reject and trigger Metacognitive Rewind Protocol"]
+        RAV5 -->|No| RAV7["Execute elimination trace"]
+        RAV7 --> RAV8{"More alternatives?"}
+        RAV8 -->|Yes| RAV4
+        RAV8 -->|No| RAV9(["Generate final solution"])
     end
 
     subgraph State_Compression_Protocol [State-Compression Protocol]
