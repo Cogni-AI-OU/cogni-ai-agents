@@ -1,12 +1,22 @@
 flowchart TD
-    subgraph Core_Agent_Execution_Protocol
-        Boot[Activate Agent] --> Sync[Read AGENTS.md/AGENTS.mmd & Instructs]
-        Sync --> LoadSkills[Mandatory Skill Loading]
-        LoadSkills --> Context[Declare Inputs, Context, Edge Cases]
-        Context --> Snapshot[Snapshot Problem State]
-        Snapshot --> Risk[Enumerate Risks]
-        Risk --> Plan[Formulate Strategy]
-        Plan --> Execute[Execution & Verification]
+    subgraph Core_Initialization_Sequence [Initialization Sequence]
+        direction TB
+        IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
+
+        IS_FL --> IS2["Load copilot-instructions.md"]
+        IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
+        IS_IL --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
+        IS_SL --> IS5
+
+        IS5["Context Intake (Read project memory, trackers, and docs guided by loaded instructions)"] --> IS6
+
+        IS6["Pre-Flight Snapshot (Synthesize into single entropy-minimized sentence)"] --> IS7
+
+        IS7["Strategy Initialization (Design-It-Twice & sequence-linked #todos)"] --> IS8
+
+        IS8["Task Refinement (Decompose into atomic sub-tasks, no artificial grouping)"] --> IS9
+
+        IS9["Autonomous Engagement (Immediately transition to Workflow Contract execution)"]
     end
 
     subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
