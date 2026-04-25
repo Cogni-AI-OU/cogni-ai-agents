@@ -43,16 +43,16 @@ flowchart TD
         subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
             direction TB
             EE_Trig{Trigger Extrinsic Escalation}
-            EE_Trig -->|Credential/Auth Required| EE1[Credential Lock]
-            EE_Trig -->|Milestone Validation| EE2[Milestone Approval]
-            EE_Trig -->|Platform/Quota/Permissions| EE3[Environment Hard-Block]
-            EE_Trig -->|Logical Contradiction| EE4[Requirement Impossibility]
-            EE_Trig -->|Ambiguity Exhaustion| EE5[Requirement Blindness]
-            EE_Trig -->|All Vectors Failed| EE6[Vector Exhaustion]
-            EE_Trig -->|Architectural Fork| EE7[High-Stakes Trade-Off]
-            EE_Trig -->|Force/Destructive Mutation| EE8[Safety Confirmation]
-            EE_Trig -->|Intractable Regression| EE9[Persistent Failure]
-            EE_Trig -->|Egress/Firewall Block| EE10[Network Isolation]
+            EE_Trig -->|Missing API/Auth| EE1[Credential Lock]
+            EE_Trig -->|Structural Obj Complete| EE2[Milestone Validation]
+            EE_Trig -->|Quota/Hardware/Perms| EE3[Environment Hard-Block]
+            EE_Trig -->|Logical Impossibility| EE4[Requirement Contradiction]
+            EE_Trig -->|Exhausted Clarification| EE5[Irresolvable Ambiguity]
+            EE_Trig -->|All Avenues Failed| EE6[Vector Exhaustion]
+            EE_Trig -->|Deep Architectural Fork| EE7[High-Stakes Trade-Off]
+            EE_Trig -->|Force-Push/Data Mutation| EE8[Destructive Confirmation]
+            EE_Trig -->|Intractable Critical Bug| EE9[Persistent Regression]
+            EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
         end
 
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
