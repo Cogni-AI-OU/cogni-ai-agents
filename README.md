@@ -80,7 +80,10 @@ pre-commit run flake8 -a
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
-- `.github/`: default templates, workflows, skills, and agent configuration
+- `.github/`: default templates, workflows, and GitHub-specific configurations
+- `agents/`: AI agent configurations (cloned in CI)
+- `instructions/`: AI agent instructions (cloned in CI)
+- `skills/`: reusable capabilities and skills (cloned in CI)
 - `.tours/`: guided walkthroughs for repository onboarding
 - `README.md`: repository overview and local development workflow
 
