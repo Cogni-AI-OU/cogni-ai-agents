@@ -1,14 +1,5 @@
 mindmap
   root((Project Cogni AI Agents))
-    Context
-      Organization::Cogni-AI-OU
-      Purpose::Template_Repo
-      License::MIT
-      Clone_Path::.github/agents
-      Security::Audit_Passed
-      Metrics
-        Coverage::High
-        Maintainability::A
     Architecture
       Agents
         Architect::Primary
@@ -23,15 +14,24 @@ mindmap
           Pull_With_Merge
         Mandatory_Skill_Loading
           Read_First::.github/skills/AGENTS.md
+    Context
+      Clone_Path::.github/agents
+      License::MIT
+      Metrics
+        Maintainability_Grade::A
+        Test_Coverage::High
+      Organization::Cogni-AI-OU
+      Purpose::Template_Repo
+      Security::Audit_Passed
     Ecosystem
+      Dependencies
+        PyYAML
+        ansible
+        molecule
+        requests
+        tabulate
+        uv
       Python::3.11+
-        Dependencies
-          ansible
-          molecule
-          PyYAML
-          requests
-          tabulate
-          uv
       Tools
         Automation
           GitHub_Actions
