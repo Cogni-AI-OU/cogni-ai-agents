@@ -25,7 +25,7 @@ flowchart TD
         direction TB
         IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
 
-        IS_FL --> IS2["Load copilot-instructions.md"]
+        IS_FL --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
         IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
         IS_IL --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
         IS_SL --> IS5
