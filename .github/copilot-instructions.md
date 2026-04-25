@@ -91,19 +91,12 @@ runtime and as the source of required controller-side dependencies.
 
 ```text
 .
-|-- agents/                  # AI agent configurations (cloned in CI)
-|-- instructions/            # AI agent instructions (cloned in CI)
-|-- skills/                  # Agent skills definitions (cloned in CI)
 |-- .github/
-|   |-- ISSUE_TEMPLATE/      # Issue templates (bug reports, feature requests)
 |   |-- workflows/           # GitHub Actions workflows
 |   |-- copilot-instructions.md
 |   +-- pull_request_template.md
 |-- .tours/                   # VS Code guided tours
-|-- profile/
-|   +-- README.md             # Organization profile (shown on GitHub org page)
 |-- AGENTS.md                 # AI agent guidance
-|-- CODE_OF_CONDUCT.md        # Community standards
 +-- README.md                 # Repository documentation
 ```
 
