@@ -21,6 +21,9 @@
     },
     {
       "pattern": "^https://github.com/org/repo"
+    },
+    {
+      "pattern": ".github/skills/AGENTS.md"
     }
   ],
   "retryCount": 3,
