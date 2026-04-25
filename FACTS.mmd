@@ -1,36 +1,47 @@
+%% Project's facts
+%% Note: Keep items in alphabetical order.
 mindmap
   root((Project Cogni AI Agents))
-    Agents
-      Architect::Primary
-      DevOps::Site_Reliability
-      Elite::System_Architect
-      Keeper::Fact_Custody
-      Reviewer::Code_Review
-      Weaver::Flow_Custody
+    Architecture
+      Agents
+        Architect::Primary
+        DevOps::Site_Reliability
+        Elite::System_Architect
+        Keeper::Fact_Custody
+        Reviewer::Code_Review
+        Weaver::Flow_Custody
+      Protocols
+        Git_Branch_Sync
+          No_Rebase_During_Runtime
+          Pull_With_Merge
+        Mandatory_Skill_Loading
+          Read_First::.github/skills/AGENTS.md
     Context
+      Clone_Path::.github/agents
+      License::MIT
+      Metrics
+        Maintainability_Grade::A
+        Test_Coverage::High
       Organization::Cogni-AI-OU
       Purpose::Template_Repo
-    Dependencies
-      Python
+    Ecosystem
+      Dependencies
         PyYAML
+        ansible
+        molecule
         requests
         tabulate
-    License::MIT
-    Protocols
-      Git_Branch_Sync
-        No_Rebase_During_Runtime
-        Pull_With_Merge
-      Mandatory_Skill_Loading
-        Read_First::.github/skills/AGENTS.md
-    Structure
-      Clone_Path::.github/agents
-    Tech Stack
-      Languages
-        Python::3.11+
+        uv
+      Python::3.11+
       Tools
+        Automation
+          GitHub_Actions
+          Molecule
+          Task_Orchestration
         Linters
           black
           flake8
           markdownlint
+          mermaid-validation
           pre-commit
           yamllint
