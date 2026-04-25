@@ -26,7 +26,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any `AGENTS.md` or `SKILL.md` in ancestor, then current directory tree
+- Any `AGENTS.md`, `AGENTS.mmd` (if it exists, containing project diagrams/flows and mindmaps), or `SKILL.md` in ancestor, then current directory tree
 
 ## Mandatory Skill Loading Protocol
 
@@ -48,13 +48,13 @@ Read and merge these when operating inside corresponding sub-directories or repo
 **Maintenance invariant**:
 
 - After every complex task completion or troubleshooting victory,
-  immediately update the nearest relevant AGENTS.md or SKILL.md.
+  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
 - On recurring failure, immediately re-evaluate
-  and update the nearest relevant AGENTS.md or SKILL.md.
+  and update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
 - On discovery of superior workaround, new efficiency primitive, or explicit user directive,
-  immediately update the nearest relevant AGENTS.md or SKILL.md.
+  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
 - On detection of ambiguous steps or unclear instructions,
-  immediately update the nearest relevant AGENTS.md or SKILL.md.
+  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
 
 **Creation / Update Triggers (Hard Gate)**:
 
@@ -92,7 +92,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
   environment and upstream dependencies. If the root cause originates outside the repository scope,
   state the required upstream fix clearly and halt rather than introducing local entropy.
 - Read, assimilate, and strictly enforce the invariants defined in the main `AGENTS.md`,
-  along with any directory-specific `AGENTS.md` and related files, `.github/copilot-instructions.md`,
+  along with any directory-specific `AGENTS.md` and `AGENTS.mmd` (if it exists, containing project diagrams/flows and mindmaps), related files, `.github/copilot-instructions.md`,
   and autonomously load any relevant `.instructions.md` rules, `FACTS.mmd`/`FLOWS.mmd` context,
   or `SKILL.md` workflows before formulating a strategy.
 - Declare required inputs, missing context, edge cases, and optimal strategy before any tool invocation or code delta.
@@ -142,7 +142,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
 - All TODOs empirically verified.
 - Quality, security, performance gates satisfied.
 - User objective resolved at target fidelity (+20% over prior baseline).
-- AGENTS.md/SKILL.md updated if new reusable primitive discovered.
+- AGENTS.md/AGENTS.mmd/SKILL.md updated if new reusable primitive discovered.
 
 ## GitHub Actions Runtime
 

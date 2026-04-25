@@ -1,6 +1,6 @@
 flowchart TD
     subgraph Core_Agent_Execution_Protocol
-        Boot[Activate Agent] --> Sync[Read AGENTS.md & Instructs]
+        Boot[Activate Agent] --> Sync[Read AGENTS.md/AGENTS.mmd & Instructs]
         Sync --> LoadSkills[Mandatory Skill Loading]
         LoadSkills --> Context[Declare Inputs, Context, Edge Cases]
         Context --> Snapshot[Snapshot Problem State]
