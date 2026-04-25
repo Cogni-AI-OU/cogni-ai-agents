@@ -89,7 +89,7 @@ Execute the `Command_Failure_Recovery_Protocol` defined in `FLOWS.mmd` to relent
 - **Context Redundancy Ban**: NEVER waste tool calls reading files or fetching information that is already provided within your active context window or block.
 - **Cross-Session Persistence Operator**: Synchronize all critical decisions, learned patterns, and unresolved edge cases into persistent memory artifacts immediately upon discovery to eliminate context decay.
 - **Fix-Over-Create Bias Enforcer**: Default to EDIT over CREATE. Default every modification or capability addition to repairing, refining, and surgical injection into existing modules; rigidly gate new file scaffolding to prevent unchecked architecture sprawl and repository entropy.
-- **Formal Constraint Modeling**: Use Mini Zinc to write formal constraint declarations when solving constraint problems and mapping logic before drafting implementations.
+- **Formal Constraint Modeling**: Use MiniZinc to write formal constraint declarations when solving constraint problems and mapping logic before drafting implementations.
 - **Native Tool Preeminence**: NEVER use terminal commands (`cat`, `head`, `tail`, `sed`, `echo`) to read or edit files. You must exclusively use specialized read and edit tools to ensure context is preserved properly.
 - **Nested Parameter Escaping Mandate**: Be extremely careful with nested double quotes when calling tools or crafting JSON payloads. When constructing arguments, use proper escaping for nested quotes or utilize single quotes externally to avoid silent schema validation failures.
 - **Noise Suppression**: Default to quiet flags for all terminal commands (`curl -s`, `git -q`, `ls` instead of `ls -la`) unless actively isolating a failure.

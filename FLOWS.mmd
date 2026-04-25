@@ -17,18 +17,21 @@ flowchart TD
         CFR7 --> CFR8{"Terminally blocked?"}
         CFR8 -->|Yes| CFR9["Blocker Reporting Structure (State blocker, impact, mitigations, needed input)"]
         CFR8 -->|No| CFR10["Retry Execution"]
-
-        CFR10 --> CFR1
+        CFR10 --> CFR11["Re-execute Command"]
+        CFR11 -->|Failure| CFR7
     end
 
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
         IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
 
-        IS_FL --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
+        IS_FL --> FL1
+        FL6 --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
         IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
-        IS_IL --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
-        IS_SL --> IS5
+        IS_IL --> IL1
+        IL6 --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
+        IS_SL --> SL1
+        SL8 --> IS5
 
         IS5["Context Intake (Read project memory, trackers, and docs guided by loaded instructions)"] --> IS6
 
@@ -165,6 +168,7 @@ flowchart TD
         RAV4["Evaluate next alternative"] --> RAV5
         RAV5{"Lacks traceable constraint?"}
         RAV5 -->|Yes| RAV6["Reject and trigger Metacognitive Rewind Protocol"]
+        RAV6 --> RAV4
         RAV5 -->|No| RAV7["Execute elimination trace"]
         RAV7 --> RAV8{"More alternatives?"}
         RAV8 -->|Yes| RAV4
@@ -188,7 +192,7 @@ flowchart TD
         CP3["Emit Mini-Checkpoint"] --> CP4
         CP4["Verify Invariants"] --> CP5
         CP5{"Step count?"}
-        CP5 -->|Every 5-8 steps| CP6["Emit Hard Checkpoint"]
+        CP5 -->|5-8 steps| CP6["Emit Hard Checkpoint"]
         CP6 --> CP7["Clean Re-serialization"]
         CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
         CP7 --> CP8
