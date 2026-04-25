@@ -171,6 +171,16 @@ flowchart TD
         RAV8 -->|No| RAV9(["Generate final solution"])
     end
 
+    subgraph Scratchpad_Protocol [Drafting & Commitment Partitioning: Scratchpad Protocol]
+        direction TB
+        SP1["Idea/Candidate Generated"] --> SP2
+        SP2["Place in 'Draft Memory' (Scratchpad)"] --> SP3
+        SP3["Evaluate formal logical forcing functions"] --> SP4
+        SP4{"Explicitly triggered? (e.g., all others eliminated)"}
+        SP4 -->|Yes| SP5["Promote to 'Committed State'"]
+        SP4 -->|No| SP6["Keep isolated as unverified projection"]
+    end
+
     subgraph State_Compression_Protocol [State-Compression Protocol]
         direction TB
         CP1["Partition task into <= 8 steps"] --> CP2
@@ -182,7 +192,7 @@ flowchart TD
         CP6 --> CP7["Clean Re-serialization"]
         CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
         CP7 --> CP8
-        CP8 -->|Yes| CP9["Metacognitive Rewind Gate"]
+        CP8 -->|Yes| CP9["Metacognitive Rewind Protocol"]
         CP9 --> CP2
         CP8 -->|No| CP10{"More steps?"}
         CP10 -->|Yes| CP2
