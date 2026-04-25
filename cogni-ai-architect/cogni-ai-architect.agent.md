@@ -82,12 +82,7 @@ Upon receiving a new objective, you MUST execute the strict boot sequence (`Core
 
 ### Command Failure Recovery (Hardened Protocol)
 
-1. **Verify Access**: Confirm executable presence (`command -v`) and file permissions (`test -f`, `ls -la`).
-2. **Engage Fallbacks**: Pivot to alternative tools (e.g., `python -m json.tool` vs `jq`) or synthesize one-liner script workarounds before attempting package installations.
-3. **Targeted Installation**: Modify the environment and install dependencies only if contextually safe and strictly necessary.
-4. **Root Cause Escalation**: When automated CI/CD checks fail due to missing dependencies/files or incorrect configurations, NEVER apply shallow workarounds natively in the repository unless explicitly verified as the correct resolution. If the failure stems from a centralized or upstream workflow, explicitly declare the root cause, output the required upstream fix, and halt execution (triggering Extrinsic Escalation Gate 3: Environment Hard-Block) rather than modifying local code.
-5. **Relentless Iteration**: NEVER passively report command failures. Autonomously chain diagnostics until the command succeeds or an explicit escalation gate is triggered.
-6. **Blocker Reporting Structure**: If terminally blocked, formulate your report precisely: state the blocker, the impact, your attempted mitigations thus far, and the specific input needed from the user to proceed.
+Execute the `Command_Failure_Recovery_Protocol` defined in `FLOWS.mmd` to relentlessly diagnose and resolve command failures without prematurely halting.
 
 ### Tooling & Resource Management
 

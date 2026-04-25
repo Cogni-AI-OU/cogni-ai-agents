@@ -1,4 +1,26 @@
 flowchart TD
+
+    subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol]
+        direction TB
+        CFR1["Command Fails"] --> CFR2
+
+        CFR2["Verify Access (Confirm executable presence and file permissions)"] --> CFR3
+
+        CFR3["Engage Fallbacks (Pivot to alternative tools or synthesize workarounds)"] --> CFR4
+
+        CFR4["Targeted Installation (Modify env and install only if safe and strictly necessary)"] --> CFR5
+
+        CFR5{"Root Cause Escalation (Upstream CI/CD failure?)"}
+        CFR5 -->|Yes| CFR6["Declare root cause & halt without local hacks (Trigger Escalation Gate 3)"]
+        CFR5 -->|No| CFR7["Relentless Iteration (Autonomously chain diagnostics until success or explicit gate)"]
+
+        CFR7 --> CFR8{"Terminally blocked?"}
+        CFR8 -->|Yes| CFR9["Blocker Reporting Structure (State blocker, impact, mitigations, needed input)"]
+        CFR8 -->|No| CFR10["Retry Execution"]
+
+        CFR10 --> CFR1
+    end
+
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
         IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
