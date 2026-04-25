@@ -81,9 +81,9 @@ pre-commit run flake8 -a
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
 - `.github/`: default templates, workflows, and GitHub-specific configurations
-- `agents/`: AI agent configurations (cloned in CI)
-- `instructions/`: AI agent instructions (cloned in CI)
-- `skills/`: reusable capabilities and skills (cloned in CI)
+- `.github/agents/`: AI agent configurations (cloned in CI)
+- `.github/instructions/`: AI agent instructions (cloned in CI)
+- `.github/skills/`: reusable capabilities and skills (cloned in CI)
 - `.tours/`: guided walkthroughs for repository onboarding
 - `README.md`: repository overview and local development workflow
 
@@ -92,7 +92,7 @@ pre-commit run flake8 -a
 This repository is the **source of truth** for Cogni AI agent configurations.
 Agent files live in the **repository root** so that when this repo is added
 via git subtree at `agents`, consumers receive them directly at
-`agents/cogni-ai-architect/cogni-ai-architect.agent.md` (and `agents/AGENTS.md`).
+`.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` (and `.github/agents/AGENTS.md`).
 
 ### Agent Configuration Files
 
@@ -107,7 +107,7 @@ via git subtree at `agents`, consumers receive them directly at
 | [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
-| [skills/](skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
+| [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
 
 ### Using This Repository via Git Subtree
 
@@ -119,8 +119,8 @@ git subtree add --prefix=agents https://github.com/Cogni-AI-OU/cogni-ai-agents.g
 
 After initialization the consumer project gets:
 
-- `agents/cogni-ai-architect/cogni-ai-architect.agent.md` — the primary agent
-- `agents/AGENTS.md` — the agents catalog
+- `.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` — the primary agent
+- `.github/agents/AGENTS.md` — the agents catalog
 
 See also:
 

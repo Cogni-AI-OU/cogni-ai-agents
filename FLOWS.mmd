@@ -10,7 +10,7 @@ flowchart TD
     end
 
     subgraph Mandatory_Skill_Loading_Protocol
-        SL1[Check skills/AGENTS.md] --> SL2{Skills Found?}
+        SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
         SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
         SL2 -->|No| SL6[Proceed Without Skill]
         SL3 --> SL4{Multiple Matches?}

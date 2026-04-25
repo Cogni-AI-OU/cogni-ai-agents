@@ -92,6 +92,9 @@ runtime and as the source of required controller-side dependencies.
 ```text
 .
 |-- .github/
+|   |-- agents/              # AI agent configurations (cloned)
+|   |-- instructions/        # AI agent instructions (cloned)
+|   |-- skills/              # Reusable skills (cloned)
 |   |-- workflows/           # GitHub Actions workflows
 |   |-- copilot-instructions.md
 |   +-- pull_request_template.md
