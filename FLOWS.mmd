@@ -56,6 +56,19 @@ flowchart TD
         DbC6 -->|No| DbC10
     end
 
+    subgraph Defensive_Blast_Radius_Containment_Protocol [Defensive Blast-Radius Containment Protocol]
+        direction TB
+        BR1["Identify wide-ranging, destructive, or high-risk modification"] --> BR2
+        BR2["Perform strict impact assessment (Explicitly model the blast radius)"] --> BR3
+        BR3["Define robust rollback strategy and ensure state backup"] --> BR4
+        BR4{"High-risk vector?"}
+        BR4 -->|Yes| BR5["Pause for explicit validation (Trigger Escalation Gate as needed)"]
+        BR4 -->|No| BR6["Commit to execution"]
+        BR5 -->|Validation Received| BR6
+        BR6 --> BR7["Execute operation"]
+        BR7 --> BR8["Verify target environments and corresponding tests"]
+    end
+
     subgraph Design_It_Twice_Protocol [Design-It-Twice Protocol]
         direction TB
         DT1["Identify non-trivial strategy/component"] --> DT2
