@@ -40,6 +40,27 @@ flowchart TD
         direction TB
         TL{Traffic Light Classification}
 
+        subgraph Mandatory_Instructions_Loading_Protocol
+            IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
+            IL2 -->|Yes| IL3[Match Context to Instruction Scope]
+            IL3 --> IL4[Read Relevant .instructions.md Files]
+            IL2 -->|No| IL5[Proceed Without Domain Instructions]
+            IL4 --> IL6[Apply Instruction Rules to Execution]
+            IL5 --> IL6
+        end
+
+        subgraph Mandatory_Skill_Loading_Protocol
+            SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
+            SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
+            SL2 -->|No| SL6[Proceed Without Skill]
+            SL3 --> SL4{Multiple Matches?}
+            SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
+            SL4 -->|No| SL5
+            SL5 --> SL7[Read Best-Matching SKILL.md Files]
+            SL7 --> SL8[Proceed with Execution]
+            SL6 --> SL8
+        end
+
         subgraph Extrinsic_Escalation_Protocol [Extrinsic Escalation Protocol: 10-Point Gate]
             direction TB
             EE_Trig{Trigger Extrinsic Escalation}
@@ -93,7 +114,10 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class Boot,Input,Core,Finalize,B1,B2,B3,B4,B5 phaseNode
+
+    class IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class IL2,SL2,SL4 gateNode
+class Boot,Input,Core,Finalize,B1,B2,B3,B4,B5 phaseNode
     class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
     class Reject,Commit,Report,Escalate checkNode
     class Start,Output endNode
