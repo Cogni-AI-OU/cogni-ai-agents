@@ -17,6 +17,14 @@ on:
     types:
       - opened
       - edited
+  discussion:
+    types:
+      - created
+      - edited
+      - answered
+  discussion_comment:
+    types:
+      - created
   workflow_dispatch:
     inputs:
       model:  # @docs: <https://opencode.ai/zen/v1/models>
@@ -64,6 +72,7 @@ jobs:
       id-token: write
       issues: write
       pull-requests: write
+      discussions: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -125,6 +134,7 @@ jobs:
               vim*: allow
           prompt: >-
             ${{ github.event.comment.body ||
+                github.event.discussion.body ||
                 github.event.issue.body ||
                 github.event.pull_request.body ||
                 inputs.prompt }}
