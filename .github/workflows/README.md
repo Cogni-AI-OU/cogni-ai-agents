@@ -85,6 +85,7 @@ permission for the caller).
 #### Using Devcontainer CI as a Reusable Workflow
 
 ```yaml
+# Build and validate the dev container
 jobs:
   devcontainer:
     uses: Cogni-AI-OU/.github/.github/workflows/devcontainer-ci.yml@main
@@ -92,83 +93,6 @@ jobs:
       contents: read
       packages: write  # Required for pushing to GitHub Container Registry
 ```
-
-### OpenCode Workflow (`opencode.yml`)
-
-The `opencode.yml` workflow provides OpenCode automation for AI-assisted development, including slash-command and
-manual triggers.
-
-#### Using OpenCode as a Reusable Workflow
-
-Reference it via `workflow_call` or `workflow_dispatch` to leverage the same automation:
-
-```yaml
----
-name: OpenCode
-on:
-  issue_comment:
-    types: [created, edited]
-  pull_request_review_comment:
-    types: [created, edited]
-  workflow_call:
-    inputs:
-      agent:
-        description: Agent to use.
-        required: false
-        type: string
-      model:
-        description: Model to use for OpenCode
-        required: false
-        type: string
-      issue_number:
-        description: Issue or PR number for workflow_call triggers
-        required: false
-        type: number
-      prompt:
-        description: Custom prompt to override the default prompt
-        required: false
-        type: string
-  workflow_dispatch:
-    inputs:
-      agent:
-        description: Agent to use.
-        required: false
-        type: string
-      model:
-        description: Model to use for OpenCode
-        required: false
-        type: string
-      issue_number:
-        description: Issue or PR number for manual workflow execution
-        required: false
-        type: number
-      prompt:
-        description: Custom prompt to override the default prompt
-        required: false
-        type: string
-jobs:
-  opencode:
-    uses: Cogni-AI-OU/.github/.github/workflows/opencode.yml@main
-    with:
-      agent: >-
-        ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') && inputs.agent }}
-      model: >-
-        ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') && inputs.model }}
-      prompt: >-
-        ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') && inputs.prompt }}
-      issue_number: >-
-        ${{ github.event.issue.number || github.event.pull_request.number || inputs.issue_number }}
-    permissions:
-      actions: read
-      contents: write
-      id-token: write
-      issues: write
-      pull-requests: write
-    secrets: inherit
-```
-
-*Note: Requires the `OPENCODE_API_KEY` secret and the [GitHub OpenCode app](https://github.com/apps/opencode-agent)
-installation (or manual setup per the [OpenCode docs](https://opencode.ai/docs/github/#manual-setup)).*
 
 ## Workflow Templates
 
@@ -179,7 +103,7 @@ when needed.
 ## Agent Prompts and Catalogs
 
 - [`AGENTS.md`](AGENTS.md): Agent-facing catalog for workflows in this directory.
-- [`../agents/`](../agents/): Primary Cogni agent definitions consumed by OpenCode.
+- [`../agents/`](../agents/): Primary Cogni agent definitions.
 
 ## MCP Configuration
 
@@ -215,68 +139,3 @@ problem matcher.
 Problem matchers are registered in the `check.yml` workflow before running the corresponding tools. When using
 `check.yml` as a reusable workflow, the matcher files are automatically provided from this repository. You can override
 them by providing custom paths via workflow inputs (`actionlint-matcher-path`, `pre-commit-matcher-path`).
-
-## Security
-
-### OpenCode Workflow Git Access
-
-The OpenCode workflow (`opencode.yml`) grants intentionally broad git access via `Bash(git:*)` to enable autonomous code
-changes. This permission is necessary for OpenCode to commit and push changes, but it requires proper safeguards.
-
-#### Security Controls
-
-**Access Control:**
-
-- Only trusted users can trigger OpenCode (OWNER, MEMBER, COLLABORATOR, CONTRIBUTOR).
-- PR/issue authors can only trigger on their own content.
-- External contributors (FIRST_TIME_CONTRIBUTOR, NONE) are explicitly blocked.
-
-**Required Repository Protections:**
-
-To safely use OpenCode with git access, repository administrators must configure:
-
-1. **Branch Protection Rules** on main/protected branches:
-   - Require pull request reviews before merging.
-   - Require status checks to pass (e.g., linting, tests).
-   - Require conversation resolution before merging.
-   - Do not allow bypassing the above settings.
-
-2. **GitHub Audit Logs** (organization-level):
-   - Enable and regularly review audit logs.
-   - Monitor commits made by `github-actions[bot]` (OpenCode's identity).
-   - Set up alerts for suspicious patterns (rapid commits, deleted branches, etc.).
-
-3. **Protected Branch Policies**:
-   - Restrict who can push to protected branches.
-   - Consider requiring deployment approvals for production branches.
-   - Use CODEOWNERS to require specific reviewer approval for sensitive files.
-
-#### Best Practices
-
-- Review OpenCode's commits before merging PRs.
-- Use draft PRs for OpenCode's work to require explicit promotion.
-- Regularly audit OpenCode's tool usage and permissions.
-- Rotate `OPENCODE_API_KEY` periodically.
-- Monitor workflow run logs for unexpected behavior.
-
-## OpenCode Tools
-
-When operating via OpenCode in the GitHub Actions runtime, the following MCP tools are available and should be utilized
-to perform tasks effectively:
-
-- **vscode**: `getProjectSetupInfo`, `installExtension`, `memory`, `newWorkspace`, `resolveMemoryFileUri`,
-  `runCommand`, `vscodeAPI`, `extensions`, `askQuestions`
-- **execute**: `runNotebookCell`, `testFailure`, `getTerminalOutput`, `killTerminal`, `sendToTerminal`,
-  `createAndRunTask`, `runInTerminal`
-- **read**: `getNotebookSummary`, `problems`, `readFile`, `viewImage`, `terminalSelection`, `terminalLastCommand`
-- **edit**: `createDirectory`, `createFile`, `createJupyterNotebook`, `editFiles`, `editNotebook`, `rename`
-- **search**: `changes`, `codebase`, `fileSearch`, `listDirectory`, `textSearch`, `usages`
-- **web**: `fetch`, `githubRepo`
-- **browser**: `openBrowserPage`
-- **agent**: `runSubagent`
-- **misc**: `vscode.mermaid-chat-features/renderMermaidDiagram`, `ms-python.python/getPythonEnvironmentInfo`,
-  `ms-python.python/getPythonExecutableCommand`, `ms-python.python/installPythonPackage`, `todo`
-
-In addition to the MCP integrations, the agent runtime provides a set of core built-in capabilities (often logged as
-`Glob`, `Todo`/`TodoWrite`, `Edit`, etc.). These are executed directly by the agent's core engine, rather than through
-the OpenCode MCP protocol, and include file system access, editing, and shell execution primitives.

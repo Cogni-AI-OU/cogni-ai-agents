@@ -1,1 +1,0 @@
-../../cogni-ai-elite/cogni-ai-elite.agent.md

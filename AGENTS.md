@@ -8,7 +8,7 @@ For general project invariants see [README.md](README.md).
 
 This repository is the source of truth for Cogni AI agent files.
 Agent files live at the repository root so they are accessible directly when
-this repo is used via git subtree at `.github/agents`.
+this repo is cloned into `.github/agents`.
 
 | File | Purpose |
 | ---- | ------- |
@@ -22,7 +22,6 @@ Read and merge these when operating inside corresponding sub-directories or repo
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
 - `FLOWS.mmd` (Root canonical timelines, flows, and dependency graphs)
-- `.opencode/AGENTS.md`
 - [`.github/AGENTS.md`](.github/AGENTS.md)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request

@@ -1,1 +1,0 @@
-../../cogni-ai-architect/cogni-ai-architect.agent.md
