@@ -8,7 +8,7 @@ For general project invariants see [README.md](README.md).
 
 This repository is the source of truth for Cogni AI agent files.
 Agent files live at the repository root so they are accessible directly when
-this repo is used via git subtree at `agents`.
+this repo is cloned into `.github/agents`.
 
 | File | Purpose |
 | ---- | ------- |

@@ -90,8 +90,8 @@ pre-commit run flake8 -a
 ## AI Agents
 
 This repository is the **source of truth** for Cogni AI agent configurations.
-Agent files live in the **repository root** so that when this repo is added
-via git subtree at `agents`, consumers receive them directly at
+Agent files live in the **repository root** so that when they are cloned
+into `.github/agents`, consumers receive them directly at
 `.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` (and `.github/agents/AGENTS.md`).
 
 ### Agent Configuration Files
@@ -109,15 +109,17 @@ via git subtree at `agents`, consumers receive them directly at
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
 | [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
 
-### Using This Repository via Git Subtree
+### Installation
 
-Other projects initialize this repo via git subtree **directly at `agents`**:
+To set up the required agents, instructions, and skills in your repository:
 
 ```bash
-git subtree add --prefix=agents https://github.com/Cogni-AI-OU/cogni-ai-agents.git main --squash
+git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agents .github/agents
+git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-instructions .github/instructions
+git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-skills .github/skills
 ```
 
-After initialization the consumer project gets:
+After cloning the repositories the consumer project gets:
 
 - `.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` — the primary agent
 - `.github/agents/AGENTS.md` — the agents catalog
