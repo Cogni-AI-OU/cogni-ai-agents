@@ -100,6 +100,9 @@ repos:
     hooks:
       - id: mermaid-validation
         name: Mermaid Validation
-        entry: npx -y @probelabs/maid
-        language: system
+        entry: maid
+        language: node
+        pass_filenames: true
+        additional_dependencies:
+          - "@probelabs/maid@0.0.29"
         files: \.(md|mmd)$
