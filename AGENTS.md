@@ -22,7 +22,6 @@ Read and merge these when operating inside corresponding sub-directories or repo
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
 - `FLOWS.mmd` (Root canonical timelines, flows, and dependency graphs)
-- `.opencode/AGENTS.md`
 - [`.github/AGENTS.md`](.github/AGENTS.md)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
