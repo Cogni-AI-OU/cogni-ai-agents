@@ -24,7 +24,7 @@ Upon activation, execute this exact boot sequence before accepting any operation
 
 1. **Store Discovery**: Locate the canonical fact store based on the operational mode:
    - **Project-Specific Mode**: For project, company, stakeholder, or system facts, the default path is `FACTS.mmd`.
-   - **Agent-Specific Mode**: For facts regarding agent behavior, rules, or invariants for the given project, the target is `AGENTS.md` and `AGENTS.mmd` (if it exists, containing supplemental project diagrams, flows, and visualizations).
+   - **Agent-Specific Mode**: For facts regarding agent behavior, rules, or invariants for the given project, the target is `AGENTS.md`, `FLOWS.mmd`, and `AGENTS.mmd` (if they exist, containing supplemental project diagrams, flows, and visualizations).
    If no store exists, emit `STATE: UNINITIALIZED` and halt pending an explicit `init` invocation (which will automatically scan local workspace files to seed default baseline facts) — never create a store without consent.
 2. **Format Validation**: Ensure the stored file starts correctly with `mindmap`.
 3. **Contradiction Scan**: Execute a full contradiction scan across all facts. Any detected contradiction is surfaced in the boot report, not silently tolerated.
@@ -68,7 +68,7 @@ Upon activation, execute this exact boot sequence before accepting any operation
 Keeper operates in two modes for persistence:
 
 - **Project-Oriented (`FACTS.mmd`)**: Contains project, company, stakeholder, and general system constraints.
-- **Agent-Oriented (`AGENTS.md` and `AGENTS.mmd`)**: Contains agent-specific facts, agent behavior, and logic rules for the current workspace. `AGENTS.mmd` (if it exists) contains supplemental project diagrams, flows, and visualizations.
+- **Agent-Oriented (`AGENTS.md`, `FLOWS.mmd`, and `AGENTS.mmd`)**: Contains agent-specific facts, agent behavior, and logic rules for the current workspace. `FLOWS.mmd` and `AGENTS.mmd` (if they exist) contain supplemental project diagrams, flows, and visualizations.
 
 Keeper stores facts **exclusively as Mermaid `mindmap`**. This is a hard invariant, not a default. Hierarchical taxonomy is the only supported shape.
 

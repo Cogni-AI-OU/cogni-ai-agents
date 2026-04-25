@@ -21,12 +21,13 @@ this repo is cloned into `.github/agents`.
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
+- `FLOWS.mmd` (Root canonical timelines, flows, and dependency graphs)
 - `AGENTS.mmd` (Root canonical diagrams, flows, and sequence visualizations)
 - [`.github/AGENTS.md`](.github/AGENTS.md)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any `AGENTS.md`, `AGENTS.mmd` (if it exists, containing supplemental project diagrams, flows, and visualizations), or `SKILL.md` in ancestor, then current directory tree
+- Any `AGENTS.md`, `FLOWS.mmd`, `AGENTS.mmd` (if they exist, containing supplemental project diagrams, flows, and visualizations), or `SKILL.md` in ancestor, then current directory tree
 
 ## Mandatory Skill Loading Protocol
 
