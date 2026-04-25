@@ -97,6 +97,16 @@ flowchart TD
         SL6 --> SL8
     end
 
+    subgraph Metacognitive_Rewind_Gate [Metacognitive Rewind Gate]
+        direction TB
+        MR1["Contradiction Detected"] --> MR2
+        MR2["Emit 'CONTRADICTION at step N' (No in-place patching)"] --> MR3
+        MR3["Rewind to last matching Pre/Post pair"] --> MR4
+        MR4["Discard all downstream derivations"] --> MR5
+        MR5["Restart the proof/logic chain"] --> MR6
+        MR6["Verify every step anomaly-free before claiming solution"]
+    end
+
     subgraph State_Compression_Protocol [State-Compression Protocol]
         direction TB
         CP1["Partition task into <= 8 steps"] --> CP2
