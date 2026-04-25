@@ -27,10 +27,12 @@ For a human-readable overview, see [README.md](README.md).
 ### cogni-ai-agent.yml
 
 - Purpose: provides the underlying logic to run the Cogni AI Agent.
-- Triggers: `issue_comment`, `pull_request_review_comment`, `issues`, `pull_request`, `workflow_dispatch`.
+- Triggers: `issue_comment`, `pull_request_review_comment`, `issues`, `pull_request`,
+  `discussion`, `discussion_comment`, `workflow_dispatch`.
 - Details: Installs Python dependencies from `.devcontainer/requirements.txt` and calls the
   `Cogni-AI-OU/cogni-ai-agent-action` to process instructions.
-- Permissions: `contents: write`, `id-token: write`, `issues: write`, `pull-requests: write`.
+- Permissions: `contents: write`, `id-token: write`, `issues: write`, `pull-requests: write`,
+  `discussions: write`.
 
 ### copilot-setup-steps.yml
 
