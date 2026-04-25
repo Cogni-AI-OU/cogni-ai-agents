@@ -16,6 +16,7 @@ flowchart TD
 
     Boot --> GLOBAL_AGENTS_md
     GLOBAL_AGENTS_md -->|Yes| B5["5- Emit Boot Report"]
+    B5 --> Idle
         Idle{"6- Await PR/Code Input"}
 
         Idle -->|"New PR / Code Diff"| Input[Gather Context]
