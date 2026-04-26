@@ -99,6 +99,7 @@ Include a **Self-Test Report** at the end of your response detailing the PASS/FA
 and performing an operational self-test. I will trace the outcomes of my
 activation, execute diagnostic checks, document any challenges faced, and output
 the final Mermaid sequence diagram showing what actually happened, along with a
-mindmap of available capabilities and a self-test report. **CRITICAL: Ensure
-you explicitly include your active Agent Name (e.g. 'architect') in
-the title of the generated report or GitHub issue so it is instantly identifiable.**"
+mindmap of available capabilities and a self-test report.
+Ensure you explicitly include your active Agent Name (e.g. 'architect')
+in the title of the generated report.
+Publish this report as a new GitHub Discussion in the 'Agent tests' category."
