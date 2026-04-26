@@ -352,7 +352,12 @@ molecule syntax
 - Update `.markdownlint.yaml`, `.yamllint`, or `.editorconfig` for linting rules
 - Run `pre-commit run -a` to verify changes pass all checks
 
-## Integrating Changes from Target Branch
+## Local Interactive Development: Integrating Changes from Target Branch
+
+> **Note:** The following policy applies ONLY to local interactive development sessions.
+> When operating autonomously inside a GitHub Actions runtime,
+> refer to the [GitHub Actions Runtime](#github-actions-runtime) section which explicitly forbids rebasing
+> and requires merge commits.
 
 Recommended way is to use the **cherry-pick workflow** to rebase your commits
 on top of the updated target branch:
