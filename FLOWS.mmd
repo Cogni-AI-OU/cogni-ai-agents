@@ -127,12 +127,6 @@ flowchart TD
         GI3 --> GI4["IsRetryable[Class] -> gated retry only"]
     end
 
-    subgraph Global_Invariants ["Global Invariants (Scheduler-Theoretic)"]
-        direction TB
-        GI1["MaxRecoveryDepth (bounded)"] --> GI2["ImmutablePlanVersion = true"]
-        GI2 --> GI3["GuardrailPreFlight = (memo /\ growth /\ progress /\ budget)"]
-        GI3 --> GI4["IsRetryable[Class] -> gated retry only"]
-    end
 
     subgraph Global_Budget_Protocol ["Global Budget Protocol (New - Research Hard Limits)"]
         direction TB
