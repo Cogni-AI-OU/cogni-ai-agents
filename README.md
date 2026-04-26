@@ -44,6 +44,7 @@ Cogni-AI-OU projects:
    - This README for repository scope and the local workflow
    - [.tours/getting-started.tour](.tours/getting-started.tour) for a guided walkthrough
    - [AGENTS.md](AGENTS.md) for repository-specific agent guidance
+   - [AGENTS-RUNTIME.md](AGENTS-RUNTIME.md) for runtime-specific loading protocols
 
 ## Development
 
@@ -82,6 +83,7 @@ pre-commit run flake8 -a
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
+- `AGENTS-RUNTIME.md`: core loading protocols and execution logic for the GitHub Runtime
 - `AGENTS.mmd`: root canonical diagram, flows, and booting sequence visualizations
 - `CONSTRAINTS.mzn`: formal constraint declarations (budgets, loop arrest, and guardrails)
 - `FACTS.mmd`: root canonical fact store and project mindmap
@@ -108,10 +110,12 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md) | All agents | Autonomous Context7 Ops responsible for gathering and filtering documentation |
 | [cogni-ai-devops/cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | DevOps/SREs | Elite autonomous DevOps and SRE agent |
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
+| [cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Fact Ops | Autonomous fact operator responsible for maintaining canonical fact files |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
 | [cogni-ai-reviewer/cogni-ai-reviewer.agent.md](cogni-ai-reviewer/cogni-ai-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
 | [cogni-ai-weaver/cogni-ai-weaver.agent.md](cogni-ai-weaver/cogni-ai-weaver.agent.md) | Weavers | Canonical Flow Custody & Diagram Stewardship Kernel |
-| [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific workflows |
+| [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific guidance |
+| [AGENTS-RUNTIME.md](AGENTS-RUNTIME.md) | Runtime | Core loading protocols and execution logic |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
 | [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
@@ -159,6 +163,10 @@ CI/CD pipeline precision, infrastructure-as-code (IaC), and resolving deployment
 ### [Cogni AI Elite](cogni-ai-elite/cogni-ai-elite.agent.md)
 
 Elite autonomous systems architect engineered for structural perfection and recursive problem decomposition.
+
+### [Cogni AI Fact Ops](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md)
+
+Autonomous fact operator responsible for maintaining canonical fact files and information consistency.
 
 ### [Cogni AI Keeper](cogni-ai-keeper/cogni-ai-keeper.agent.md)
 
