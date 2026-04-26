@@ -20,7 +20,10 @@ Key contents:
 
 ## Interactive Editor Workflow
 
-- **Do Not Commit Automatically**: When working in the editor interactively, **NEVER** stage, commit, or push changes automatically. Wait for explicit user confirmation or instructions before executing any Git structural modifications (e.g., `git commit`, `git push`, initializing/modifying submodules).
+- **Do Not Commit Automatically**: When working in the editor interactively, **NEVER** stage,
+  commit, or push changes automatically. Wait for explicit user confirmation or instructions
+  before executing any Git structural modifications (e.g., `git commit`, `git push`,
+  initializing/modifying submodules).
 - **Leave Files Uncommitted**: Allow the user to review the uncommitted changes in the workspace and decide when to commit.
 
 ## Coding Standards
