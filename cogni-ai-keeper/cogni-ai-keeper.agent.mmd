@@ -101,8 +101,8 @@ flowchart TD
     GLOBAL_AGENTS_md --> B5
 
     Core --> TL
-    TL -->|&quot;Green: Autonomous&quot;| Mutation
-    TL -->|&quot;Yellow: Collaborative&quot;| EscalateGate{Escalation Required?}
+    TL -->|Green: Autonomous| Mutation
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Mutation
     EscalateGate -->|No| Mutation
@@ -134,7 +134,7 @@ flowchart TD
 
 
     class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
-    class FL2,IL2,SL2,SL4 gateNode
+    class FL2,CL2,IL2,SL2,SL4 gateNode
 class Boot,Input,Core,Finalize,B1,B2,B3,B4,B5 phaseNode
     class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
     class Reject,Commit,Report,Escalate checkNode

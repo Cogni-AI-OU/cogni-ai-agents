@@ -13,9 +13,9 @@ flowchart TD
         CFR_MEMO_PROG -->|No Progress, Repetition >=3, OR BudgetExhausted| CFR_ARREST["Loop Arrest v3<br/>-> Hard Stop / Terminal Escalation"]
         CFR_MEMO_PROG -->|Progress OK| CFR_LAYER{"Recovery Layer? (3-Layer Escalation Protocol)"}
 
-        CFR_LAYER -->|&quot;Layer 1: Retry Transient&quot;| CFR_BOUNDED["Bounded Retry + Backoff<br/>(per-objective budget; ImmutablePlanVersion preserved)"]
-        CFR_LAYER -->|&quot;Layer 2: Local Patch&quot;| CFR_REWIND_PATH["Rewind to Last Known-Valid + Patch<br/>(repo-discovered only)"]
-        CFR_LAYER -->|&quot;Layer 3: Full Escalate&quot;| CFR_ESCALATE["Immediate Escalation<br/>(Extrinsic Gate 3; closed loop - no LLM feedback)"]
+        CFR_LAYER -->|Layer 1: Retry Transient| CFR_BOUNDED["Bounded Retry + Backoff<br/>(per-objective budget; ImmutablePlanVersion preserved)"]
+        CFR_LAYER -->|Layer 2: Local Patch| CFR_REWIND_PATH["Rewind to Last Known-Valid + Patch<br/>(repo-discovered only)"]
+        CFR_LAYER -->|Layer 3: Full Escalate| CFR_ESCALATE["Immediate Escalation<br/>(Extrinsic Gate 3; closed loop - no LLM feedback)"]
 
         CFR_BOUNDED --> CFR_REMEDY["Execute Contextual Remedies<br/>(Verify Access -> Pivot Fallbacks -> Safe Installs)"]
         CFR_REWIND_PATH --> CFR_REMEDY
@@ -110,41 +110,6 @@ flowchart TD
         EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
     end
 
-    subgraph Failure_Taxonomy ["Failure Taxonomy (Gating Matrix)"]
-        direction TB
-        FT1["Classify Error Signature"] --> FT2{"POLICY_DENIED / ALLOWLIST / LOG_ACCESS?"}
-        FT2 -->|Yes| FT3["Never retry -> Pivot/Escalate"]
-        FT2 -->|No| FT4{"PATH_MUTATION + arg growth?"}
-        FT4 -->|Yes| FT5["Rewind to last known-valid"]
-        FT4 -->|No| FT6{"TRANSIENT only?"}
-        FT6 -->|Yes| FT7["Bounded retry + backoff + budget"]
-        FT6 -->|No| FT8["Escalate / Non-retryable"]
-    end
-
-    subgraph Global_Invariants ["Global Invariants (Scheduler-Theoretic)"]
-        direction TB
-        GI1["MaxRecoveryDepth (bounded)"] --> GI2["ImmutablePlanVersion = true"]
-        GI2 --> GI3["GuardrailPreFlight = (memo /\ growth /\ progress /\ budget)"]
-        GI3 --> GI4["IsRetryable[Class] -> gated retry only"]
-    end
-
-
-    subgraph Global_Budget_Protocol ["Global Budget Protocol (New - Research Hard Limits)"]
-        direction TB
-        GBP1["Per-run / Per-objective Budgets<br/>(max_steps=20, max_tool_calls=N, token_budget, time_TTL)"] --> GBP2{"Budget Exhausted?"}
-        GBP2 -->|Yes| GBP3["Hard Stop + Escalate<br/>(override any internal loop)"]
-        GBP2 -->|No| GBP4["Decrement & Continue"]
-    end
-
-    subgraph Guardrail_Executor ["Guardrail Executor (New - External Enforcement Wrapper)"]
-        direction TB
-        GE1["Every Tool Invocation Routes Here"] --> GE2["Global_Budget_Protocol Check"]
-        GE2 --> GE3["Loop_Arrest_Protocol Check"]
-        GE3 --> GE4["Memo + Growth + Progress Pre-flight"]
-        GE4 -->|All Pass| GE5["Execute Tool"]
-        GE4 -->|Any Fail| GE6["Immediate Arrest / Rewind"]
-    end
-
     subgraph Failed_Build_Diagnosis ["Failed Build Diagnosis (Updated)"]
         FB1[Trigger: Build Failure] --> FB2[Identify Last Green Build]
         FB2 --> FB3[Compare Changes: git diff/log]
@@ -158,6 +123,17 @@ flowchart TD
         FB8 --> FB9
     end
 
+    subgraph Failure_Taxonomy ["Failure Taxonomy (Gating Matrix)"]
+        direction TB
+        FT1["Classify Error Signature"] --> FT2{"POLICY_DENIED / ALLOWLIST / LOG_ACCESS?"}
+        FT2 -->|Yes| FT3["Never retry -> Pivot/Escalate"]
+        FT2 -->|No| FT4{"PATH_MUTATION + arg growth?"}
+        FT4 -->|Yes| FT5["Rewind to last known-valid"]
+        FT4 -->|No| FT6{"TRANSIENT only?"}
+        FT6 -->|Yes| FT7["Bounded retry + backoff + budget"]
+        FT6 -->|No| FT8["Escalate / Non-retryable"]
+    end
+
     subgraph Git_Branch_Sync_Policy
         BS1[Determine PR Base & Head] --> BS2[Check PR Head Branch]
         BS2 --> BS3["Pull Head (No Rebase)"]
@@ -167,6 +143,29 @@ flowchart TD
         BS4 -->|No| BS7[Verify No Rebase Executed]
         BS6 --> BS7
         BS7 --> BS8[Push to Remote]
+    end
+
+    subgraph Global_Budget_Protocol ["Global Budget Protocol (New - Research Hard Limits)"]
+        direction TB
+        GBP1["Per-run / Per-objective Budgets<br/>(max_steps=20, max_tool_calls=N, token_budget, time_TTL)"] --> GBP2{"Budget Exhausted?"}
+        GBP2 -->|Yes| GBP3["Hard Stop + Escalate<br/>(override any internal loop)"]
+        GBP2 -->|No| GBP4["Decrement & Continue"]
+    end
+
+    subgraph Global_Invariants ["Global Invariants (Scheduler-Theoretic)"]
+        direction TB
+        GI1["MaxRecoveryDepth (bounded)"] --> GI2["ImmutablePlanVersion = true"]
+        GI2 --> GI3["GuardrailPreFlight = (memo /\ growth /\ progress /\ budget)"]
+        GI3 --> GI4["IsRetryable[Class] -> gated retry only"]
+    end
+
+    subgraph Guardrail_Executor ["Guardrail Executor (New - External Enforcement Wrapper)"]
+        direction TB
+        GE1["Every Tool Invocation Routes Here"] --> GE2["Global_Budget_Protocol Check"]
+        GE2 --> GE3["Loop_Arrest_Protocol Check"]
+        GE3 --> GE4["Memo + Growth + Progress Pre-flight"]
+        GE4 -->|All Pass| GE5["Execute Tool"]
+        GE4 -->|Any Fail| GE6["Immediate Arrest / Rewind"]
     end
 
     subgraph Loop_Arrest_Protocol ["Loop Arrest Protocol v2 (Enhanced)"]
@@ -261,9 +260,9 @@ flowchart TD
         CP3["Emit Mini-Checkpoint"] --> CP4
         CP4["Verify Invariants"] --> CP5
         CP5{"Step count?"}
-        CP5 -->|&quot;>= 5 steps&quot;| CP6["Emit Hard Checkpoint"]
+        CP5 -->|>= 5 steps| CP6["Emit Hard Checkpoint"]
         CP6 --> CP7["Clean Re-serialization"]
-        CP5 -->|&quot;< 5 steps&quot;| CP8{"Contradiction detected?"}
+        CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
         CP7 --> CP8
         CP8 -->|Yes| CP9["Metacognitive Rewind Protocol"]
         CP9 --> CP2

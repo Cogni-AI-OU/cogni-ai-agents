@@ -18,7 +18,7 @@ Key contents:
 - Refer to the `README.md` in the project root for setup and installation instructions.
 - Check also `.tours/getting-started.tour` which provides a guided walkthrough of key project features and structure.
 
-## INTERACTIVE EDITOR WORKFLOW (NO AUTO-COMMIT)
+## Interactive Editor Workflow (No Auto-Commit)
 
 When working interactively in the editor as programming assistant, you MUST follow these guidelines:
 

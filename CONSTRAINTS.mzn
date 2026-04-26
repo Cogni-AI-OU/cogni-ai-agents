@@ -5,10 +5,10 @@
 
 % --- Parameters (Budgets and Limits) ---
 % Derived from Global_Budget_Protocol and Loop_Arrest_Protocol in FLOWS.mmd
-int: MAX_STEPS = 20;
-int: MAX_REPETITION = 3;
-int: MAX_PARTITION_STEPS = 8;
-int: HARD_CHECKPOINT_THRESHOLD = 5;
+int: MAX_STEPS = 20;               % Gated by Global_Budget_Protocol (GBP1)
+int: MAX_REPETITION = 3;           % Gated by Loop_Arrest_Protocol (LAP2)
+int: MAX_PARTITION_STEPS = 8;      % Gated by State-Compression Protocol (CP1)
+int: HARD_CHECKPOINT_THRESHOLD = 5; % Gated by State-Compression Protocol (CP5)
 
 % --- State Variables ---
 var 0..MAX_STEPS: current_step_count;
@@ -21,7 +21,7 @@ var bool: has_progress_or_growth;
 var bool: has_memo_hit;
 
 % Global Invariants & Enforcements
-var bool: immutable_plan_version;
+bool: immutable_plan_version = true; % Fixed parameter (Global_Invariants GI2)
 var bool: guardrail_preflight_passed;
 var bool: loop_arrest_triggered;
 var bool: hard_checkpoint_required;
@@ -30,7 +30,7 @@ var bool: hard_checkpoint_required;
 
 % 1. Global Invariants
 % The plan version must be immutable to prevent plan-drifting LLM loops.
-constraint immutable_plan_version = true;
+% (Enforced by bool initialization above)
 
 % 2. Global Budget Protocol
 constraint is_budget_exhausted <-> (current_step_count >= MAX_STEPS);
@@ -53,8 +53,6 @@ constraint guardrail_preflight_passed <-> (
 );
 
 % 5. State-Compression Protocol
-% Cannot partition more than the max step limit per batch.
-constraint partition_size <= MAX_PARTITION_STEPS;
 % Force a hard checkpoint if the step window reaches threshold.
 constraint hard_checkpoint_required <-> (partition_size >= HARD_CHECKPOINT_THRESHOLD);
 

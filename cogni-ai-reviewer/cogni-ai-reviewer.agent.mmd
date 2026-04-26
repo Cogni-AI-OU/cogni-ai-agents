@@ -20,7 +20,7 @@ flowchart TD
     B5 --> Idle
         Idle{"6- Await PR/Code Input"}
 
-        Idle -->|&quot;New PR / Code Diff&quot;| Input[Gather Context]
+        Idle -->|New PR / Code Diff| Input[Gather Context]
 
         Input --> Rules{"Relevant Rules Found? (Global + Local)"}
         Rules -->|No| Generic[Load Base Coding Standards]
@@ -116,8 +116,8 @@ flowchart TD
     Output --> Idle
 
     Analysis --> TL
-    TL -->|&quot;Green: Autonomous&quot;| Assessment
-    TL -->|&quot;Yellow: Collaborative&quot;| EscalateGate{Escalation Required?}
+    TL -->|Green: Autonomous| Assessment
+    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Assessment
     EscalateGate -->|No| Assessment
@@ -146,7 +146,7 @@ flowchart TD
 
 
     class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a phaseNode
-    class FL2,IL2,SL2,SL4,B3 gateNode
+    class FL2,CL2,IL2,SL2,SL4,B3 gateNode
     class Boot,Input,Analysis,Finalize,B5 phaseNode
     class Idle,Rules,Assessment,Severity,TL,EscalateGate gateNode
     class Generic,Specific,Flag,Suggest,Request,Approve,Escalate checkNode

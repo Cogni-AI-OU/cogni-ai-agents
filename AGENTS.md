@@ -360,10 +360,10 @@ molecule syntax
 > refer to the [GitHub Actions Runtime](#github-actions-runtime) section which explicitly forbids rebasing
 > and requires merge commits.
 
-Recommended way is to use the **cherry-pick workflow** to rebase your commits
+Recommended way is to use the **cherry-pick workflow** to rebase your commits (local sessions only)
 on top of the updated target branch:
 
-1. Identify your feature commits
+1. Identify your feature commits (local sessions only)
 2. Fetch the latest target branch
 3. Reset your branch to target (with backup)
 4. Cherry-pick your feature commits
