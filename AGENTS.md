@@ -24,7 +24,6 @@ Read and merge these when operating inside corresponding sub-directories or repo
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
 - `AGENTS.mmd` and `FLOWS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
 - `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
-- `AGENTS.md` (Repository-wide instructions and global agent behavior contract)
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (Domain context and IDE constraints)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request

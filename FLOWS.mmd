@@ -155,7 +155,7 @@ flowchart TD
     subgraph Global_Invariants ["Global Invariants (Scheduler-Theoretic)"]
         direction TB
         GI1["MaxRecoveryDepth (bounded)"] --> GI2["ImmutablePlanVersion = true"]
-        GI2 --> GI3["GuardrailPreFlight = (memo /\ growth /\ progress /\ budget)"]
+        GI2 --> GI3["GuardrailPreFlight = (memo AND growth AND progress AND budget)"]
         GI3 --> GI4["IsRetryable[Class] -> gated retry only"]
     end
 
