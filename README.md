@@ -113,6 +113,11 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
 | [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |
 
+See also:
+
+- [`AGENTS.md` file format specification](https://agents.md/)
+- [Best practices for using GitHub Copilot](https://gh.io/copilot-coding-agent-tips).
+
 ### Installation
 
 To set up the required agents, instructions, and skills in your repository:
@@ -126,16 +131,6 @@ git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-skills .github
 # Symlink individual agents from their subdirectories to the discovery directory.
 for d in .github/agents/*/ ; do ln -fsv "$(basename "$d")/$(basename "$d").agent.md" .github/agents/ ; done
 ```
-
-After cloning the repositories the consumer project gets:
-
-- `.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` — the primary agent
-- `.github/agents/AGENTS.md` — the agents catalog
-
-See also:
-
-- [`AGENTS.md` file format specification](https://agents.md/)
-- [Best practices for using GitHub Copilot](https://gh.io/copilot-coding-agent-tips).
 
 ## Available Agents
 
@@ -259,23 +254,6 @@ Repository administrators must configure:
 
 ## Troubleshooting
 
-### Claude Not Responding to Comments
-
-If Claude isn't responding to your comments, verify:
-
-1. **Permissions**: You must have one of these roles:
-   - Repository OWNER, MEMBER, COLLABORATOR, or CONTRIBUTOR
-   - PR/issue author (on your own content only)
-
-2. **Trigger conditions** for PR review comments:
-   - Your comment contains `@claude`, OR
-   - You're replying to a comment from `github-actions[bot]` (Claude's responses), OR
-   - You're replying to a comment that contains `@claude`
-
-The workflow uses a two-stage filter to prevent abuse while allowing natural
-conversation flow. Check the Actions tab in your repository for workflow run details
-if Claude doesn't respond as expected.
-
 ## GitHub Actions
 
 For documentation on GitHub Actions workflows, problem matchers, and CI/CD
@@ -290,11 +268,6 @@ For information about Cogni AI OÜ, our mission, and how to collaborate, see our
 
 See [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) for organization-wide
 contribution guidelines and expectations for issues, pull requests, and CI.
-
-## References
-
-- [How to Use the .github Repository](https://www.freecodecamp.org/news/how-to-use-the-dot-github-repository/)
-- [Creating a Default Community Health File](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)
 
 ## License
 
