@@ -47,9 +47,7 @@ constraint loop_arrest_triggered <-> (
 % 4. Guardrail Executor (Pre-flight)
 % Guardrail allows tool execution only if ALL conditions are met safely.
 constraint guardrail_preflight_passed <-> (
-    not has_memo_hit /\
-    has_progress_or_growth /\
-    not is_budget_exhausted /\
+    not loop_arrest_triggered /\
     immutable_plan_version
 );
 

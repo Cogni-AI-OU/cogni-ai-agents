@@ -173,9 +173,9 @@ flowchart TD
         direction TB
         LAP1["Pre-Retry: Fingerprint + Sliding Window (last 5 steps)"] --> LAP2{"Memo Hit OR Repetition >=3?"}
         LAP2 -->|Yes| LAP3["Hard-Stop This Branch -> Escalation / Rewind"]
-        LAP2 -->|No| LAP4["Monotonic Growth Detector + Budget Check"]
-        LAP4 -->|Growth OR Budget Exceeded| LAP5["Rewind / Halt"]
-        LAP4 -->|OK| LAP6["Non-Progress Counter (2 consecutive)"]
+        LAP2 -->|No| LAP4["Progress Growth Detector + Budget Check"]
+        LAP4 -->|No Growth OR Budget Exceeded| LAP5["Rewind / Halt"]
+        LAP4 -->|Growth Exists / OK| LAP6["Non-Progress Counter (2 consecutive)"]
         LAP6 -->|Threshold Exceeded| LAP3
         LAP6 -->|OK| LAP7["Proceed to Progress Contract"]
     end
