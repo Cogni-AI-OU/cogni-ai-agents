@@ -28,3 +28,8 @@ this repo is cloned into `.github/agents`.
 ### Structural Invariant
 
 - **Agents Location**: Agents are located directly in the root directory of this repository.
+
+## Subagent Delegation
+
+- **Spawning Sub-agents**:
+  If subagent delegation is enabled in the runtime, agents are encouraged to spawn new sub-agents to handle complex, multi-step, or parallelizable tasks. This promotes modular problem-solving and efficient resource utilization.

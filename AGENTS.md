@@ -47,6 +47,11 @@ Read and merge these when operating inside corresponding sub-directories or repo
 Autonomous agents operating in this repository MUST adhere to the core loading protocols
 and execution logic defined in [AGENTS-RUNTIME.md](AGENTS-RUNTIME.md).
 
+## Subagent Delegation
+
+- **Spawning Sub-agents**:
+  If subagent delegation is enabled in the runtime, agents are encouraged to spawn new sub-agents to handle complex, multi-step, or parallelizable tasks. This promotes modular problem-solving and efficient resource utilization.
+
 ## Required References
 
 - Project overview & install: [README.md](README.md)
