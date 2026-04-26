@@ -9,7 +9,7 @@ flowchart TD
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
         B2 --> FL1
-    FL6 --> CL1
+        FL6 --> CL1
         CL6 --> IL1
         IL6 --> SL1
         SL8 --> B3
@@ -157,8 +157,8 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class Phase0,Phase1,Phase2,Phase3,B1,B2,B3a,B4,B5,B6,B7,B8,CL1,CL3,CL4,CL5,CL6 phaseNode
-    class Contradiction,QAPass,TodosCheck,Cognitive,EscalateCheck,TL,EscalateGate,B3,CL2 gateNode
+    class Phase0,Phase1,Phase2,Phase3,B1,B2,B3a,B4,B5,B6,B7,B8,FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class Contradiction,QAPass,TodosCheck,Cognitive,EscalateCheck,TL,EscalateGate,B3,FL2,CL2,IL2,SL2,SL4 gateNode
     class Rewind,Signal,Escalate checkNode
     class Start,End endNode
     class G1,G2,G3,G4,G5,G6 guardNode

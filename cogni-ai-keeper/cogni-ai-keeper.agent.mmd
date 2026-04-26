@@ -3,17 +3,27 @@ flowchart TD
 
     subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        B1["1- Store Discovery"]
-        B2["2- Schema Validation"]
-        B3["3- Contradiction & Integrity Scan"]
-        B4["4- Provenance Audit"]
+        B1["1- AGENTS.md Contract Alignment"]
+        B2["2- Load SKILL.md and .instructions.md"]
+        B3{"3- Submodules Initialized?"}
+        B3 -->|No| B3a["git submodule update --init"]
+        B3a --> B2
+        B2 --> FL1
+        FL6 --> CL1
+        CL6 --> IL1
+        IL6 --> SL1
+        SL8 --> B3
     end
 
     subgraph LOCAL_CONTRACT [keeper.agent.md: Local Framework]
-        B5["5- Emit Boot Report"]
-        Idle{"6- Await Action"}
+        B4["4- Store Discovery"]
+        B5["5- Schema Validation"]
+        B6["6- Contradiction & Integrity Scan"]
+        B7["7- Provenance Audit"]
+        B8["8- Emit Boot Report"]
+        Idle{"9- Await Action"}
 
-        Idle -->|Command / Trigger| Input[Parse Invocation]
+        Idle -->|@Keeper verb: payload| Input[Parse Invocation]
 
         Input --> Gate{"Is Operation Authorized?"}
         Gate -->|No| Reject["Emit: UNAUTHORIZED_OPERATION"]
@@ -98,7 +108,12 @@ flowchart TD
     end
 
     Boot --> GLOBAL_AGENTS_md
-    GLOBAL_AGENTS_md --> B5
+    B3 -->|Yes| B4
+    B4 --> B5
+    B5 --> B6
+    B6 --> B7
+    B7 --> B8
+    B8 --> Idle
 
     Core --> TL
     TL -->|Green: Autonomous| Mutation
@@ -133,9 +148,9 @@ flowchart TD
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
 
-    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
-    class FL2,CL2,IL2,SL2,SL4 gateNode
-class Boot,Input,Core,Finalize,B1,B2,B3,B4,B5 phaseNode
+    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5,B6,B7,B8 phaseNode
+    class FL2,CL2,IL2,SL2,SL4,B3 gateNode
+    class Boot,Input,Core,Finalize phaseNode
     class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
     class Reject,Commit,Report,Escalate checkNode
     class Start,Output endNode
