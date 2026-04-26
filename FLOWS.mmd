@@ -35,12 +35,12 @@ flowchart TD
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
         %% Note: FL6, IL6, CL6, and SL8 are the contractual terminal nodes relied on by this sequence
-        IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
-
-        IS_FL --> FL1
-        FL6 --> IS_CL["Execute Mandatory_Constraints_Loading_Protocol"]
+        IS_FL["Execute Mandatory_Facts_Loading_Protocol (FACTS.mmd)"] --> FL1
+        FL6 --> IS1["Agent Contract Alignment (AGENTS.mmd, FLOWS.mmd)"]
+        IS1 --> IS_CL["Execute Mandatory_Constraints_Loading_Protocol (CONSTRAINTS.mzn)"]
         IS_CL --> CL1
-        CL6 --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
+        CL6 --> IS_AL["Agent Contract Alignment (Root AGENTS.md + Local AGENTS.md)"]
+        IS_AL --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
         IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
         IS_IL --> IL1
         IL6 --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]

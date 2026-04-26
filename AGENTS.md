@@ -22,9 +22,10 @@ this repo is cloned into `.github/agents`.
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
-- `AGENTS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
+- `AGENTS.mmd` and `FLOWS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
 - `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
-- [`.github/AGENTS.md`](.github/AGENTS.md)
+- `AGENTS.md` (Repository-wide instructions and global agent behavior contract)
+- [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (Domain context and IDE constraints)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)

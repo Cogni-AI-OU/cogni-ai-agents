@@ -8,8 +8,11 @@ sequenceDiagram
 
     Note over Agent,Root: 1. Mandatory Core Initialization (Booting Sequence)
     Note right of Agent: This sequence MUST be followed upon every activation.
+    Agent->>Root: Read /FACTS.mmd (Must)
+    Agent->>Root: Read /AGENTS.mmd & /FLOWS.mmd (Must)
+    Agent->>Root: Read /CONSTRAINTS.mzn (Must)
     Agent->>Root: Read /AGENTS.md (Must)
-    Agent->>Root: Read /AGENTS.mmd (Must)
+    Agent->>Root: Read /.github/copilot-instructions.md (Must)
 
     Note over Agent,CWD: 2. Directory-Specific Context
     opt When operating inside sub-directories
