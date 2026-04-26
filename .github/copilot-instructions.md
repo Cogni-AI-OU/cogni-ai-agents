@@ -18,6 +18,11 @@ Key contents:
 - Refer to the `README.md` in the project root for setup and installation instructions.
 - Check also `.tours/getting-started.tour` which provides a guided walkthrough of key project features and structure.
 
+## Interactive Editor Workflow
+
+- **Do Not Commit Automatically**: When working in the editor interactively, **NEVER** stage, commit, or push changes automatically. Wait for explicit user confirmation or instructions before executing any Git structural modifications (e.g., `git commit`, `git push`, initializing/modifying submodules).
+- **Leave Files Uncommitted**: Allow the user to review the uncommitted changes in the workspace and decide when to commit.
+
 ## Coding Standards
 
 ### Python
