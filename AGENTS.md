@@ -409,7 +409,9 @@ tries to auto-rebase (e.g., 113 commits), it encounters conflicts it cannot reso
 - Use `gh` command to interact with GitHub resources. For example:
 
   - `gh run list --limit 3` to list recent builds.
-  - `gh run view {ID} --log | rg -iw "failed|error|exit"` to look for build errors.
+  - `gh run view {ID}` to inspect run metadata before attempting log access.
+  - `gh run view {ID} --log-failed` only when the run or job actually concluded with failure.
+  - Prefer `gh --json/--jq` or Actions API/MCP queries over `grep` or `rg` pipelines in allowlisted shells.
 
 ### Firewall issues
 
