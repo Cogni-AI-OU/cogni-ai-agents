@@ -4,6 +4,7 @@
 % (Scheduler-Theoretic v3, Global Budget Protocol, Loop Arrest, Guardrails).
 
 % --- Parameters (Budgets and Limits) ---
+% Derived from Global_Budget_Protocol and Loop_Arrest_Protocol in FLOWS.mmd
 int: MAX_STEPS = 20;
 int: MAX_REPETITION = 3;
 int: MAX_PARTITION_STEPS = 8;
@@ -12,7 +13,7 @@ int: HARD_CHECKPOINT_THRESHOLD = 5;
 % --- State Variables ---
 var 0..MAX_STEPS: current_step_count;
 var 0..MAX_PARTITION_STEPS: partition_size;
-var 0..10: repetition_count;
+var 0..MAX_REPETITION: repetition_count;
 
 % Protocol Signals
 var bool: is_budget_exhausted;

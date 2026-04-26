@@ -4,9 +4,9 @@ flowchart TD
 
     subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol - Bounded Scheduler v3]
         direction TB
-        CFR1["Command Fails"] --> CFR_GUARD["Guardrail Executor<br/>(Pre: memo + growth + progress + budget + ImmutablePlanVersion check)"]
+        CFR1["Command Fails"] --> CFR_GE_INVOKE["Invoke Guardrail_Executor<br/>(Pre: memo + growth + progress + budget + ImmutablePlanVersion check)"]
 
-        CFR_GUARD --> CFR_TAX["Failure Taxonomy Classification<br/>(POLICY_DENIED | PATH_MUTATION_GROWTH | TRANSIENT | LOG_ACCESS | AUTH_ENV | NOT_FOUND | OTHER)"]
+        CFR_GE_INVOKE --> CFR_TAX["Failure Taxonomy Classification<br/>(POLICY_DENIED | PATH_MUTATION_GROWTH | TRANSIENT | LOG_ACCESS | AUTH_ENV | NOT_FOUND | OTHER)"]
 
         CFR_TAX --> CFR_MEMO_PROG["Progress + Memo Gate<br/>(NewArtifact \/ HypothesisNarrowed \/ TerminationSignal ?)<br/>+ Sliding-Window Repetition (RepetitionWindow)"]
 
@@ -28,7 +28,7 @@ flowchart TD
 
         CFR8 -->|Yes| CFR9["Blocker Reporting (state, impact, mitigations)"]
         CFR8 -->|No| CFR11["Retry Execution (Re-execute Command)"]
-        CFR11 -->|Failure| CFR_GUARD
+        CFR11 -->|Failure| CFR_GE_INVOKE
         CFR11 -->|Success| CFR12(["Recovery Complete<br/>+ Telemetry: repeated_hits, stagnation_events, drift_detected, budget_exhausted, loop_arrest_activations"])
     end
 
