@@ -74,6 +74,7 @@ pre-commit run flake8 -a
 ## Project Layout
 
 - `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
+- `cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md`: autonomous context7 ops responsible for gathering and filtering documentation
 - `cogni-ai-devops/cogni-ai-devops.agent.md`: elite autonomous DevOps and SRE agent
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
@@ -104,6 +105,7 @@ into `.github/agents`, consumers receive them directly at
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
 | [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
+| [cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md) | All agents | Autonomous Context7 Ops responsible for gathering and filtering documentation |
 | [cogni-ai-devops/cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | DevOps/SREs | Elite autonomous DevOps and SRE agent |
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
@@ -144,6 +146,10 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 - Command installation fallback logic
 - Self-improvement capabilities
 - Never-give-up problem-solving approach
+
+### [Cogni AI Context7 Ops](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md)
+
+Autonomous Context7 Ops responsible for gathering and filtering documentation and code from Context7 service into relevant context.
 
 ### [Cogni AI DevOps](cogni-ai-devops/cogni-ai-devops.agent.md)
 
