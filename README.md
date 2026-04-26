@@ -76,6 +76,7 @@ pre-commit run flake8 -a
 - `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
 - `cogni-ai-devops/cogni-ai-devops.agent.md`: elite autonomous DevOps and SRE agent
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
+- `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
@@ -117,9 +118,13 @@ into `.github/agents`, consumers receive them directly at
 To set up the required agents, instructions, and skills in your repository:
 
 ```bash
+# Clone agents, instructions, and skills.
 git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agents .github/agents
 git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-instructions .github/instructions
 git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-skills .github/skills
+
+# Symlink individual agents from their subdirectories to the discovery directory.
+for d in .github/agents/*/ ; do ln -fsv "$(basename "$d")/$(basename "$d").agent.md" .github/agents/ ; done
 ```
 
 After cloning the repositories the consumer project gets:
