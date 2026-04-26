@@ -37,7 +37,8 @@ Read and merge these when operating inside corresponding sub-directories or repo
 **Maintenance invariant**:
 
 - After every complex task completion or troubleshooting victory,
-  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
+  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md
+  (requires write access to the repository; in read-only runtimes, log the proposed changes instead).
 - On recurring failure, immediately re-evaluate
   and update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
 - On discovery of superior workaround, new efficiency primitive, or explicit user directive,
@@ -80,7 +81,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
   patch local configuration files or create suppressions to hide errors. Investigate the execution
   environment and upstream dependencies. If the root cause originates outside the repository scope,
   state the required upstream fix clearly and halt rather than introducing local entropy.
-- Read, assimilate, and strictly enforce the invariants defined in the main `AGENTS.md`,
+- Read, assimilate, and strictly enforce the invariants defined in the repository root `AGENTS.md`,
   along with any directory-specific `AGENTS.md` and `AGENTS.mmd` (if it exists, containing
   supplemental project diagrams, flows, and the booting sequence), related files,
   `.github/copilot-instructions.md`,
