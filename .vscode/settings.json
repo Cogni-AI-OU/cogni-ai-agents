@@ -16,6 +16,7 @@
         "ansible-galaxy": true,
         "ansible-playbook": true,
         "awk": true,
+        "base64": true,
         "continue": true,
         "cp": true,
         "ex": true,
