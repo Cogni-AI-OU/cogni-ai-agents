@@ -21,6 +21,7 @@ this repo is cloned into `.github/agents`.
 
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
+- `/memories/` (Cognitive persistence tier for session and long-term state)
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
 - `AGENTS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
 - [`.github/AGENTS.md`](.github/AGENTS.md)
