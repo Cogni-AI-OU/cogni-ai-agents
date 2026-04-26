@@ -76,6 +76,7 @@ pre-commit run flake8 -a
 - `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
 - `cogni-ai-devops/cogni-ai-devops.agent.md`: elite autonomous DevOps and SRE agent
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
+- `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
