@@ -13,7 +13,7 @@ flowchart TD
         B5["5- Emit Boot Report"]
         Idle{"6- Await Action"}
 
-        Idle -->|"Command / Trigger"| Input[Parse Invocation]
+        Idle -->|Command / Trigger| Input[Parse Invocation]
 
         Input --> Gate{"Is Operation Authorized?"}
         Gate -->|No| Reject["Emit: UNAUTHORIZED_OPERATION"]
@@ -47,6 +47,15 @@ flowchart TD
             FL2 -->|No| FL5[Proceed Without Canonical Facts]
             FL4 --> FL6[Align Strategy with Project Facts]
             FL5 --> FL6
+        end
+
+        subgraph Mandatory_Constraints_Loading_Protocol
+            CL1[Locate CONSTRAINTS.mzn in Repo] --> CL2{CONSTRAINTS.mzn Exists?}
+            CL2 -->|Yes| CL3[Parse Project Constraints & Invariants]
+            CL3 --> CL4[Inject Core Logic Context into Working Memory]
+            CL2 -->|No| CL5[Proceed Without Constraint Bounds]
+            CL4 --> CL6[Align Execution Bounds with Restrictions]
+            CL5 --> CL6
         end
 
         subgraph Mandatory_Instructions_Loading_Protocol
@@ -110,12 +119,12 @@ flowchart TD
         I6["Provenance-Linked Facts"]
     end
 
-    Input -.governed by.-> I3
-    Commit -.governed by.-> I1
-    Commit -.governed by.-> I2
-    P1 -.governed by.-> I6
-    P3 -.governed by.-> I4
-    Output -.governed by.-> I5
+    Input -.->|governed by| I3
+    Commit -.->|governed by| I1
+    Commit -.->|governed by| I2
+    P1 -.->|governed by| I6
+    P3 -.->|governed by| I4
+    Output -.->|governed by| I5
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -124,7 +133,7 @@ flowchart TD
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
 
-    class FL1,FL3,FL4,FL5,FL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
     class FL2,IL2,SL2,SL4 gateNode
 class Boot,Input,Core,Finalize,B1,B2,B3,B4,B5 phaseNode
     class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
