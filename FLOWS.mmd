@@ -13,9 +13,9 @@ flowchart TD
         CFR_MEMO_PROG -->|No Progress, Repetition >=3, OR BudgetExhausted| CFR_ARREST["Loop Arrest v3<br/>-> Hard Stop / Terminal Escalation"]
         CFR_MEMO_PROG -->|Progress OK| CFR_LAYER{"Recovery Layer? (3-Layer Escalation Protocol)"}
 
-        CFR_LAYER -->|Layer 1: Retry Transient| CFR_BOUNDED["Bounded Retry + Backoff<br/>(per-objective budget; ImmutablePlanVersion preserved)"]
-        CFR_LAYER -->|Layer 2: Local Patch| CFR_REWIND_PATH["Rewind to Last Known-Valid + Patch<br/>(repo-discovered only)"]
-        CFR_LAYER -->|Layer 3: Full Escalate| CFR_ESCALATE["Immediate Escalation<br/>(Extrinsic Gate 3; closed loop - no LLM feedback)"]
+        CFR_LAYER -->|&quot;Layer 1: Retry Transient&quot;| CFR_BOUNDED["Bounded Retry + Backoff<br/>(per-objective budget; ImmutablePlanVersion preserved)"]
+        CFR_LAYER -->|&quot;Layer 2: Local Patch&quot;| CFR_REWIND_PATH["Rewind to Last Known-Valid + Patch<br/>(repo-discovered only)"]
+        CFR_LAYER -->|&quot;Layer 3: Full Escalate&quot;| CFR_ESCALATE["Immediate Escalation<br/>(Extrinsic Gate 3; closed loop - no LLM feedback)"]
 
         CFR_BOUNDED --> CFR_REMEDY["Execute Contextual Remedies<br/>(Verify Access -> Pivot Fallbacks -> Safe Installs)"]
         CFR_REWIND_PATH --> CFR_REMEDY
@@ -261,9 +261,9 @@ flowchart TD
         CP3["Emit Mini-Checkpoint"] --> CP4
         CP4["Verify Invariants"] --> CP5
         CP5{"Step count?"}
-        CP5 -->|>= 5 steps| CP6["Emit Hard Checkpoint"]
+        CP5 -->|&quot;>= 5 steps&quot;| CP6["Emit Hard Checkpoint"]
         CP6 --> CP7["Clean Re-serialization"]
-        CP5 -->|< 5 steps| CP8{"Contradiction detected?"}
+        CP5 -->|&quot;< 5 steps&quot;| CP8{"Contradiction detected?"}
         CP7 --> CP8
         CP8 -->|Yes| CP9["Metacognitive Rewind Protocol"]
         CP9 --> CP2

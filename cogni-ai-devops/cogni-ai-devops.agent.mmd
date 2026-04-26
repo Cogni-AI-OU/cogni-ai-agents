@@ -124,8 +124,8 @@ flowchart TD
     end
 
     P0b --> TL
-    TL -->|Green: Autonomous| Phase1
-    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    TL -->|&quot;Green: Autonomous&quot;| Phase1
+    TL -->|&quot;Yellow: Collaborative&quot;| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Phase1
     EscalateGate -->|No| Phase1

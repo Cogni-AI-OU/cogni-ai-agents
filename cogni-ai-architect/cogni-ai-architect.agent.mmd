@@ -40,8 +40,8 @@ flowchart TD
         P1c --> P1d["Post: Chain-of-Verification"]
 
         P1d --> Cognitive{Cognitive Checkpoint}
-        Cognitive -->|Per 8-Step Batch| MiniCP[Mini-Checkpoint: Verify Invariants]
-        Cognitive -->|Every 5-8 Steps| HardCP[Hard Checkpoint: Re-Serialize State]
+        Cognitive -->|&quot;Per Batch (Max 8 Steps)&quot;| MiniCP[Mini-Checkpoint: Verify Invariants]
+        Cognitive -->|&quot;At 5 Steps (Threshold)&quot;| HardCP[Hard Checkpoint: Re-Serialize State]
         MiniCP --> Contradiction{Contradiction Detected?}
         HardCP --> Contradiction
 
@@ -131,8 +131,8 @@ flowchart TD
     end
 
     P0e --> TL
-    TL -->|Green: Autonomous| Phase1
-    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    TL -->|&quot;Green: Autonomous&quot;| Phase1
+    TL -->|&quot;Yellow: Collaborative&quot;| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Phase1
     EscalateGate -->|No| Phase1

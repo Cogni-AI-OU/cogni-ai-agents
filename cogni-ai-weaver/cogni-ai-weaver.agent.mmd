@@ -13,14 +13,14 @@ flowchart TD
         B5["5- Emit Boot Report"]
         Idle{"6- Await Invocation"}
 
-        Idle -->|Weaver verb: command| Input[Parse Invocation]
+        Idle -->|&quot;Weaver verb: command&quot;| Input[Parse Invocation]
 
         Input --> PreGate{"Pre-Flight Checklist Valid?"}
 
         Operation[Route to Specific Contract Verb]
 
-        Operation -->|Mutating Verbs| O1("ingest | update")
-        Operation -->|Read-Only Verbs| O2("query | export | verify")
+        Operation -->|&quot;Mutating Verbs&quot;| O1("ingest | update")
+        Operation -->|&quot;Read-Only Verbs&quot;| O2("query | export | verify")
 
         O1 --> Mutate[Apply Delta / Weave Flow]
         Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
@@ -114,8 +114,8 @@ flowchart TD
     Reject --> Idle
 
     PreGate -->|Yes| TL
-    TL -->|Green: Autonomous| Operation
-    TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
+    TL -->|&quot;Green: Autonomous&quot;| Operation
+    TL -->|&quot;Yellow: Collaborative&quot;| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
     Escalate -->|User Input Received| Operation
     EscalateGate -->|No| Operation
