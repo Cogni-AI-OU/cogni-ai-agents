@@ -118,7 +118,7 @@ into `.github/agents`, consumers receive them directly at
 To set up the required agents, instructions, and skills in your repository:
 
 ```bash
-# Clone agents, instructions and skills.
+# Clone agents, instructions, and skills.
 git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agents .github/agents
 git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-instructions .github/instructions
 git clone --depth=1 https://github.com/Cogni-AI-OU/cogni-ai-agent-skills .github/skills
