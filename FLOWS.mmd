@@ -1,7 +1,6 @@
+flowchart TD
 %% Project Execution Flows & Protocol Logic for Agents
 %% Note: Keep subgraphs and unordered items in alphabetical order.
-
-flowchart TD
 
     subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol - Bounded Scheduler v3]
         direction TB
@@ -35,11 +34,13 @@ flowchart TD
 
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
-        %% Note: FL6, IL6, and SL8 are the contractual terminal nodes relied on by this sequence
+        %% Note: FL6, IL6, CL6, and SL8 are the contractual terminal nodes relied on by this sequence
         IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
 
         IS_FL --> FL1
-        FL6 --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
+        FL6 --> IS_CL["Execute Mandatory_Constraints_Loading_Protocol"]
+        IS_CL --> CL1
+        CL6 --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
         IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
         IS_IL --> IL1
         IL6 --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
@@ -177,6 +178,15 @@ flowchart TD
         LAP4 -->|OK| LAP6["Non-Progress Counter (2 consecutive)"]
         LAP6 -->|Threshold Exceeded| LAP3
         LAP6 -->|OK| LAP7["Proceed to Progress Contract"]
+    end
+
+    subgraph Mandatory_Constraints_Loading_Protocol
+        CL1[Locate CONSTRAINTS.mzn in Repo] --> CL2{CONSTRAINTS.mzn Exists?}
+        CL2 -->|Yes| CL3[Parse Project Constraints & Invariants]
+        CL3 --> CL4[Inject Core Logic Context into Working Memory]
+        CL2 -->|No| CL5[Proceed Without Constraint Bounds]
+        CL4 --> CL6[Align Execution Bounds with Restrictions]
+        CL5 --> CL6
     end
 
     subgraph Mandatory_Facts_Loading_Protocol
