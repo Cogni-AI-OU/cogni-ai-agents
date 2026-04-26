@@ -1,37 +1,46 @@
+flowchart TD
 %% Project Execution Flows & Protocol Logic for Agents
 %% Note: Keep subgraphs and unordered items in alphabetical order.
 
-flowchart TD
-
-    subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol]
+    subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol - Bounded Scheduler v3]
         direction TB
-        CFR1["Command Fails"] --> CFR2
+        CFR1["Command Fails"] --> CFR_GE_INVOKE["Invoke Guardrail_Executor<br/>(Pre: memo + growth + progress + budget + ImmutablePlanVersion check)"]
 
-        CFR2["Verify Access (Confirm executable presence and file permissions)"] --> CFR3
+        CFR_GE_INVOKE --> CFR_TAX["Failure Taxonomy Classification<br/>(POLICY_DENIED | PATH_MUTATION_GROWTH | TRANSIENT | LOG_ACCESS | AUTH_ENV | NOT_FOUND | OTHER)"]
 
-        CFR3["Engage Fallbacks (Pivot to alternative tools or synthesize workarounds)"] --> CFR4
+        CFR_TAX --> CFR_MEMO_PROG["Progress + Memo Gate<br/>(NewArtifact / HypothesisNarrowed / TerminationSignal ?)<br/>+ Sliding-Window Repetition (RepetitionWindow)"]
 
-        CFR4["Targeted Installation (Modify env and install only if safe and strictly necessary)"] --> CFR5
+        CFR_MEMO_PROG -->|No Progress, Repetition >=3, OR BudgetExhausted| CFR_ARREST["Loop Arrest v3<br/>-> Hard Stop / Terminal Escalation"]
+        CFR_MEMO_PROG -->|Progress OK| CFR_LAYER{"Recovery Layer? (3-Layer Escalation Protocol)"}
 
-        CFR5{"Root Cause Escalation (Upstream CI/CD failure?)"}
-        CFR5 -->|Yes| CFR6["Declare root cause & halt without local hacks (Trigger Escalation Gate 3)"]
-        CFR5 -->|No| CFR7["Relentless Iteration (Autonomously chain diagnostics until success or explicit gate)"]
+        CFR_LAYER -->|Layer 1: Retry Transient| CFR_BOUNDED["Bounded Retry + Backoff<br/>(per-objective budget; ImmutablePlanVersion preserved)"]
+        CFR_LAYER -->|Layer 2: Local Patch| CFR_REWIND_PATH["Rewind to Last Known-Valid + Patch<br/>(repo-discovered only)"]
+        CFR_LAYER -->|Layer 3: Full Escalate| CFR_ESCALATE["Immediate Escalation<br/>(Extrinsic Gate 3; closed loop - no LLM feedback)"]
 
-        CFR7 --> CFR8{"Terminally blocked?"}
-        CFR8 -->|Yes| CFR9["Blocker Reporting Structure (State blocker, impact, mitigations, needed input)"]
-        CFR8 -->|No| CFR10["Retry Execution"]
-        CFR10 --> CFR11["Re-execute Command"]
-        CFR11 -->|Failure| CFR7
-        CFR11 -->|Success| CFR12(["Recovery Complete"])
+        CFR_BOUNDED --> CFR_REMEDY["Execute Contextual Remedies<br/>(Verify Access -> Pivot Fallbacks -> Safe Installs)"]
+        CFR_REWIND_PATH --> CFR_REMEDY
+        CFR_ESCALATE --> CFR9
+
+        CFR_REMEDY --> CFR5{"Upstream CI/CD Issue?"}
+
+        CFR5 -->|Yes| CFR6["Halt & Escalate (Extrinsic Gate 3)"]
+        CFR5 -->|No| CFR8{"Hit Iteration Limits or Blockers?"}
+
+        CFR8 -->|Yes| CFR9["Blocker Reporting (state, impact, mitigations)"]
+        CFR8 -->|No| CFR11["Retry Execution (Re-execute Command)"]
+        CFR11 -->|Failure| CFR_GE_INVOKE
+        CFR11 -->|Success| CFR12(["Recovery Complete<br/>+ Telemetry: repeated_hits, stagnation_events, drift_detected, budget_exhausted, loop_arrest_activations"])
     end
 
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
-        %% Note: FL6, IL6, and SL8 are the contractual terminal nodes relied on by this sequence
-        IS1["Agent Contract Alignment (Strictly enforce AGENTS files before proceeding)"] --> IS_FL["Execute Mandatory_Facts_Loading_Protocol"]
-
-        IS_FL --> FL1
-        FL6 --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
+        %% Note: FL6, IL6, CL6, and SL8 are the contractual terminal nodes relied on by this sequence
+        IS_FL["Execute Mandatory_Facts_Loading_Protocol (FACTS.mmd)"] --> FL1
+        FL6 --> IS1["Agent Contract Alignment (AGENTS.mmd, FLOWS.mmd)"]
+        IS1 --> IS_CL["Execute Mandatory_Constraints_Loading_Protocol (CONSTRAINTS.mzn)"]
+        IS_CL --> CL1
+        CL6 --> IS_AL["Agent Contract Alignment (Root AGENTS.md + Local AGENTS.md)"]
+        IS_AL --> IS2["Load [.github/copilot-instructions.md](.github/copilot-instructions.md)"]
         IS2 --> IS_IL["Execute Mandatory_Instructions_Loading_Protocol"]
         IS_IL --> IL1
         IL6 --> IS_SL["Execute Mandatory_Skill_Loading_Protocol"]
@@ -101,17 +110,28 @@ flowchart TD
         EE_Trig -->|Restrictive Egress Block| EE10[Network/Firewall Isolation]
     end
 
-    subgraph Failed_Build_Diagnosis
+    subgraph Failed_Build_Diagnosis ["Failed Build Diagnosis (Updated)"]
         FB1[Trigger: Build Failure] --> FB2[Identify Last Green Build]
         FB2 --> FB3[Compare Changes: git diff/log]
-        FB3 --> FB4[Analyze Logs: gh run view --log-failed]
+        FB3 --> FB4["Analyze Logs: gh run view --log-failed OR gh api .../logs<br/>(empty/403 treated as LOG_ACCESS_UNSUPPORTED -> NON_RETRYABLE)"]
         FB4 --> FB5{Identify Cause}
-        FB5 -->|Syntax| FB6[Validate Syntax: lint/actionlint]
+        FB5 -->|Syntax| FB6[Validate Syntax]
         FB5 -->|Regression| FB7[Trace to Recent Change]
-        FB5 -->|Timeout/Temp| FB8[Retry or Optimize]
+        FB5 -->|Timeout/Temp| FB8[Retry only if TRANSIENT]
         FB6 --> FB9[Propose & Implement Fix]
         FB7 --> FB9
         FB8 --> FB9
+    end
+
+    subgraph Failure_Taxonomy ["Failure Taxonomy (Gating Matrix)"]
+        direction TB
+        FT1["Classify Error Signature"] --> FT2{"POLICY_DENIED / ALLOWLIST / LOG_ACCESS?"}
+        FT2 -->|Yes| FT3["Never retry -> Pivot/Escalate"]
+        FT2 -->|No| FT4{"PATH_MUTATION + arg growth?"}
+        FT4 -->|Yes| FT5["Rewind to last known-valid"]
+        FT4 -->|No| FT6{"TRANSIENT only?"}
+        FT6 -->|Yes| FT7["Bounded retry + backoff + budget"]
+        FT6 -->|No| FT8["Escalate / Non-retryable"]
     end
 
     subgraph Git_Branch_Sync_Policy
@@ -123,6 +143,49 @@ flowchart TD
         BS4 -->|No| BS7[Verify No Rebase Executed]
         BS6 --> BS7
         BS7 --> BS8[Push to Remote]
+    end
+
+    subgraph Global_Budget_Protocol ["Global Budget Protocol (New - Research Hard Limits)"]
+        direction TB
+        GBP1["Per-run / Per-objective Budgets<br/>(max_steps=20, max_tool_calls=N, token_budget, time_TTL)"] --> GBP2{"Budget Exhausted?"}
+        GBP2 -->|Yes| GBP3["Hard Stop + Escalate<br/>(override any internal loop)"]
+        GBP2 -->|No| GBP4["Decrement & Continue"]
+    end
+
+    subgraph Global_Invariants ["Global Invariants (Scheduler-Theoretic)"]
+        direction TB
+        GI1["MaxRecoveryDepth (bounded)"] --> GI2["ImmutablePlanVersion = true"]
+        GI2 --> GI3["GuardrailPreFlight = (memo AND growth AND progress AND budget)"]
+        GI3 --> GI4["IsRetryable[Class] -> gated retry only"]
+    end
+
+    subgraph Guardrail_Executor ["Guardrail Executor (New - External Enforcement Wrapper)"]
+        direction TB
+        GE1["Every Tool Invocation Routes Here"] --> GE2["Global_Budget_Protocol Check"]
+        GE2 --> GE3["Loop_Arrest_Protocol Check"]
+        GE3 --> GE4["Memo + Growth + Progress Pre-flight"]
+        GE4 -->|All Pass| GE5["Execute Tool"]
+        GE4 -->|Any Fail| GE6["Immediate Arrest / Rewind"]
+    end
+
+    subgraph Loop_Arrest_Protocol ["Loop Arrest Protocol v3 (Enhanced)"]
+        direction TB
+        LAP1["Pre-Retry: Fingerprint + Sliding Window (last 5 steps)"] --> LAP2{"Memo Hit OR Repetition >=3?"}
+        LAP2 -->|Yes| LAP3["Hard-Stop This Branch -> Escalation / Rewind"]
+        LAP2 -->|No| LAP4["Progress Growth Detector + Budget Check"]
+        LAP4 -->|No Growth OR Budget Exceeded| LAP5["Rewind / Halt"]
+        LAP4 -->|Growth Exists / OK| LAP6["Non-Progress Counter (2 consecutive)"]
+        LAP6 -->|Threshold Exceeded| LAP3
+        LAP6 -->|OK| LAP7["Proceed to Progress Contract"]
+    end
+
+    subgraph Mandatory_Constraints_Loading_Protocol
+        CL1[Locate CONSTRAINTS.mzn in Repo] --> CL2{CONSTRAINTS.mzn Exists?}
+        CL2 -->|Yes| CL3[Parse Project Constraints & Invariants]
+        CL3 --> CL4[Inject Core Logic Context into Working Memory]
+        CL2 -->|No| CL5[Proceed Without Constraint Bounds]
+        CL4 --> CL6[Align Execution Bounds with Restrictions]
+        CL5 --> CL6
     end
 
     subgraph Mandatory_Facts_Loading_Protocol

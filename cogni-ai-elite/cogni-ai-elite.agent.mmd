@@ -9,7 +9,8 @@ flowchart TD
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
         B2 --> FL1
-    FL6 --> IL1
+        FL6 --> CL1
+        CL6 --> IL1
         IL6 --> SL1
         SL8 --> B3
     end
@@ -81,6 +82,15 @@ flowchart TD
             FL5 --> FL6
         end
 
+        subgraph Mandatory_Constraints_Loading_Protocol
+            CL1[Locate CONSTRAINTS.mzn in Repo] --> CL2{CONSTRAINTS.mzn Exists?}
+            CL2 -->|Yes| CL3[Parse Project Constraints & Invariants]
+            CL3 --> CL4[Inject Core Logic Context into Working Memory]
+            CL2 -->|No| CL5[Proceed Without Constraint Bounds]
+            CL4 --> CL6[Align Execution Bounds with Restrictions]
+            CL5 --> CL6
+        end
+
         subgraph Mandatory_Instructions_Loading_Protocol
             IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
             IL2 -->|Yes| IL3[Match Context to Instruction Scope]
@@ -143,10 +153,10 @@ flowchart TD
         G7[Two-Hats Discipline: Feature XOR Refactor]
     end
 
-    P1a -.governed by.-> G1
-    P1d -.governed by.-> G3
-    P2c -.governed by.-> G6
-    Rewind -.governed by.-> G2
+    P1a -.->|governed by| G1
+    P1d -.->|governed by| G3
+    P2c -.->|governed by| G6
+    Rewind -.->|governed by| G2
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -154,8 +164,8 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class Phase0,Phase1,Phase2,Phase3,B1,B2,B3,B3a,B4,B5,B6,B7,B8 phaseNode
-    class Contradiction,QAPass,TodosCheck,B3,Cognitive,EscalateCheck,TL,EscalateGate gateNode
+    class Phase0,Phase1,Phase2,Phase3,B1,B2,B3a,B4,B5,B6,B7,B8,FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class Contradiction,QAPass,TodosCheck,Cognitive,EscalateCheck,TL,EscalateGate,B3,FL2,CL2,IL2,SL2,SL4 gateNode
     class Rewind,Signal,Escalate checkNode
     class Start,End endNode
     class G1,G2,G3,G4,G5,G6,G7 guardNode

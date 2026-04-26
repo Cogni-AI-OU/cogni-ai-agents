@@ -82,6 +82,7 @@ pre-commit run flake8 -a
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
 - `AGENTS.mmd`: root canonical diagram, flows, and booting sequence visualizations
+- `CONSTRAINTS.mzn`: formal constraint declarations (budgets, loop arrest, and guardrails)
 - `FACTS.mmd`: root canonical fact store and project mindmap
 - `FLOWS.mmd`: root canonical timelines, flows, and dependency graphs
 - `.github/`: default templates, workflows, and GitHub-specific configurations

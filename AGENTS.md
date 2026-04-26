@@ -22,12 +22,14 @@ this repo is cloned into `.github/agents`.
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
-- `AGENTS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
-- [`.github/AGENTS.md`](.github/AGENTS.md)
+- `AGENTS.mmd` and `FLOWS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
+- `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
+- [`.github/AGENTS.md`](.github/AGENTS.md) (Directory-specific health and agent guidance)
+- [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (Domain context and IDE constraints)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any `AGENTS.md` or `AGENTS.mmd` (which must be followed for sequence booting instructions),
+- Any other directory-specific `AGENTS.md` or `AGENTS.mmd` (which must be followed for sequence booting instructions),
   or `SKILL.md` in ancestor, then current directory tree
 
 ## Mandatory Skill Loading Protocol
@@ -351,12 +353,17 @@ molecule syntax
 - Update `.markdownlint.yaml`, `.yamllint`, or `.editorconfig` for linting rules
 - Run `pre-commit run -a` to verify changes pass all checks
 
-## Integrating Changes from Target Branch
+## Local Interactive Development: Integrating Changes from Target Branch
 
-Recommended way is to use the **cherry-pick workflow** to rebase your commits
+> **Note:** The following policy applies ONLY to local interactive development sessions.
+> When operating autonomously inside a GitHub Actions runtime,
+> refer to the [GitHub Actions Runtime](#github-actions-runtime) section which explicitly forbids rebasing
+> and requires merge commits.
+
+Recommended way is to use the **cherry-pick workflow** to rebase your commits (local sessions only)
 on top of the updated target branch:
 
-1. Identify your feature commits
+1. Identify your feature commits (local sessions only)
 2. Fetch the latest target branch
 3. Reset your branch to target (with backup)
 4. Cherry-pick your feature commits
@@ -403,13 +410,6 @@ tries to auto-rebase (e.g., 113 commits), it encounters conflicts it cannot reso
 - Main documentation: [README.md](README.md)
 
 ## Troubleshooting
-
-### GitHub Build issues
-
-- Use `gh` command to interact with GitHub resources. For example:
-
-  - `gh run list --limit 3` to list recent builds.
-  - `gh run view {ID} --log | rg -iw "failed|error|exit"` to look for build errors.
 
 ### Firewall issues
 
