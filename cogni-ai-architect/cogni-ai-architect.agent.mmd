@@ -9,7 +9,8 @@ flowchart TD
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
         B2 --> FL1
-    FL6 --> IL1
+        FL6 --> CL1
+        CL6 --> IL1
         IL6 --> SL1
         SL8 --> B3
     end
@@ -27,9 +28,9 @@ flowchart TD
         B8 --> Phase0[Phase 0: Intent and Architecture]
 
         Phase0 --> P0a[Task Triage and Context Economy]
-        P0a --> P0b[Adversarial Constraint Analysis: Top-10 Risks]
-        P0b --> P0c[Adversarial Self-Inquiry: Devil's Advocate Pass]
-        P0c --> P0d[Tracer-Bullet Planning]
+        P0a --> P0b["Adversarial Constraint Analysis: Top-10 Risks"]
+        P0b --> P0c["Adversarial Self-Inquiry: Devils Advocate Pass"]
+        P0c --> P0d["Tracer-Bullet Planning"]
         P0d --> P0e[Visual Architecture Charting: Mermaid]
 
         Phase1[Phase 1: Execution and Instrumentation]
@@ -140,10 +141,10 @@ flowchart TD
         G7[Two-Hats Discipline: Feature XOR Refactor]
     end
 
-    P1a -.governed by.-> G1
-    P1d -.governed by.-> G3
-    P2c -.governed by.-> G6
-    Rewind -.governed by.-> G2
+    P1a -.->|governed by| G1
+    P1d -.->|governed by| G3
+    P2c -.->|governed by| G6
+    Rewind -.->|governed by| G2
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
