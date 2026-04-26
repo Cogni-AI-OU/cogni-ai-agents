@@ -24,11 +24,12 @@ Read and merge these when operating inside corresponding sub-directories or repo
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
 - `AGENTS.mmd` and `FLOWS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
 - `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
+- [`.github/AGENTS.md`](.github/AGENTS.md) (Directory-specific health and agent guidance)
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (Domain context and IDE constraints)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any `AGENTS.md` or `AGENTS.mmd` (which must be followed for sequence booting instructions),
+- Any other directory-specific `AGENTS.md` or `AGENTS.mmd` (which must be followed for sequence booting instructions),
   or `SKILL.md` in ancestor, then current directory tree
 
 ## Mandatory Skill Loading Protocol

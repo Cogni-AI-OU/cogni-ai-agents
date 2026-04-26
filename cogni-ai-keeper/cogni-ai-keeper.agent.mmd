@@ -4,7 +4,7 @@ flowchart TD
     subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
         B1["1- AGENTS.md Contract Alignment"]
-        B2["2- Load SKILL.md and .instructions.md"]
+        B2["2- Facts, Constraints, Instructions, & Skills"]
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2

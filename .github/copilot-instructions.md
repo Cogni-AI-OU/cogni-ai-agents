@@ -20,7 +20,7 @@ Key contents:
 
 ## Interactive Editor Workflow (No Auto-Commit)
 
-When working interactively in the editor as programming assistant, you MUST follow these guidelines:
+When working interactively in the editor as a programming assistant, you MUST follow these guidelines:
 
 - **Leave Files Uncommitted**: Your scope of work ends at successfully editing the files and verifying they work/lint.
   Allow the user to review the uncommitted changes in the workspace and decide when to commit them using VS Code's

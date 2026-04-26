@@ -33,7 +33,7 @@
     },
     {
       "title": "Formal Constraints",
-      "description": "## Protocol-Level Guardrails\n\nThe `CONSTRAINTS.mzn` file defines formal constraints for agent behavior using MiniZinc:\n\n- **Budget Protocol**: Max steps, tool calls, and time limits\n- **Loop Arrest**: Detection of stagnation or runaway repetition\n- **State Compression**: Checkpoint and partitioning rules\n\nThese constraints are loaded during agent initialization to provide hard-stop safety boundaries.",
+      "description": "## Protocol-Level Guardrails\n\nThe `CONSTRAINTS.mzn` file defines formal constraints for agent behavior using MiniZinc:\n\n- **Budget Protocol**: Max steps, tool calls, token usage, and time limits\n- **Loop Arrest**: Detection of stagnation or runaway repetition\n- **State Compression**: Checkpoint and partitioning rules\n\nThese constraints are loaded during agent initialization to provide hard-stop safety boundaries.",
       "file": "CONSTRAINTS.mzn",
       "line": 1
     },
