@@ -23,6 +23,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
 
 - `FACTS.mmd` (Root canonical fact store and project mindmap)
 - `AGENTS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
+- `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
 - [`.github/AGENTS.md`](.github/AGENTS.md)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
