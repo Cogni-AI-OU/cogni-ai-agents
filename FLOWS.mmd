@@ -168,7 +168,7 @@ flowchart TD
         GE4 -->|Any Fail| GE6["Immediate Arrest / Rewind"]
     end
 
-    subgraph Loop_Arrest_Protocol ["Loop Arrest Protocol v2 (Enhanced)"]
+    subgraph Loop_Arrest_Protocol ["Loop Arrest Protocol v3 (Enhanced)"]
         direction TB
         LAP1["Pre-Retry: Fingerprint + Sliding Window (last 5 steps)"] --> LAP2{"Memo Hit OR Repetition >=3?"}
         LAP2 -->|Yes| LAP3["Hard-Stop This Branch -> Escalation / Rewind"]

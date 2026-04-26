@@ -35,7 +35,7 @@ var bool: hard_checkpoint_required;
 % 2. Global Budget Protocol
 constraint is_budget_exhausted <-> (current_step_count >= MAX_STEPS);
 
-% 3. Loop Arrest Protocol v2 & Command Failure Recovery
+% 3. Loop Arrest Protocol v3 & Command Failure Recovery
 % Loop arrest activates if we hit too many repetitions, hit a memo footprint,
 % drain the budget, or fail to produce monotonic growth/progress.
 constraint loop_arrest_triggered <-> (
