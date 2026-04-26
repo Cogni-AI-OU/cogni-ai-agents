@@ -16,6 +16,7 @@ this repo is cloned into `.github/agents`.
 | [cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | Elite autonomous DevOps and Site Reliability Engineering agent |
 | [cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Autonomous Fact Operator responsible for canonical fact files |
+| [cogni-ai-context7-ops.agent.md](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md) | Autonomous Context7 Ops responsible for gathering and filtering documentation |
 
 ## Persistent Memory & Context Files
 
