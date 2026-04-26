@@ -50,6 +50,7 @@ categorizing the loaded capabilities.
   - Map nodes using directory-styled shapes (e.g., `Workspace[/"Workspace"/] --> Memories[/"/memories/"/]`)
     to ensure stable rendering across all platforms.
   - Include roots for `Workspace`, `/memories/`, `.github/skills`, and `MCP Servers`.
+  - Explicitly mark missing or inaccessible resources (e.g., `style Memories fill:#ffcccc,stroke:#ff0000`).
 - **Diagnostic Health Matrix (Radar Chart)**:
   - Use `radar-beta` to output a 1-10 health/confidence score of your current capabilities.
   - Define variables like `FileSystem_Access`, `Terminal_Execution`, `Memory_Persistence`, `GitHub_API`, and `Context_Capacity`.
@@ -82,6 +83,8 @@ Perform a rapid diagnostic self-test to verify your operational readiness:
 - Verify your basic file system interaction (e.g., confirm `AGENTS.md` is strictly accessible).
 - Verify terminal and shell command execution availability.
 - Check the health and responsiveness of your persistent memory tier (e.g., reading/writing a test note in `/memories/session/`).
+  **CRITICAL: Use the native `memory` tool/API if available, rather than `touch`/`mkdir` in bash,**
+  **as `/memories/` may be virtualized.**
 - Verify any MCP server integrations are active and responsive.
 
 Include a **Self-Test Report** at the end of your response detailing the PASS/FAIL status of these core capabilities.
@@ -94,4 +97,6 @@ Include a **Self-Test Report** at the end of your response detailing the PASS/FA
 and performing an operational self-test. I will trace the outcomes of my
 activation, execute diagnostic checks, document any challenges faced, and output
 the final Mermaid sequence diagram showing what actually happened, along with a
-mindmap of available capabilities and a self-test report."
+mindmap of available capabilities and a self-test report. **CRITICAL: Ensure
+you explicitly include your active Agent Name (e.g. 'architect') in
+the title of the generated report or GitHub issue so it is instantly identifiable.**"
