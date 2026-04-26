@@ -62,7 +62,9 @@ categorizing the loaded capabilities.
 - **Mindmap Requirements**:
   - Use `mindmap` with a central root node (e.g., `root((Context & Capabilities))`).
   - Group available capabilities into major branches (e.g., `Instructions`, `Skills`, `Protocols`, `MCP_Servers`).
-  - Include the specific file/skill names, organizational protocols, and MCP capabilities identified during boot.
+  - For the `Instructions` and `Skills` branches, explicitly list the exact filenames
+    (e.g., `markdown.instructions.md`, `mermaid/SKILL.md`) of all files actually loaded, rather than vague names.
+  - Include organizational protocols and MCP capabilities identified during boot.
 - **Sequence Diagram Requirements**:
   - Use `sequenceDiagram` with `autonumber`.
   - Define explicit participants that represent the logical entities interacted with (e.g., Workspace,
