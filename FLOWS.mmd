@@ -8,7 +8,7 @@ flowchart TD
 
         CFR_GE_INVOKE --> CFR_TAX["Failure Taxonomy Classification<br/>(POLICY_DENIED | PATH_MUTATION_GROWTH | TRANSIENT | LOG_ACCESS | AUTH_ENV | NOT_FOUND | OTHER)"]
 
-        CFR_TAX --> CFR_MEMO_PROG["Progress + Memo Gate<br/>(NewArtifact \/ HypothesisNarrowed \/ TerminationSignal ?)<br/>+ Sliding-Window Repetition (RepetitionWindow)"]
+        CFR_TAX --> CFR_MEMO_PROG["Progress + Memo Gate<br/>(NewArtifact / HypothesisNarrowed / TerminationSignal ?)<br/>+ Sliding-Window Repetition (RepetitionWindow)"]
 
         CFR_MEMO_PROG -->|No Progress, Repetition >=3, OR BudgetExhausted| CFR_ARREST["Loop Arrest v3<br/>-> Hard Stop / Terminal Escalation"]
         CFR_MEMO_PROG -->|Progress OK| CFR_LAYER{"Recovery Layer? (3-Layer Escalation Protocol)"}
