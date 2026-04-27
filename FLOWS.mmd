@@ -2,6 +2,16 @@ flowchart TD
 %% Project Execution Flows & Protocol Logic for Agents
 %% Note: Keep subgraphs and unordered items in alphabetical order.
 
+    subgraph Agent_Delegation_Protocol [Agent Delegation Protocol]
+        direction TB
+        ADP1["Architect: Identify delegation trigger (e.g., GitHub Ops)"] --> ADP2["Architect: Formulate sub-task prompt and context"]
+        ADP2 --> ADP3["Architect: Invoke Task tool with subagent_type"]
+        ADP3 --> ADP4["Sub-agent: Receive encapsulated context and task"]
+        ADP4 --> ADP5["Sub-agent: Execute specialized operations (e.g., gh issue create)"]
+        ADP5 --> ADP6["Sub-agent: Return results and artifacts to parent"]
+        ADP6 --> ADP7["Architect: Integrate results and update FACTS.mmd"]
+    end
+
     subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol - Bounded Scheduler v3]
         direction TB
         CFR1["Command Fails"] --> CFR_GE_INVOKE["Invoke Guardrail_Executor<br/>(Pre: memo + growth + progress + budget + ImmutablePlanVersion check)"]
@@ -55,7 +65,7 @@ flowchart TD
 
         IS8["Task Refinement (Decompose into atomic sub-tasks, no artificial grouping)"] --> IS9
 
-        IS9["Autonomous Engagement (Immediately transition to Workflow Contract execution)"]
+        IS9["Autonomous Engagement (Immediately transition to Workflow Contract execution)"] --> ADP1
     end
 
     subgraph DbC_Enforcement_Protocol [Design-by-Contract Enforcement]
