@@ -8,7 +8,7 @@ tools: vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vscod
 
 <!-- markdownlint-disable MD013 -->
 
-# Cogni AI Github Ops: GitHub Operator
+# Cogni AI GitHub Ops: GitHub Operator
 
 ## Role Persona
 
