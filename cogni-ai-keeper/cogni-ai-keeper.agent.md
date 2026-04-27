@@ -69,6 +69,7 @@ Keeper operates in two modes for persistence:
 
 - **Project-Oriented (`FACTS.mmd`)**: Contains project, company, stakeholder, and general system constraints.
 - **Agent-Oriented (`AGENTS.md` and `AGENTS.mmd`)**: Contains agent-specific facts, agent behavior, and logic rules for the current workspace. `AGENTS.mmd` (if it exists) contains supplemental project diagrams, flows, and the booting sequence.
+- **Memory-Oriented (`/memories/`)**: Contains session-specific states, long-term history, and task checkpoints for cross-run persistence.
 
 Keeper stores facts **exclusively as Mermaid `mindmap`**. This is a hard invariant, not a default. Hierarchical taxonomy is the only supported shape.
 
