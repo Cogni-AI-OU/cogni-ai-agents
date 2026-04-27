@@ -18,6 +18,9 @@ this repo is cloned into `.github/agents`.
   Autonomous fact operator responsible for maintaining canonical fact files and information consistency.
 - [**Cogni AI Context7 Ops**](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md):
   Autonomous context gathering agent specialized in retrieving and filtering documentation from the Context7 service.
+- [**Cogni AI GitHub Ops**](cogni-ai-github-ops/cogni-ai-github-ops.agent.md):
+  Autonomous GitHub Operator responsible for GitHub operations such as
+  modifying comments, issues, or discussions on behalf of other agents.
 - [**Cogni AI Keeper**](cogni-ai-keeper/cogni-ai-keeper.agent.md):
   Canonical fact custody and mindmap stewardship kernel for structured knowledge management.
 - [**Cogni AI Reviewer**](cogni-ai-reviewer/cogni-ai-reviewer.agent.md):
