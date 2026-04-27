@@ -2,6 +2,16 @@ flowchart TD
 %% Project Execution Flows & Protocol Logic for Agents
 %% Note: Keep subgraphs and unordered items in alphabetical order.
 
+    subgraph Agent_Interaction_Flow [Agent Interaction Example - Architect Delegate]
+        direction TB
+        AI1["Architect Agent: Identifies need for GitHub Issue"] --> AI2["Architect Agent: Formulates task for GitHub Ops Agent"]
+        AI2 --> AI3["Architect Agent: Invokes GitHub Ops Agent via Task Tool"]
+        AI3 --> AI4["GitHub Ops Agent: Receives request + context"]
+        AI4 --> AI5["GitHub Ops Agent: Executes gh issue create"]
+        AI5 --> AI6["GitHub Ops Agent: Returns issue URL / result to Architect"]
+        AI6 --> AI7["Architect Agent: Updates local state with new Issue reference"]
+    end
+
     subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol - Bounded Scheduler v3]
         direction TB
         CFR1["Command Fails"] --> CFR_GE_INVOKE["Invoke Guardrail_Executor<br/>(Pre: memo + growth + progress + budget + ImmutablePlanVersion check)"]
