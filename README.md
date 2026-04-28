@@ -75,11 +75,12 @@ pre-commit run flake8 -a
 ## Project Layout
 
 - `cogni-ai-architect/cogni-ai-architect.agent.md`: primary agent configuration (source of truth for agent consumers)
-- `cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md`: autonomous context7 ops responsible for gathering and filtering documentation
+- `cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md`: autonomous context7 ops for gathering and filtering docs
 - `cogni-ai-devops/cogni-ai-devops.agent.md`: elite autonomous DevOps and SRE agent
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
+- `cogni-ai-python-dev/cogni-ai-python-dev.agent.md`: autonomous Python Developer for writing Python 3 code
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
@@ -112,6 +113,7 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Fact Ops | Autonomous fact operator responsible for maintaining canonical fact files |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
+| [cogni-ai-python-dev/cogni-ai-python-dev.agent.md](cogni-ai-python-dev/cogni-ai-python-dev.agent.md) | Python Devs | Autonomous Python Developer responsible for writing and testing Python 3 code |
 | [cogni-ai-reviewer/cogni-ai-reviewer.agent.md](cogni-ai-reviewer/cogni-ai-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
 | [cogni-ai-weaver/cogni-ai-weaver.agent.md](cogni-ai-weaver/cogni-ai-weaver.agent.md) | Weavers | Canonical Flow Custody & Diagram Stewardship Kernel |
 | [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific guidance |
@@ -153,7 +155,7 @@ Enhanced agent with critical thinking, robust problem-solving, and context-aware
 
 ### [Cogni AI Context7 Ops](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md)
 
-Autonomous Context7 Ops responsible for gathering and filtering documentation and code from Context7 service into relevant context.
+Autonomous Context7 Ops responsible for gathering and filtering documentation from Context7 into relevant context.
 
 ### [Cogni AI DevOps](cogni-ai-devops/cogni-ai-devops.agent.md)
 
@@ -172,6 +174,10 @@ Autonomous fact operator responsible for maintaining canonical fact files and in
 
 Canonical fact-custody kernel and mindmap steward.
 Deep module for fact management via VCS-aligned plain-text mindmaps.
+
+### [Cogni AI Python Dev](cogni-ai-python-dev/cogni-ai-python-dev.agent.md)
+
+Autonomous Python Developer responsible for writing, testing, and debugging Python 3 code.
 
 ### [Cogni AI Reviewer](cogni-ai-reviewer/cogni-ai-reviewer.agent.md)
 
