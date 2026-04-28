@@ -18,39 +18,39 @@ flowchart TD
     Boot --> GLOBAL_AGENTS_md
     B3 -->|Yes| B5["5- Emit Boot Report"]
     B5 --> Idle
-        Idle{"6- Await PR/Code Input"}
+    Idle{"6- Await Code Input"}
 
-        Idle -->|New PR / Code Diff| Input[Gather Context]
+    Idle -->|Code Diff / PR Changes| Input[Gather Context]
 
-        Input --> Rules{"Relevant Rules Found? (Global + Local)"}
-        Rules -->|No| Generic[Load Base Coding Standards]
-        Rules -->|Yes| Specific[Load Context-Specific Instructions]
+    Input --> Rules{"Relevant Rules Found? (Global + Local)"}
+    Rules -->|No| Generic[Load Base Coding Standards]
+    Rules -->|Yes| Specific[Load Context-Specific Instructions]
 
-        Generic & Specific --> Analysis[Perform Deep Static/Logical Analysis]
+    Generic & Specific --> Analysis[Perform Deep Static/Logical Analysis]
 
-        subgraph Review_Dimensions [Mandatory Review Dimensions]
-            direction TB
-            D1["Correctness / Logic"]
-            D2["Security / Vulnerability"]
-            D3["Maintainability / Clean Code"]
-            D4["Performance / Complexity"]
-            D5["Alignment with AGENTS.md/FACTS.mmd"]
-        end
+    subgraph Review_Dimensions [Mandatory Review Dimensions]
+        direction TB
+        D1["Correctness / Logic"]
+        D2["Security / Vulnerability"]
+        D3["Maintainability / Clean Code"]
+        D4["Performance / Complexity"]
+        D5["Alignment with AGENTS.md/FACTS.mmd"]
+    end
 
-        Analysis --> Review_Dimensions
+    Analysis --> Review_Dimensions
 
-        Review_Dimensions --> Assessment{"Issues Found?"}
+    Review_Dimensions --> Assessment{"Issues Found?"}
 
-        Assessment -->|No| Approve["Emit: APPROVAL + Positive Feedback"]
-        Assessment -->|Yes| Flag["Generate Critical Feedback"]
+    Assessment -->|No| Approve["Emit: APPROVAL + Positive Feedback"]
+    Assessment -->|Yes| Flag["Generate Critical Feedback"]
 
-        Flag --> Severity{"Critical / Blocking?"}
+    Flag --> Severity{"Critical / Blocking?"}
 
-        Severity -->|No| Suggest["Emit: COMMENT / SUGGESTION"]
-        Severity -->|Yes| Request["Emit: REQUEST CHANGES"]
+    Severity -->|No| Suggest["Emit: COMMENT / SUGGESTION"]
+    Severity -->|Yes| Request["Emit: REQUEST CHANGES"]
 
-        Approve & Suggest & Request --> Finalize[Log Meta-Analysis for AI Learning]
-        Finalize --> Output["Finalize Review Action"]
+    Approve & Suggest & Request --> Finalize[Log Meta-Analysis for AI Learning]
+    Finalize --> Output["Finalize Review Action"]
 
     subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
         direction TB
@@ -122,7 +122,7 @@ flowchart TD
     Escalate -->|User Input Received| Assessment
     EscalateGate -->|No| Assessment
 
-    subgraph Invariants ["Reviewer Invariants"]
+    subgraph Invariants ["Code Reviewer Invariants"]
         direction TB
         I1["Zero False Positives"]
         I2["Imperative Feedback Syntax"]
@@ -143,7 +143,6 @@ flowchart TD
     classDef checkNode fill:#5f4a1e,stroke:#e2a04a,stroke-width:2px,color:#fff
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
-
 
     class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a phaseNode
     class FL2,CL2,IL2,SL2,SL4,B3 gateNode

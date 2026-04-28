@@ -25,8 +25,10 @@ this repo is cloned into `.github/agents`.
   modifying comments, issues, or discussions on behalf of other agents.
 - [**Cogni AI Keeper**](cogni-ai-keeper/cogni-ai-keeper.agent.md):
   Canonical fact custody and mindmap stewardship kernel for structured knowledge management.
-- [**Cogni AI Reviewer**](cogni-ai-reviewer/cogni-ai-reviewer.agent.md):
+- [**Cogni AI Code Reviewer**](cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md):
   Elite autonomous code reviewer for PR analysis, quality enforcement, and architectural invariant verification.
+- [**Cogni AI Plan Reviewer**](cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md):
+  Elite autonomous architectural reviewer for plan validation and ensuring strategic alignment.
 - [**Cogni AI Weaver**](cogni-ai-weaver/cogni-ai-weaver.agent.md):
   Canonical flow custody and diagram stewardship kernel specializing in flowchart and dependency memory.
 

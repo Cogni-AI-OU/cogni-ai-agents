@@ -80,7 +80,8 @@ pre-commit run flake8 -a
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
-- `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
+- `cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md`: elite autonomous code reviewer
+- `cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md`: elite autonomous architectural reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
 - `AGENTS-RUNTIME.md`: core loading protocols and execution logic for the GitHub Runtime
@@ -112,7 +113,8 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Fact Ops | Autonomous fact operator responsible for maintaining canonical fact files |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
-| [cogni-ai-reviewer/cogni-ai-reviewer.agent.md](cogni-ai-reviewer/cogni-ai-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
+| [cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md](cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
+| [cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md](cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md) | Reviewers | Elite autonomous architectural reviewer for plan validation |
 | [cogni-ai-weaver/cogni-ai-weaver.agent.md](cogni-ai-weaver/cogni-ai-weaver.agent.md) | Weavers | Canonical Flow Custody & Diagram Stewardship Kernel |
 | [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific guidance |
 | [AGENTS-RUNTIME.md](AGENTS-RUNTIME.md) | Runtime | Core loading protocols and execution logic |
@@ -173,9 +175,13 @@ Autonomous fact operator responsible for maintaining canonical fact files and in
 Canonical fact-custody kernel and mindmap steward.
 Deep module for fact management via VCS-aligned plain-text mindmaps.
 
-### [Cogni AI Reviewer](cogni-ai-reviewer/cogni-ai-reviewer.agent.md)
+### [Cogni AI Code Reviewer](cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md)
 
 Elite autonomous agent for code review, PR analysis, and enforcing zero-defect quality and architectural invariants.
+
+### [Cogni AI Plan Reviewer](cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md)
+
+Elite autonomous architectural reviewer for plan validation and ensuring strategic alignment.
 
 ### [Cogni AI Weaver](cogni-ai-weaver/cogni-ai-weaver.agent.md)
 
