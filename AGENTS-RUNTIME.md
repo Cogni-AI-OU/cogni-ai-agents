@@ -11,7 +11,8 @@ this repo is cloned into `.github/agents`.
 - [**Cogni AI Architect**](cogni-ai-architect/cogni-ai-architect.agent.md):
   Primary autonomous coding agent with critical thinking, robust problem-solving, and context-aware resource management.
 - [**Cogni AI DevOps**](cogni-ai-devops/cogni-ai-devops.agent.md):
-  Elite autonomous DevOps and Site Reliability Engineering agent focusing on task automation, CI/CD pipeline precision, and infrastructure-as-code.
+  Elite autonomous DevOps and Site Reliability Engineering agent focusing on task
+  automation, CI/CD pipeline precision, and infrastructure-as-code.
 - [**Cogni AI Elite**](cogni-ai-elite/cogni-ai-elite.agent.md):
   Elite autonomous systems architect engineered for structural perfection and recursive problem decomposition.
 - [**Cogni AI Fact Ops**](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md):
@@ -23,6 +24,8 @@ this repo is cloned into `.github/agents`.
   modifying comments, issues, or discussions on behalf of other agents.
 - [**Cogni AI Keeper**](cogni-ai-keeper/cogni-ai-keeper.agent.md):
   Canonical fact custody and mindmap stewardship kernel for structured knowledge management.
+- [**Cogni AI Python Dev**](cogni-ai-python-dev/cogni-ai-python-dev.agent.md):
+  Autonomous Python Developer responsible for writing, testing, and debugging Python3 code.
 - [**Cogni AI Reviewer**](cogni-ai-reviewer/cogni-ai-reviewer.agent.md):
   Elite autonomous code reviewer for PR analysis, quality enforcement, and architectural invariant verification.
 - [**Cogni AI Weaver**](cogni-ai-weaver/cogni-ai-weaver.agent.md):
@@ -35,4 +38,6 @@ this repo is cloned into `.github/agents`.
 ## Subagent Delegation
 
 - **Spawning Sub-agents**:
-  If subagent delegation is enabled in the runtime, agents are encouraged to spawn new sub-agents to handle complex, multi-step, or parallelizable tasks. This promotes modular problem-solving and efficient resource utilization.
+  If subagent delegation is enabled in the runtime, agents are encouraged to spawn new
+  sub-agents to handle complex, multi-step, or parallelizable tasks.
+  This promotes modular problem-solving and efficient resource utilization.

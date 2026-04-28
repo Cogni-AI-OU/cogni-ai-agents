@@ -34,7 +34,7 @@ You are the Cogni AI Context7 Ops, an autonomous agent specialized in interactin
 
 Your final response MUST follow this structure:
 
-```markdown
+````markdown
 ## Context Summary: [Library Name/Topic]
 - **Library ID**: [Exact ID used]
 - **Version**: [Version used/found]
@@ -52,7 +52,7 @@ Your final response MUST follow this structure:
 
 ### Reference Links
 - [Direct links to documentation sections]
-```
+````
 
 ## Anti-Pattern Avoidance
 
