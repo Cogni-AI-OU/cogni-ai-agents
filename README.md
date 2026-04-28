@@ -80,7 +80,7 @@ pre-commit run flake8 -a
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
-- `cogni-ai-python-dev/cogni-ai-python-dev.agent.md`: autonomous Python Developer for writing Python3 code
+- `cogni-ai-python-dev/cogni-ai-python-dev.agent.md`: autonomous Python Developer for writing Python 3 code
 - `cogni-ai-reviewer/cogni-ai-reviewer.agent.md`: elite autonomous code reviewer
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
@@ -113,7 +113,7 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Fact Ops | Autonomous fact operator responsible for maintaining canonical fact files |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
-| [cogni-ai-python-dev/cogni-ai-python-dev.agent.md](cogni-ai-python-dev/cogni-ai-python-dev.agent.md) | Python Devs | Autonomous Python Developer responsible for writing and testing Python3 code |
+| [cogni-ai-python-dev/cogni-ai-python-dev.agent.md](cogni-ai-python-dev/cogni-ai-python-dev.agent.md) | Python Devs | Autonomous Python Developer responsible for writing and testing Python 3 code |
 | [cogni-ai-reviewer/cogni-ai-reviewer.agent.md](cogni-ai-reviewer/cogni-ai-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
 | [cogni-ai-weaver/cogni-ai-weaver.agent.md](cogni-ai-weaver/cogni-ai-weaver.agent.md) | Weavers | Canonical Flow Custody & Diagram Stewardship Kernel |
 | [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific guidance |
@@ -177,7 +177,7 @@ Deep module for fact management via VCS-aligned plain-text mindmaps.
 
 ### [Cogni AI Python Dev](cogni-ai-python-dev/cogni-ai-python-dev.agent.md)
 
-Autonomous Python Developer responsible for writing, testing, and debugging Python3 code.
+Autonomous Python Developer responsible for writing, testing, and debugging Python 3 code.
 
 ### [Cogni AI Reviewer](cogni-ai-reviewer/cogni-ai-reviewer.agent.md)
 

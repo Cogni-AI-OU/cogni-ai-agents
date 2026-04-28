@@ -27,7 +27,7 @@ this repo is cloned into `.github/agents`.
 - [**Cogni AI Keeper**](cogni-ai-keeper/cogni-ai-keeper.agent.md):
   Canonical fact custody and mindmap stewardship kernel for structured knowledge management.
 - [**Cogni AI Python Dev**](cogni-ai-python-dev/cogni-ai-python-dev.agent.md):
-  Autonomous Python Developer responsible for writing, testing, and debugging Python3 code.
+  Autonomous Python Developer responsible for writing, testing, and debugging Python 3 code.
 - [**Cogni AI Reviewer**](cogni-ai-reviewer/cogni-ai-reviewer.agent.md):
   Elite autonomous code reviewer for PR analysis, quality enforcement, and architectural invariant verification.
 - [**Cogni AI Weaver**](cogni-ai-weaver/cogni-ai-weaver.agent.md):
