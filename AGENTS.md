@@ -28,8 +28,10 @@ this repo is cloned into `.github/agents`.
   Canonical fact custody and mindmap stewardship kernel for structured knowledge management.
 - [**Cogni AI Python Dev**](cogni-ai-python-dev/cogni-ai-python-dev.agent.md):
   Autonomous Python Developer responsible for writing, testing, and debugging Python 3 code.
-- [**Cogni AI Reviewer**](cogni-ai-reviewer/cogni-ai-reviewer.agent.md):
-  Elite autonomous code reviewer for PR analysis, quality enforcement, and architectural invariant verification.
+- [**Cogni AI Code Reviewer**](cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md):
+  Elite autonomous code reviewer for PR analysis, quality enforcement, and zero-defect security validation.
+- [**Cogni AI Plan Reviewer**](cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md):
+  Elite autonomous architectural reviewer for plan validation and ensuring strategic alignment.
 - [**Cogni AI Weaver**](cogni-ai-weaver/cogni-ai-weaver.agent.md):
   Canonical flow custody and diagram stewardship kernel specializing in flowchart and dependency memory.
 
