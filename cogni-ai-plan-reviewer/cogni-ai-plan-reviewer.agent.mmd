@@ -133,10 +133,12 @@ flowchart TD
     end
 
     Analysis -.->|governed by| I5
+    Analysis -.->|governed by| I6
     Flag -.->|governed by| I2
     Flag -.->|governed by| I3
     Approve -.->|governed by| I4
     Output -.->|governed by| I1
+    Output -.->|governed by| I6
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff

@@ -48,11 +48,13 @@ Your final response MUST follow this structure:
 ### Code Snippets
 ```[language]
 [Precise, minimal code examples]
-```
+```markdown
 
 ### Reference Links
+
 - [Direct links to documentation sections]
-```
+
+```markdown
 
 ## Anti-Pattern Avoidance
 

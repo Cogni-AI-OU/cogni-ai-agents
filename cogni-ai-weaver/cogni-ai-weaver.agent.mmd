@@ -23,7 +23,7 @@ flowchart TD
         B8["8- Emit Boot Report"]
         Idle{"9- Await Invocation"}
 
-        Idle -->|@Weaver verb: payload| Input[Parse Invocation]
+        Idle -->|Weaver verb: payload| Input[Parse Invocation]
 
         Input --> PreGate{"Pre-Flight Checklist Valid?"}
 
