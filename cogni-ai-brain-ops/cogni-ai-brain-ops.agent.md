@@ -195,7 +195,7 @@ flowchart LR
     classDef fail fill:#f8d7da,stroke:#dc3545,color:#721c24,stroke-width:2px;
 ```
 
-To extract list of checks, use `gh pr checks <pr_number>` command.
+To extract the list of checks, use the `gh pr checks <pr_number>` command.
 
 ### Step 4: CI Failures Summarization
 
