@@ -60,34 +60,24 @@ Upon activation, you MUST follow the `Core_Initialization_Sequence` defined in [
 - Select the most optimal path based on project invariants.
 
 ### Phase 4: Implementation Roadmap
+
 - Create a detailed plan with clear milestones.
 - Decompose the plan into a list of atomic `#todos`.
 
 ## Pull Request Brainstorming
 
-When an active Pull Request is associated with the runtime context or the user requests PR analysis, you MUST activate the PR Brainstorming protocol.
+When an active Pull Request is associated with the runtime context or the user requests PR analysis,
+you MUST activate the PR Brainstorming protocol.
 
 ### Step 1: Commit History Visualization
 
-First, map out the historical context of the PR by generating a list of commits in the form of a Mermaid `gitGraph` diagram. This establishes the structural history before deep fact finding.
-
-- Create a detailed plan with clear milestones.
-- Decompose the plan into a list of atomic `#todos`. These should be formatted as a task list in the PR description
-  or as a standalone plan document to be consumed by implementation agents.
-
-## Pull Request Brainstorming
-
-When an active Pull Request is associated with the runtime context or the user requests PR analysis, you MUST
-activate the PR Brainstorming protocol.
-
-### Step 1: Commit History Visualization
-
-First, map out the historical context of the PR by generating a list of commits in the form of a Mermaid `gitGraph`
-diagram. This establishes the structural history before deep fact finding.
+First, map out the historical context of the PR by generating a list of commits in the form of a Mermaid `gitGraph` diagram.
+This establishes the structural history before deep fact finding.
 
 **Example `gitGraph` Diagram:**
 
 ```mermaid
+%% This diagram visualizes the commit history of a PR.
 %% Data for this diagram can be retrieved natively using:
 %% gh pr view <pr_number> --json baseRefName,headRefName,commits
 gitGraph
@@ -109,6 +99,7 @@ failing, or pending jobs. Map these findings using a Mermaid `flowchart` diagram
 **Example `flowchart` Diagram:**
 
 ```mermaid
+%% This diagram visualizes the topology and statuses of CI/CD checks for a PR.
 %% Data for this diagram can be retrieved natively using:
 %% gh pr checks <pr_number> --repo <owner>/<repo>
 flowchart LR
@@ -116,16 +107,16 @@ flowchart LR
 
     subgraph Checks ["CI Format & Linting"]
         direction TB
-        c3["Actionlint<br/>#1234"]:::pass
-        c1["Link Checker<br/>#1234"]:::pass
-        c2["Pre-commit<br/>#1234"]:::pass
+        c3["Actionlint<br/>#{run_id}"]:::pass
+        c1["Link Checker<br/>#{run_id}"]:::pass
+        c2["Pre-commit<br/>#{run_id}"]:::pass
     end
 
     subgraph Tests ["Test Scenarios"]
         direction TB
-        m1["default<br/>#1234"]:::pass
-        m3["qa<br/>#1234"]:::fail
-        m2["test<br/>#1234"]:::fail
+        m1["default<br/>#{run_id}"]:::pass
+        m3["qa<br/>#{run_id}"]:::fail
+        m2["test<br/>#{run_id}"]:::fail
     end
 
     pr --> Checks
@@ -137,14 +128,42 @@ flowchart LR
 
 To extract list of checks, use `gh pr checks <pr_number>` command.
 
+### Step 3: CI Failures Summarization
+
+If any CI checks fail, use a Mermaid `ishikawa-beta` (fishbone) diagram to categorize
+and summarize the root causes and affected jobs.
+
+**Example `ishikawa-beta` Diagram:**
+
+```mermaid
+%% This diagram categorizes CI failures for a PR, grouping them by logical categories.
+%% Data for this diagram can be retrieved natively using:
+%% gh pr checks <pr_number> --repo <owner>/<repo>
+ishikawa-beta
+    PR 123 CI Failures
+    Test Scenarios
+        qa (#1234)
+            Job Canceled
+            Missing artifact
+        test (#1234)
+            Root Failure (test scenario failed)
+            Node.js 20 deprecated warning
+    CI Format & Linting
+        All Checks Passed
+```
+
+To gather summary of failures,
+use `gh run view --job <run_id>`.
+At this step, don't check for more detailed logs yet.
+
 ## Mandatory skills
 
 List of skills you must load:
 
-- git
 - gh
 - gh-api
 - gh-pr
 - gh-run
+- git
 
 If these are not available during runtime, stop and report the incident.

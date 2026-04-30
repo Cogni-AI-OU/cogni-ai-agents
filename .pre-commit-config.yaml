@@ -106,3 +106,4 @@ repos:
         additional_dependencies:
           - '@probelabs/maid@0.0.29'
         files: \.(md|mmd)$
+        exclude: cogni-ai-brain-ops/cogni-ai-brain-ops\.agent\.md
