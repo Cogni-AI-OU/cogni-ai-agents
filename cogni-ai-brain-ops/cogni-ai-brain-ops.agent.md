@@ -221,7 +221,7 @@ ishikawa-beta
         All Checks Passed
 ```
 
-To gather summary of failures,
+To gather a summary of failures,
 use `gh run view --job <run_id>`.
 At this step, don't check for more detailed logs yet.
 
