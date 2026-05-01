@@ -142,7 +142,7 @@ sequenceDiagram
 
 | Test | Status | Note |
 | :--- | :--- | :--- |
-| **File System Access** | **PASS** | `read`, `glob`, `read` (Skill) all successful. |
+| **File System Access** | **PASS** | `read` tool, `glob` helper, and Read (Skill) all successful. |
 | **Terminal Execution** | **PARTIAL** | Gated by strict allowlist; `git` and `gh` work. |
 | **Memory Tier** | **FAIL** | `/memories/` access via bash denied; no native `memory` tool provided. |
 | **GitHub Integration** | **PASS** | `gh --version` confirmed; `gh api` invoked. |
