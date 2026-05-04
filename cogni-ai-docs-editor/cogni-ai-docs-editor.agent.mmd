@@ -7,6 +7,7 @@ flowchart TD
         B2["2- Facts, Constraints, Instructions, & Skills"]
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
+        B3 -->|Yes| B4
         B3a --> B2
         B2 --> FL1
         FL6 --> CL1
