@@ -5,7 +5,7 @@ Persistent single-source truth for autonomous agent behavior in runtime environm
 ## Agents Catalog
 
 This repository is the source of truth for Cogni AI agent files.
-Agent files live at the repository root so they are accessible directly when
+Agent files live in agent-specific subdirectories so they are accessible directly when
 this repo is cloned into `.github/agents`.
 
 - [**Cogni AI Architect**](cogni-ai-architect/cogni-ai-architect.agent.md):
@@ -40,7 +40,7 @@ this repo is cloned into `.github/agents`.
 
 ### Structural Invariant
 
-- **Agents Location**: Agents are located directly in the root directory of this repository.
+- **Agents Location**: Agents are located in agent-specific subdirectories.
 
 ## Subagent Delegation
 

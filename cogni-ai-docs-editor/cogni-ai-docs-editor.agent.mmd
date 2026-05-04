@@ -86,13 +86,12 @@ flowchart TD
         subgraph Mandatory_Skill_Loading_Protocol
             SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
             SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
-            SL2 -->|No| SL6[Proceed Without Skill]
+            SL2 -->|No| SL6_STOP([Stop & Report: docs-review Unavailable])
             SL3 --> SL4{Multiple Matches?}
             SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
             SL4 -->|No| SL5
             SL5 --> SL7[Read Best-Matching SKILL.md Files]
             SL7 --> SL8[Proceed with Execution]
-            SL6 --> SL8
         end
     end
 
@@ -102,6 +101,6 @@ flowchart TD
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
 
-    class Phase1,Phase2,Phase3,B1,B2,B3a,B4,B5,B6,FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8 phaseNode
+    class Phase1,Phase2,Phase3,B1,B2,B3a,B4,B5,B6,FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL7,SL8 phaseNode
     class DiscrepancyFound,Verify,B3,FL2,CL2,IL2,SL2,SL4 gateNode
-    class Start,End endNode
+    class Start,End,SL6_STOP endNode

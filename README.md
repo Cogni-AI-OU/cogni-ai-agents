@@ -100,7 +100,7 @@ pre-commit run flake8 -a
 ## AI Agents
 
 This repository is the **source of truth** for Cogni AI agent configurations.
-Agent files live in the **repository root** so that when they are cloned
+Agent files live in agent-specific subdirectories so that when they are cloned
 into `.github/agents`, consumers receive them directly at
 `.github/agents/cogni-ai-architect/cogni-ai-architect.agent.md` (and `.github/agents/AGENTS.md`).
 

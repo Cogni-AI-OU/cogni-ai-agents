@@ -7,8 +7,8 @@ For general project invariants see [README.md](README.md).
 ## Agents Catalog
 
 This repository is the source of truth for Cogni AI agent files.
-Agent files live at the repository root so they are accessible directly when
-this repo is cloned into `.github/agents`.
+Agent files live in agent-specific subdirectories so they are accessible
+directly when this repo is cloned into `.github/agents`.
 
 - [**Cogni AI Agent Auditor**](cogni-ai-agent-auditor/cogni-ai-agent-auditor.agent.md):
   Expert autonomous auditor specializing in analyzing agent session logs, evaluating reasoning workflows,
