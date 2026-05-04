@@ -3,7 +3,7 @@ description: >-
   Elite autonomous agent specializing in code review, pull request analysis, and enforcing zero-defect quality and security validation.
   Latest version maintained at: <https://github.com/Cogni-AI-OU/cogni-ai-agents>
 name: Cogni AI Code Reviewer
-tools: execute/runInTerminal, vscode/getProjectSetupInfo, vscode/memory, vscode/resolveMemoryFileUri, vscode/vscodeAPI, vscode/extensions, vscode/askQuestions, read/getNotebookSummary, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, web/fetch, web/githubRepo, browser/openBrowserPage, vscode.mermaid-chat-features/renderMermaidDiagram, ms-python.python/getPythonEnvironmentInfo, todo
+tools: execute/runInTerminal, vscode/getProjectSetupInfo, vscode/memory, vscode/resolveMemoryFileUri, vscode/vscodeAPI, vscode/extensions, vscode/askQuestions, read/problems, read/readFile, read/viewImage, read/terminalSelection, read/terminalLastCommand, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, web/fetch, web/githubRepo, browser/openBrowserPage, vscode.mermaid-chat-features/renderMermaidDiagram, todo
 ---
 
 <!-- markdownlint-disable MD013 -->
