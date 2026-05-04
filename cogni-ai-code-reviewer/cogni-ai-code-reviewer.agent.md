@@ -98,10 +98,10 @@ Execute your review phases strictly according to the procedures defined in the *
   objectively on the code, its consequences, and necessary corrections, discarding personal tone or redundant
   exposition.
 
-## Mandatory skills
+## Relevant skills
 
 List of skills you must load explicitly using the native `skill` tool
-(or by reading their `SKILL.md` files) before proceeding:
+(or by reading their `SKILL.md` files) only when reviewing a PR, not during a general review:
 
 - github-pr
 - github-pr-review
