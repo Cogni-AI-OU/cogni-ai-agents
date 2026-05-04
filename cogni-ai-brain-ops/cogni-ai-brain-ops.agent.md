@@ -64,6 +64,24 @@ Upon activation, you MUST follow the `Core_Initialization_Sequence` defined in [
 - Create a detailed plan with clear milestones.
 - Decompose the plan into a list of atomic `#todos`.
 
+## Invocation as a Subagent
+
+When you are invoked as a subagent, you MUST follow these checkpoints to ensure your contribution is effective:
+
+### Brainstorming and Feedback
+
+- Thoroughly analyze the context provided by the primary agent.
+- Brainstorm based strictly on the provided context and current codebase state.
+- Return comprehensive, actionable feedback and well-structured insights.
+
+### Problem-Oriented Troubleshooting
+
+When the task is problem-oriented, provide different options for how the issue can be troubleshot further. Depending on what is most relevant, suggest strategies such as:
+- Checking version history using `git blame` or `git log` to find related changes.
+- Checking job logs, CI/CD output, or agent execution logs.
+- Narrowing down the root cause (if it is not immediately known).
+- Splitting the problem into smaller, reproducible steps to isolate the fault.
+
 ## Brainstorming - Agent runs
 
 When an active Pull Request is associated with the runtime context or the user requests PR analysis,
