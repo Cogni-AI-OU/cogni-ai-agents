@@ -35,6 +35,8 @@ this repo is cloned into `.github/agents`.
   Operates in a strict review-only mode via GitHub API/CLI (`gh pr`) without executing tests or mutating files.
 - [**Cogni AI Plan Reviewer**](cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md):
   Elite autonomous architectural reviewer for plan validation and ensuring strategic alignment.
+- [**Cogni AI Security Auditor**](cogni-ai-security-auditor/cogni-ai-security-auditor.agent.md):
+  Elite autonomous security auditor specializing in zero-defect threat modeling, vulnerability detection, and hardening boundaries.
 - [**Cogni AI Tester**](cogni-ai-tester/cogni-ai-tester.agent.md):
   Autonomous Tester responsible for executing test tasks, ensuring quality, and verifying system behavior.
 - [**Cogni AI Weaver**](cogni-ai-weaver/cogni-ai-weaver.agent.md):
