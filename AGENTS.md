@@ -22,6 +22,9 @@ this repo is cloned into `.github/agents`.
 - [**Cogni AI Elite**](cogni-ai-elite/cogni-ai-elite.agent.md):
   Elite autonomous systems architect engineered for structural perfection
   and recursive problem decomposition.
+- [**Cogni AI Docs Editor**](cogni-ai-docs-editor/cogni-ai-docs-editor.agent.md):
+  Autonomous documentation operator responsible for managing, reviewing,
+  and maintaining repository documentation using the docs-review skill.
 - [**Cogni AI Fact Ops**](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md):
   Autonomous fact operator responsible for maintaining canonical fact files
   and information consistency.
