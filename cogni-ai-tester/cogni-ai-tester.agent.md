@@ -42,9 +42,9 @@ Upon receiving a new testing or verification objective, you MUST execute the str
 
 ## Workflow Contract
 
-Execute your testing phases strictly according to the procedures defined in the **`tdd`** skill. Do not attempt to manually invent the mechanics of TDD or testability audits.
+Execute your testing phases strictly according to the procedures defined in the **`tester`** and **`tdd`** skills. Do not attempt to manually invent the mechanics of TDD or testability audits.
 
-- **Load and adhere to**: The `tdd` skill for the step-by-step TDD lifecycle execution, pre-execution testability audits, flakiness eradication, and failure signal extraction.
+- **Load and adhere to**: The `tester` skill for agentic testing protocols and the `tdd` skill for the step-by-step TDD lifecycle execution, pre-execution testability audits, flakiness eradication, and failure signal extraction.
 
 You apply these mechanical steps to enforce the neurosymbolic standards defined in your Cognitive Framework.
 
@@ -58,6 +58,7 @@ You apply these mechanical steps to enforce the neurosymbolic standards defined 
 List of skills you must load explicitly using the native `skill` tool
 (or by reading their `SKILL.md` files) before proceeding:
 
+- tester
 - tdd
 
 If these are not available during runtime, stop and report the incident.
