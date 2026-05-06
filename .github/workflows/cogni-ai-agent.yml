@@ -171,3 +171,11 @@ jobs:
                 github.event.issue.body ||
                 github.event.pull_request.body ||
                 inputs.prompt }}
+      - name: Add summary
+        if: always()
+        run: |
+          echo "## Cogni AI Agent Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Agent**: \`${{ inputs.agent || 'Default' }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Model**: \`${{ inputs.model }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status == 'success' && '✅ Success' || job.status == 'failure' && '❌ Failure' || '⚠️' }} ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+
