@@ -108,6 +108,7 @@ into `.github/agents`, consumers receive them directly at
 
 | File/Directory | Audience | Purpose |
 | -------------- | -------- | ------- |
+| [**Cogni AI Agent**](.opencode/agent/cogni-ai.md) | Orchestrators | Autonomous neurosymbolic coding engineer and system architect kernel |
 | [cogni-ai-architect/cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Orchestrators | Primary Cogni AI Architect agent definition |
 | [cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md) | All agents | Autonomous Context7 Ops responsible for gathering and filtering documentation |
 | [cogni-ai-devops/cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | DevOps/SREs | Elite autonomous DevOps and SRE agent |
@@ -144,6 +145,11 @@ for d in .github/agents/*/ ; do ln -fsv "$(basename "$d")/$(basename "$d").agent
 ```
 
 ## Available Agents
+
+### [Cogni AI Agent](.opencode/agent/cogni-ai.md)
+
+Autonomous neurosymbolic coding engineer and system architect kernel,
+running as a GitHub Action via OpenCode.
 
 ### [Cogni AI Architect agent](cogni-ai-architect/cogni-ai-architect.agent.md)
 
