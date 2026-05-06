@@ -34,6 +34,9 @@ directly when this repo is cloned into `.github/agents`.
 - [**Cogni AI GitHub Ops**](cogni-ai-github-ops/cogni-ai-github-ops.agent.md):
   Autonomous GitHub Operator responsible for GitHub operations such as
   modifying comments, issues, or discussions on behalf of other agents.
+- [**Cogni AI Manager**](cogni-ai-manager/cogni-ai-manager.agent.md):
+  Autonomous orchestration and coordination manager responsible for routing work
+  to specialized agents and ensuring end-to-end completion.
 - [**Cogni AI Keeper**](cogni-ai-keeper/cogni-ai-keeper.agent.md):
   Canonical fact custody and mindmap stewardship kernel for structured
   knowledge management.

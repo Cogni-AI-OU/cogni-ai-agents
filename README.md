@@ -79,6 +79,7 @@ pre-commit run flake8 -a
 - `cogni-ai-devops/cogni-ai-devops.agent.md`: elite autonomous DevOps and SRE agent
 - `cogni-ai-elite/cogni-ai-elite.agent.md`: elite agent configuration
 - `cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md`: autonomous fact operator responsible for canonical fact files
+- `cogni-ai-manager/cogni-ai-manager.agent.md`: autonomous orchestration and coordination manager
 - `cogni-ai-keeper/cogni-ai-keeper.agent.md`: canonical fact custody and mindmap stewardship kernel
 - `cogni-ai-python-dev/cogni-ai-python-dev.agent.md`: autonomous Python Developer for writing Python 3 code
 - `cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md`: elite autonomous code reviewer
@@ -113,6 +114,7 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-devops/cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | DevOps/SREs | Elite autonomous DevOps and SRE agent |
 | [cogni-ai-elite/cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Orchestrators | Cogni AI Elite autonomous systems architect |
 | [cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Fact Ops | Autonomous fact operator responsible for maintaining canonical fact files |
+| [cogni-ai-manager/cogni-ai-manager.agent.md](cogni-ai-manager/cogni-ai-manager.agent.md) | Managers | Autonomous orchestration and coordination manager |
 | [cogni-ai-keeper/cogni-ai-keeper.agent.md](cogni-ai-keeper/cogni-ai-keeper.agent.md) | Keepers | Canonical Fact Custody & Mindmap Stewardship Kernel |
 | [cogni-ai-python-dev/cogni-ai-python-dev.agent.md](cogni-ai-python-dev/cogni-ai-python-dev.agent.md) | Python Devs | Autonomous Python Developer responsible for writing and testing Python 3 code |
 | [cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md](cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md) | Reviewers | Elite autonomous code, PR analysis, and zero-defect enforcer |
@@ -171,6 +173,10 @@ Elite autonomous systems architect engineered for structural perfection and recu
 ### [Cogni AI Fact Ops](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md)
 
 Autonomous fact operator responsible for maintaining canonical fact files and information consistency.
+
+### [Cogni AI Manager](cogni-ai-manager/cogni-ai-manager.agent.md)
+
+Autonomous orchestration and coordination manager responsible for routing work to specialized agents and ensuring end-to-end completion.
 
 ### [Cogni AI Keeper](cogni-ai-keeper/cogni-ai-keeper.agent.md)
 
