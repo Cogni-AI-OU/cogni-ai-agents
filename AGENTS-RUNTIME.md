@@ -8,6 +8,9 @@ This repository is the source of truth for Cogni AI agent files.
 Agent files live in agent-specific subdirectories so they are accessible directly when
 this repo is cloned into `.github/agents`.
 
+- [**Cogni AI Agent**](.opencode/agent/cogni-ai.md):
+  Autonomous neurosymbolic coding engineer and system architect kernel,
+  running as a GitHub Action via OpenCode.
 - [**Cogni AI Architect**](cogni-ai-architect/cogni-ai-architect.agent.md):
   Primary autonomous coding agent with critical thinking, robust problem-solving, and context-aware resource management.
 - [**Cogni AI DevOps**](cogni-ai-devops/cogni-ai-devops.agent.md):
