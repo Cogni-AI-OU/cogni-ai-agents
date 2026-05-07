@@ -5,6 +5,7 @@ flowchart TD
         direction TB
         B1["1- AGENTS.md Contract Alignment"]
         B2["2- Facts, Constraints, Instructions, & Skills"]
+        B1 --> B2
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
