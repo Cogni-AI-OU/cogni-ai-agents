@@ -16,8 +16,8 @@ flowchart TD
         SL8 --> B3
     end
 
-    Boot --> B1
-    B3 -->|Yes| B4
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
 
     subgraph LOCAL_CONTRACT [manager.agent.md: Local Framework]
         B4["4- Objective Classification"]
