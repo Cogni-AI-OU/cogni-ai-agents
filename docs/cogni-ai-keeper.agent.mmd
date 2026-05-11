@@ -3,8 +3,8 @@ flowchart TD
 
     subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        B1["1- Agent Contract Alignment"] --> B2
-        B2["2- Skill & Instruction Loading"]
+        B1["1- AGENTS.md Contract Alignment"]
+        B2["2- Facts, Constraints, Instructions, & Skills"]
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
@@ -15,48 +15,43 @@ flowchart TD
         SL8 --> B3
     end
 
-    Boot --> GLOBAL_AGENTS_md
-    GLOBAL_AGENTS_md --> B4
+    subgraph LOCAL_CONTRACT [keeper.agent.md: Local Framework]
+        B4["4- Store Discovery"]
+        B5["5- Schema Validation"]
+        B6["6- Contradiction & Integrity Scan"]
+        B7["7- Provenance Audit"]
+        B8["8- Emit Boot Report"]
+        Idle{"9- Await Action"}
 
-    subgraph LOCAL_CONTRACT [tester.agent.md: Local Framework]
-        B4["4- Context Verification"]
-        B5["5- Emit Boot Report"]
-        B5 --> Idle
-        Idle{"6- Await Testing Target"}
+        Idle -->|@Keeper verb: payload| Input[Parse Invocation]
 
-        Idle -->|Code/Feature Input| Phase0[Phase 0: Pre-Execution Audit]
+        Input --> Gate{"Is Operation Authorized?"}
+        Gate -->|No| Reject["Emit: UNAUTHORIZED_OPERATION"]
+        Reject --> Idle
 
-        Phase0 --> T_Audit["Adversarial Testability Review"]
-        T_Audit -->|Fail| RefactorReq["Reject: Code Not Testable"]
-        T_Audit -->|Pass| Phase1[Phase 1: Test-Driven Lifecycle]
+        Gate -->|Yes| Mode{Select Mode}
 
-        RefactorReq --> Phase3
+        Mode -->|Ingest/Add| P1[Extract Provenance & Facts]
+        Mode -->|Sync/Reconcile| P2[Compare Memory vs Reality]
+        Mode -->|Prune/Audit| P3[Identify Stale/Orphaned Nodes]
 
-        Phase1 --> TDD_Red["1. Assert the Gap (Write Failing Test)"]
-        TDD_Red --> TDD_Dim["2. Dimensional Scaling (Scale Boundaries/Errors)"]
-        TDD_Dim --> TDD_Exec{"Execute Test Suite"}
+        P1 & P2 & P3 --> Core[Apply Logic Engine]
 
-        TDD_Exec -->|Passes Intentionally| TDD_Green["3. Resolve the Gap (Green)"]
-        TDD_Exec -->|Fails/Flaky| Signal["Signal Extraction & Flakiness Eradication"]
-        Signal --> TDD_Exec
+        Core --> Mutation{"State Change Required?"}
 
-        TDD_Green --> Phase2[Phase 2: Quality & Security Gates]
+        Mutation -->|No| Report["Generate Status Report"]
+        Mutation -->|Yes| Commit["Write to [docs/FACTS.mmd / AGENTS.md]"]
 
-        Phase2 --> Q_Mock["Boundary Mocking Verification"]
-        Q_Mock --> Q_Iso["Non-Destructive Isolation Check"]
-        Q_Iso --> Q_Cov["Behavior vs Coverage Check"]
-
-        Q_Cov --> Phase3[Phase 3: Output & Closure]
-        Phase3 --> Finalize["Format Trace & Summarize Permutations"]
-        Finalize --> Output["Finalize Test Engineering Action"]
+        Commit & Report --> Finalize[Self-Consistency Pass]
+        Finalize --> Output["Emit: KEEPER SUCCESS"]
     end
 
-    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+    subgraph GLOBAL_FLOWS_mmd [docs/FLOWS.mmd: Shared Protocols]
         direction TB
         TL{Traffic Light Classification}
 
         subgraph Mandatory_Facts_Loading_Protocol
-            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
             FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
             FL3 --> FL4[Inject Core Context into Working Memory]
             FL2 -->|No| FL5[Proceed Without Canonical Facts]
@@ -112,29 +107,40 @@ flowchart TD
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
     end
 
-    Output --> End([Objective Complete])
+    Boot --> B1
+    B1 --> B2
+    B3 -->|Yes| B4
+    B4 --> B5
+    B5 --> B6
+    B6 --> B7
+    B7 --> B8
+    B8 --> Idle
 
-    Phase1 --> TL
-    TL -->|Green: Autonomous| Phase2
+    Core --> TL
+    TL -->|Green: Autonomous| Mutation
     TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
-    Escalate -->|User Input Received| Phase1
-    EscalateGate -->|No| Phase2
+    Escalate -->|User Input Received| Mutation
+    EscalateGate -->|No| Mutation
 
-    subgraph Invariants ["Testing Invariants"]
+    Output --> Idle
+
+    subgraph Invariants ["Keeper Invariants"]
         direction TB
-        I1["Genuine Falsifiability (Tests Must Fail First)"]
-        I2["Behavior Over Implementation"]
-        I3["Boundary Mocking Constraint"]
-        I4["Realistic Data Modeling"]
-        I5["Non-Destructive Execution"]
+        I1["Canonical Truth Only"]
+        I2["Atomic Integrity"]
+        I3["Zero Ambiguity"]
+        I4["Entropy Resistance"]
+        I5["Non-Destructive SCM First"]
+        I6["Provenance-Linked Facts"]
     end
 
-    TDD_Red -.->|governed by| I1
-    Q_Cov -.->|governed by| I2
-    Q_Mock -.->|governed by| I3
-    TDD_Dim -.->|governed by| I4
-    Q_Iso -.->|governed by| I5
+    Input -.->|governed by| I3
+    Commit -.->|governed by| I1
+    Commit -.->|governed by| I2
+    P1 -.->|governed by| I6
+    P3 -.->|governed by| I4
+    Output -.->|governed by| I5
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -142,10 +148,11 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a phaseNode
+
+    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5,B6,B7,B8 phaseNode
     class FL2,CL2,IL2,SL2,SL4,B3 gateNode
-    class Boot,Phase0,Phase1,Phase2,Phase3,Finalize,B4,B5 phaseNode
-    class Idle,T_Audit,TDD_Exec,TL,EscalateGate gateNode
-    class TDD_Red,TDD_Dim,TDD_Green,Signal,Q_Mock,Q_Iso,Q_Cov,RefactorReq,Escalate checkNode
-    class Start,End,Output endNode
-    class I1,I2,I3,I4,I5 guardNode
+    class Boot,Input,Core,Finalize phaseNode
+    class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
+    class Reject,Commit,Report,Escalate checkNode
+    class Start,Output endNode
+    class I1,I2,I3,I4,I5,I6 guardNode

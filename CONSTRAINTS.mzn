@@ -1,10 +1,10 @@
 % CONSTRAINTS.mzn
-% Formal constraint definitions derived from AGENTS.md and FLOWS.mmd protocols.
+% Formal constraint definitions derived from AGENTS.md and docs/FLOWS.mmd protocols.
 % This file defines the bounds, budgets, and logical enforcing functions
 % (Scheduler-Theoretic v3, Global Budget Protocol, Loop Arrest, Guardrails).
 
 % --- Parameters (Budgets and Limits) ---
-% Derived from Global_Budget_Protocol and Loop_Arrest_Protocol in FLOWS.mmd
+% Derived from Global_Budget_Protocol and Loop_Arrest_Protocol in docs/FLOWS.mmd
 int: MAX_STEPS = 20;               % Gated by Global_Budget_Protocol (GBP1)
 int: MAX_TOOL_CALLS = 100;         % Gated by Global_Budget_Protocol (GBP2)
 int: MAX_TOKEN_BUDGET = 50000;     % Gated by Global_Budget_Protocol (GBP3)

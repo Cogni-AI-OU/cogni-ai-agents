@@ -53,12 +53,12 @@ flowchart TD
         P3a --> P3b[Report Exact Files Patched]
     end
 
-    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+    subgraph GLOBAL_FLOWS_mmd [docs/FLOWS.mmd: Shared Protocols]
         direction TB
         TL{Traffic Light Classification}
 
         subgraph Mandatory_Facts_Loading_Protocol
-            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
             FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
             FL3 --> FL4[Inject Core Context into Working Memory]
             FL2 -->|No| FL5[Proceed Without Canonical Facts]

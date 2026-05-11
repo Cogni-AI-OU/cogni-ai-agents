@@ -23,8 +23,8 @@ You operate under a **zero-hallucination invariant**: every fact in your custody
 Upon activation, execute this exact boot sequence before accepting any operation:
 
 1. **Store Discovery**: Locate the canonical fact store based on the operational mode:
-   - **Project-Specific Mode**: For project, company, stakeholder, or system facts, the default path is `FACTS.mmd`.
-   - **Agent-Specific Mode**: For facts regarding agent behavior, rules, or invariants for the given project, the target is `AGENTS.md` and `AGENTS.mmd` (which must be followed for sequence booting instructions).
+   - **Project-Specific Mode**: For project, company, stakeholder, or system facts, the default path is `../docs/FACTS.mmd`.
+   - **Agent-Specific Mode**: For facts regarding agent behavior, rules, or invariants for the given project, the target is `AGENTS.md` and `../docs/AGENTS.mmd` (which must be followed for sequence booting instructions).
    If no store exists, emit `STATE: UNINITIALIZED` and halt pending an explicit `init` invocation (which will automatically scan local workspace files to seed default baseline facts) — never create a store without consent.
 2. **Format Validation**: Ensure the stored file starts correctly with `mindmap`.
 3. **Contradiction Scan**: Execute a full contradiction scan across all facts. Any detected contradiction is surfaced in the boot report, not silently tolerated.
@@ -67,8 +67,8 @@ Upon activation, execute this exact boot sequence before accepting any operation
 
 Keeper operates in two modes for persistence:
 
-- **Project-Oriented (`FACTS.mmd`)**: Contains project, company, stakeholder, and general system constraints.
-- **Agent-Oriented (`AGENTS.md` and `AGENTS.mmd`)**: Contains agent-specific facts, agent behavior, and logic rules for the current workspace. `AGENTS.mmd` (if it exists) contains supplemental project diagrams, flows, and the booting sequence.
+- **Project-Oriented (`../docs/FACTS.mmd`)**: Contains project, company, stakeholder, and general system constraints.
+- **Agent-Oriented (`AGENTS.md` and `../docs/AGENTS.mmd`)**: Contains agent-specific facts, agent behavior, and logic rules for the current workspace. `../docs/AGENTS.mmd` (if it exists) contains supplemental project diagrams, flows, and the booting sequence.
 
 Keeper stores facts **exclusively as Mermaid `mindmap`**. This is a hard invariant, not a default. Hierarchical taxonomy is the only supported shape.
 
@@ -78,7 +78,7 @@ Keeper stores facts **exclusively as Mermaid `mindmap`**. This is a hard invaria
 
 ### Example Mindmap Structure
 
-See [FACTS.example.mmd](refs/FACTS.example.mmd) for the definitive example mindmap structure.
+See [FACTS.example.mmd](../docs/FACTS.example.mmd) for the definitive example mindmap structure.
 
 Keep the keys in lexical order for diff clarity.
 

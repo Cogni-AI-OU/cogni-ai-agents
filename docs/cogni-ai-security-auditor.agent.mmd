@@ -16,48 +16,52 @@ flowchart TD
     end
 
     Boot --> GLOBAL_AGENTS_md
-    B3 -->|Yes| B5["5- Emit Boot Report"]
-    B5 --> Idle
-    Idle{"6- Await Plan/Strategy Input"}
+    GLOBAL_AGENTS_md --> B4
 
-    Idle -->|Proposed Plan / Design| Input[Gather Context]
+    subgraph LOCAL_CONTRACT [security-auditor.agent.md: Local Framework]
+        B4["4- Context Verification"]
+        B5["5- Emit Boot Report"]
+        B5 --> Idle
+        Idle{"6- Await Target/Code Input"}
 
-    Input --> Rules{"Relevant Rules Found? (Global + Local)"}
-    Rules -->|No| Generic[Load Base Strategic Standards]
-    Rules -->|Yes| Specific[Load Context-Specific Instructions]
+        Idle -->|Code/Config/PR| Phase0[Phase 0: Threat Surface Discovery & Triage]
 
-    Generic & Specific --> Analysis[Perform Deep Architectural Analysis]
+        Phase0 --> Phase1[Phase 1: Deep Vulnerability Audit]
 
-    subgraph Review_Dimensions [Mandatory Strategic Dimensions]
-        direction TB
-        D1["Conceptual Integrity"]
-        D2["Security by Design"]
-        D3["Maintainability / Scalability"]
-        D4["Structural Soundness"]
-        D5["Alignment with AGENTS.md/FACTS.mmd"]
+        subgraph Audit_Dimensions [Mandatory Audit Vectors]
+            direction TB
+            D1["Injection & Input Validation"]
+            D2["Authentication & Authorization"]
+            D3["Secrets & Cryptography"]
+            D4["AI & Prompt Security"]
+            D5["Data Exposure & Privacy"]
+        end
+
+        Phase1 --> Audit_Dimensions
+
+        Audit_Dimensions --> Phase2[Phase 2: Exploitability Assessment]
+
+        Phase2 --> Assessment{"Vulnerabilities Found?"}
+
+        Assessment -->|No| Approve["Emit: [PRAISE] / No Vulnerabilities Found"]
+        Assessment -->|Yes| Flag["Formulate Attack Scenario & Remediation"]
+
+        Flag --> Severity{"Risk Level"}
+
+        Severity -->|Low/Medium| Suggest["Emit: [LOW] / [MEDIUM]"]
+        Severity -->|High/Critical| Request["Emit: [HIGH] / [CRITICAL]"]
+
+        Approve & Suggest & Request --> Phase3[Phase 3: Termination & Remediation Summary]
+        Phase3 --> Finalize[Log Meta-Analysis for AI Learning]
+        Finalize --> Output["Finalize Security Audit"]
     end
 
-    Analysis --> Review_Dimensions
-
-    Review_Dimensions --> Assessment{"Issues Found?"}
-
-    Assessment -->|No| Approve["Emit: STRATEGIC APPROVAL"]
-    Assessment -->|Yes| Flag["Generate Architectural Feedback"]
-
-    Flag --> Severity{"Critical / Blocking?"}
-
-    Severity -->|No| Suggest["Emit: STRATEGIC SUGGESTION"]
-    Severity -->|Yes| Request["Emit: REVISION REQUIRED"]
-
-    Approve & Suggest & Request --> Finalize[Log Meta-Analysis for AI Learning]
-    Finalize --> Output["Finalize Strategic Review"]
-
-    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+    subgraph GLOBAL_FLOWS_mmd [docs/FLOWS.mmd: Shared Protocols]
         direction TB
         TL{Traffic Light Classification}
 
         subgraph Mandatory_Facts_Loading_Protocol
-            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
             FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
             FL3 --> FL4[Inject Core Context into Working Memory]
             FL2 -->|No| FL5[Proceed Without Canonical Facts]
@@ -113,32 +117,31 @@ flowchart TD
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
     end
 
-    Output --> Idle
+    Output --> End([Audit Complete])
 
-    Analysis --> TL
-    TL -->|Green: Autonomous| Assessment
+    Phase1 --> TL
+    TL -->|Green: Autonomous| Phase2
     TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
-    Escalate -->|User Input Received| Assessment
-    EscalateGate -->|No| Assessment
+    Escalate -->|User Input Received| Phase1
+    EscalateGate -->|No| Phase2
 
-    subgraph Invariants ["Plan Reviewer Invariants"]
+    subgraph Invariants ["Security Auditor Invariants"]
         direction TB
-        I1["High-Level Focus"]
-        I2["Strategic Pivot Guidance"]
-        I3["Solution-Oriented Architecture"]
-        I4["Strict Project Alignment"]
-        I5["Neurosymbolic Verification (CoV)"]
-        I6["No Implementation Details"]
+        I1["Zero-Trust Assumption Principle"]
+        I2["Exploit & Remediation Pairing"]
+        I3["Categorized Threat Labels (CRITICAL/HIGH/etc)"]
+        I4["Secure By Default / Least Privilege"]
+        I5["No 'looks okay' without explicit verification"]
+        I6["Audit-Only Enforcement (No Fix Execution)"]
     end
 
-    Analysis -.->|governed by| I5
-    Analysis -.->|governed by| I6
+    Phase0 -.->|governed by| I6
+    Phase1 -.->|governed by| I1
     Flag -.->|governed by| I2
     Flag -.->|governed by| I3
-    Approve -.->|governed by| I4
-    Output -.->|governed by| I1
-    Output -.->|governed by| I6
+    Approve -.->|governed by| I5
+    Phase3 -.->|governed by| I4
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -148,8 +151,8 @@ flowchart TD
 
     class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a phaseNode
     class FL2,CL2,IL2,SL2,SL4,B3 gateNode
-    class Boot,Input,Analysis,Finalize,B5 phaseNode
-    class Idle,Rules,Assessment,Severity,TL,EscalateGate gateNode
-    class Generic,Specific,Flag,Suggest,Request,Approve,Escalate checkNode
-    class Start,Output endNode
+    class Boot,Phase0,Phase1,Phase2,Phase3,Finalize,B4,B5 phaseNode
+    class Idle,Assessment,Severity,TL,EscalateGate gateNode
+    class Flag,Suggest,Request,Approve,Escalate checkNode
+    class Start,End,Output endNode
     class I1,I2,I3,I4,I5,I6 guardNode

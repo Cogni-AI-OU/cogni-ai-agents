@@ -5,6 +5,7 @@ flowchart TD
         direction TB
         B1["1- AGENTS.md Contract Alignment"]
         B2["2- Facts, Constraints, Instructions, & Skills"]
+        B1 --> B2
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
@@ -15,43 +16,61 @@ flowchart TD
         SL8 --> B3
     end
 
-    subgraph LOCAL_CONTRACT [keeper.agent.md: Local Framework]
-        B4["4- Store Discovery"]
-        B5["5- Schema Validation"]
-        B6["6- Contradiction & Integrity Scan"]
-        B7["7- Provenance Audit"]
-        B8["8- Emit Boot Report"]
-        Idle{"9- Await Action"}
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
 
-        Idle -->|@Keeper verb: payload| Input[Parse Invocation]
+    subgraph LOCAL_CONTRACT [manager.agent.md: Local Framework]
+        B4["4- Objective Classification"]
+        B5["5- Capability Mapping"]
+        B6["6- Dependency Graph Construction"]
+        B7["7- Delegation Strategy"]
+        B8["8- Risk Scan"]
 
-        Input --> Gate{"Is Operation Authorized?"}
-        Gate -->|No| Reject["Emit: UNAUTHORIZED_OPERATION"]
-        Reject --> Idle
+        B4 --> B5
+        B5 --> B6
+        B6 --> B7
+        B7 --> B8
 
-        Gate -->|Yes| Mode{Select Mode}
+        B8 --> Phase0[Phase 0: Intake & Planning]
 
-        Mode -->|Ingest/Add| P1[Extract Provenance & Facts]
-        Mode -->|Sync/Reconcile| P2[Compare Memory vs Reality]
-        Mode -->|Prune/Audit| P3[Identify Stale/Orphaned Nodes]
+        Phase0 --> P0a[Determine Execution Plan]
+        P0a --> P0b[Define Dependencies]
+        P0b --> P0c[Set Verification Gates and Completion Criteria]
 
-        P1 & P2 & P3 --> Core[Apply Logic Engine]
+        P0c --> Phase1[Phase 1: Delegation & Execution Tracking]
 
-        Core --> Mutation{"State Change Required?"}
+        Phase1 --> P1a[Maintain Live Ledger]
+        P1a --> P1b[Dispatch to Dynamic Specialist Agent]
+        P1b --> P1c[Execute Delegation Contract]
+        P1c --> Track{Track Status}
+        Track -->|pending, ready, in_progress| P1a
+        Track -->|blocked, rejected| EscalateOrReroute[Reroute or Escalate]
+        EscalateOrReroute --> P1b
+        Track -->|done, awaiting_review| Phase2
 
-        Mutation -->|No| Report["Generate Status Report"]
-        Mutation -->|Yes| Commit["Write to [FACTS.mmd / AGENTS.md]"]
+        Phase2[Phase 2: Reconciliation & Validation]
+        Phase2 --> P2a[Verify Scope Alignment]
+        P2a --> P2b[Ensure Cross-Agent Consistency]
+        P2b --> P2c[Merge Outputs Cohesively]
+        P2c --> Pass{Validation Passed?}
+        Pass -->|No| P1b
+        Pass -->|Yes| Phase3
 
-        Commit & Report --> Finalize[Self-Consistency Pass]
-        Finalize --> Output["Emit: KEEPER SUCCESS"]
+        Phase3[Phase 3: Closure]
+        Phase3 --> P3a[Ensure All Tasks Done]
+        P3a --> P3b[Resolve Contradictions]
+        P3b --> P3c[Verify User Objective Fully Addressed]
+        P3c --> P3d[Sync Durable Lessons to Memory]
+        
+        P3d --> Output["Emit: STATE SNAPSHOT & LEDGER"]
     end
 
-    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+    subgraph GLOBAL_FLOWS_mmd [docs/FLOWS.mmd: Shared Protocols]
         direction TB
         TL{Traffic Light Classification}
 
         subgraph Mandatory_Facts_Loading_Protocol
-            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
             FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
             FL3 --> FL4[Inject Core Context into Working Memory]
             FL2 -->|No| FL5[Proceed Without Canonical Facts]
@@ -107,40 +126,25 @@ flowchart TD
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
     end
 
-    Boot --> B1
-    B1 --> B2
-    B3 -->|Yes| B4
-    B4 --> B5
-    B5 --> B6
-    B6 --> B7
-    B7 --> B8
-    B8 --> Idle
-
-    Core --> TL
-    TL -->|Green: Autonomous| Mutation
+    Output --> TL
+    TL -->|Green: Autonomous| End([Objective Complete])
     TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
-    Escalate -->|User Input Received| Mutation
-    EscalateGate -->|No| Mutation
+    Escalate -->|User Input Received| End
+    EscalateGate -->|No| End
 
-    Output --> Idle
-
-    subgraph Invariants ["Keeper Invariants"]
+    subgraph Invariants ["Manager Invariants"]
         direction TB
-        I1["Canonical Truth Only"]
-        I2["Atomic Integrity"]
-        I3["Zero Ambiguity"]
-        I4["Entropy Resistance"]
-        I5["Non-Destructive SCM First"]
-        I6["Provenance-Linked Facts"]
+        I1["Zero-Defect Handoff"]
+        I2["No Orphans"]
+        I3["Delegation-First"]
+        I4["Cross-Agent Coherence"]
     end
 
-    Input -.->|governed by| I3
-    Commit -.->|governed by| I1
-    Commit -.->|governed by| I2
-    P1 -.->|governed by| I6
-    P3 -.->|governed by| I4
-    Output -.->|governed by| I5
+    P1b -.->|governed by| I3
+    Track -.->|governed by| I2
+    P2b -.->|governed by| I4
+    P2c -.->|governed by| I1
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -148,11 +152,9 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-
-    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5,B6,B7,B8 phaseNode
-    class FL2,CL2,IL2,SL2,SL4,B3 gateNode
-    class Boot,Input,Core,Finalize phaseNode
-    class Idle,Gate,Mode,Mutation,TL,EscalateGate gateNode
-    class Reject,Commit,Report,Escalate checkNode
-    class Start,Output endNode
-    class I1,I2,I3,I4,I5,I6 guardNode
+    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5,B6,B7,B8,P0a,P0b,P0c,P1a,P1b,P1c,P2a,P2b,P2c,P3a,P3b,P3c,P3d phaseNode
+    class FL2,CL2,IL2,SL2,SL4,B3,Track,Pass,TL,EscalateGate gateNode
+    class Boot,Phase0,Phase1,Phase2,Phase3 phaseNode
+    class EscalateOrReroute,Escalate checkNode
+    class Start,End,Output endNode
+    class I1,I2,I3,I4 guardNode
