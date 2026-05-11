@@ -7,223 +7,146 @@ For general project invariants see [README.md](README.md).
 ## Agents Catalog
 
 This repository is the source of truth for Cogni AI agent files.
-Agent files live at the repository root so they are accessible directly when
-this repo is cloned into `.github/agents`.
+Agent files live in agent-specific subdirectories so they are accessible
+directly when this repo is cloned into `.github/agents`.
 
-| File | Purpose |
-| ---- | ------- |
-| [cogni-ai-architect.agent.md](cogni-ai-architect/cogni-ai-architect.agent.md) | Primary Cogni AI Architect autonomous coding agent |
-| [cogni-ai-devops.agent.md](cogni-ai-devops/cogni-ai-devops.agent.md) | Elite autonomous DevOps and Site Reliability Engineering agent |
-| [cogni-ai-elite.agent.md](cogni-ai-elite/cogni-ai-elite.agent.md) | Cogni AI Elite autonomous systems architect |
-| [cogni-ai-fact-ops.agent.md](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md) | Autonomous Fact Operator responsible for canonical fact files |
+- [**Cogni AI Agent Auditor**](cogni-ai-agent-auditor/cogni-ai-agent-auditor.agent.md):
+  Expert autonomous auditor specializing in analyzing agent session logs, evaluating reasoning workflows,
+  and generating visual reports.
+- [**Cogni AI Architect**](cogni-ai-architect/cogni-ai-architect.agent.md):
+  Primary autonomous coding agent with critical thinking, robust problem-solving,
+  and context-aware resource management.
+- [**Cogni AI DevOps**](cogni-ai-devops/cogni-ai-devops.agent.md):
+  Elite autonomous DevOps and Site Reliability Engineering agent focusing on task
+  automation, CI/CD pipeline precision, and infrastructure-as-code.
+- [**Cogni AI Elite**](cogni-ai-elite/cogni-ai-elite.agent.md):
+  Elite autonomous systems architect engineered for structural perfection
+  and recursive problem decomposition.
+- [**Cogni AI Docs Editor**](cogni-ai-docs-editor/cogni-ai-docs-editor.agent.md):
+  Autonomous documentation operator responsible for managing, reviewing,
+  and maintaining repository documentation using the docs-review skill.
+- [**Cogni AI Fact Ops**](cogni-ai-fact-ops/cogni-ai-fact-ops.agent.md):
+  Autonomous fact operator responsible for maintaining canonical fact files
+  and information consistency.
+- [**Cogni AI Context7 Ops**](cogni-ai-context7-ops/cogni-ai-context7-ops.agent.md):
+  Autonomous context gathering agent specialized in retrieving and filtering
+  documentation from the Context7 service.
+- [**Cogni AI GitHub Ops**](cogni-ai-github-ops/cogni-ai-github-ops.agent.md):
+  Autonomous GitHub Operator responsible for GitHub operations such as
+  modifying comments, issues, or discussions on behalf of other agents.
+- [**Cogni AI Manager**](cogni-ai-manager/cogni-ai-manager.agent.md):
+  Autonomous orchestration and coordination manager responsible for routing work
+  to specialized agents and ensuring end-to-end completion.
+- [**Cogni AI Keeper**](cogni-ai-keeper/cogni-ai-keeper.agent.md):
+  Canonical fact custody and mindmap stewardship kernel for structured
+  knowledge management.
+- [**Cogni AI Python Dev**](cogni-ai-python-dev/cogni-ai-python-dev.agent.md):
+  Autonomous Python Developer responsible for writing, testing,
+  and debugging Python 3 code.
+- [**Cogni AI Code Reviewer**](cogni-ai-code-reviewer/cogni-ai-code-reviewer.agent.md):
+  Elite autonomous code reviewer for PR analysis, quality enforcement,
+  and zero-defect security validation.
+  Operates in a strict review-only mode via GitHub API/CLI (`gh pr`)
+  without executing tests or mutating files.
+- [**Cogni AI Plan Reviewer**](cogni-ai-plan-reviewer/cogni-ai-plan-reviewer.agent.md):
+  Elite autonomous architectural reviewer for plan validation
+  and ensuring strategic alignment.
+- [**Cogni AI Security Auditor**](cogni-ai-security-auditor/cogni-ai-security-auditor.agent.md):
+  Elite autonomous security auditor specializing in zero-defect threat modeling,
+  vulnerability detection, and hardening boundaries.
+- [**Cogni AI Tester**](cogni-ai-tester/cogni-ai-tester.agent.md):
+  Autonomous Tester responsible for executing test tasks, ensuring quality,
+  and verifying system behavior.
+- [**Cogni AI Weaver**](cogni-ai-weaver/cogni-ai-weaver.agent.md):
+  Canonical flow custody and diagram stewardship kernel specializing in
+  flowchart and dependency memory.
+- [**Cogni AI Brain Ops**](cogni-ai-brain-ops/cogni-ai-brain-ops.agent.md):
+  Autonomous brainstorming agent responsible for gathering facts,
+  describing constraints, and architecting suggested plans and tasks.
 
 ## Persistent Memory & Context Files
 
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
 - `/memories/` (Cognitive persistence tier for session and long-term state)
-- `FACTS.mmd` (Root canonical fact store and project mindmap)
-- `AGENTS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
-- [`.github/AGENTS.md`](.github/AGENTS.md)
+- `docs/FACTS.mmd` (Root canonical fact store and project mindmap)
+- `AGENTS.mmd` (Booting sequence and initialization) and `docs/FLOWS.mmd` (Timelines and operational protocols)
+- `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
+- [`.github/AGENTS.md`](.github/AGENTS.md) (Directory-specific health and agent guidance)
+- [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (Domain context and IDE constraints)
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any `AGENTS.md` or `AGENTS.mmd` (which must be followed for sequence booting instructions),
+- Any other directory-specific `AGENTS.md` or `*.agent.mmd` (which must be followed for sequence booting instructions),
   or `SKILL.md` in ancestor, then current directory tree
 
-## Mandatory Skill Loading Protocol
+## Core Agent Execution Protocol
 
-- Before any tool invocation, code delta, or execution plan, MUST read
-  [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) when present.
-- Treat [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) as the
-  authoritative catalog of available skills; follow its links to candidate
-  `SKILL.md` files.
-- Deterministically route user intent to skills in this order: exact
-  skill-name match, exact alias/tag match, normalized phrase match,
-  description/activation keyword match.
-- If multiple skills match, load all non-overlapping relevant skills ordered
-  by the routing score above; if two skills conflict, the more task-specific
-  `SKILL.md` wins.
-- If the user request includes domain terms that plausibly map to a skill,
-  MUST inspect the best-matching `SKILL.md` before proceeding.
-- If no skill matches after catalog inspection, proceed without a skill and state that no relevant skill was found.
+Autonomous agents operating in this repository MUST adhere to the core loading protocols
+and execution logic defined in [AGENTS-RUNTIME.md](AGENTS-RUNTIME.md).
 
-**Maintenance invariant**:
+## Multi-Repository Architecture & Git Isolation
 
-- After every complex task completion or troubleshooting victory,
-  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
-- On recurring failure, immediately re-evaluate
-  and update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
-- On discovery of superior workaround, new efficiency primitive, or explicit user directive,
-  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
-- On detection of ambiguous steps or unclear instructions,
-  immediately update the nearest relevant AGENTS.md, AGENTS.mmd, or SKILL.md.
+- **Directory Boundaries**:
+  In consumer repositories where these agents are deployed (following the
+  [setup instructions](README.md#installation) to install the required agents),
+  `.github/agents/`, `.github/skills/`, and `.github/instructions/`
+  are typically cloned as separate external repositories or git submodules.
+  They are NOT standard native subdirectories of the root repository.
+- **Git Context Switching**:
+  When an agent performs modifications inside the root repository, and simultaneously
+  modifies files inside one of these `.github/*` directories, they must be aware that they are touching
+  separate `.git` instances.
+- **Strict Prohibition**:
+  NEVER attempt to run `git add`, `git commit`, or `git mv` from the root workspace
+  to track changes in these subdirectories, as that will fail or corrupt the repository boundaries.
+  All git operations must be correctly scoped (e.g. `cd .github/skills && git ...`) or entirely omitted
+  (delegated to the user based on the interactive-editor protocol in `copilot-instructions.md`).
 
-**Creation / Update Triggers (Hard Gate)**:
+## Subagent Delegation
 
-- Agent-focused guidance that materially compresses cognitive load or failure surface.
-- Resolution of recurring task failures or repeated edge-case collapses.
-- Discovery of dense, reusable execution primitives during development or debugging.
-- User injects new rules, exemplars, or feedback intended for persistent agent memory.
-- Existing documentation entropy exceeds threshold, then extract & prune to peak-density form.
-- Functionality requires domain-specific knowledge that must survive context windows.
+- **Spawning Sub-agents**:
+  If subagent delegation is enabled in the runtime, agents are encouraged to spawn new
+  sub-agents to handle complex, multi-step, or parallelizable tasks.
+  This promotes modular problem-solving and efficient resource utilization.
 
-**Hardened NEVER List**:
+## Architecture Principles: Agents vs Skills vs Instructions
 
-- NEVER embed one-time discoveries or transient hacks.
-- NEVER duplicate code-level comments or obvious steps.
-- NEVER hardcode environment-specific values; use generic placeholders with explicit semantics.
-- NEVER include beginner exposition or obvious statements.
-- NEVER bloat with prose; enforce one-liner density + imperative syntax only.
-- If guidance is purely disciplinary, route to dedicated `SKILL.md` instead.
+To prevent redundancy and context drift, always enforce a strict conceptual boundary when authoring system components:
 
-**Writing invariants (Prodigy-Level)**:
+1. **Agents (`*.agent.md`) - The "Who" and "Why"**:
+   - **Focus**:
+     Persona, invariants, cognitive framework, escalation gates, and output constraints.
+   - **Rule**:
+     Do not embed explicit execution tutorials or command-by-command scripts here.
+     Instruct the agent *who* they are, *what* constraints they must obey (e.g. "Never mutate files directly"),
+     and explicitly tell them to invoke specific skills for mechanical processes.
 
-- Assume ninja-level proficiency across project spectrum.
-- Embed quantitative gates (+20% fidelity delta, <1h MTTR analog, zero ambiguity).
-- Every bullet carries measurable payload: role, then invariants, then context, then exemplars, then schema, then NEVER/MUST-NOT,
-  then verification loops.
-- Favor tables, checklists, and contract-style boundaries over linear text.
-- Zero scaffolding. Maximal information-theoretic density. Surgical imperative syntax.
+2. **Skills (`SKILL.md`) - The "How" (Execution Playbooks)**:
+   - **Focus**:
+     Tools, commands, step-by-step procedures, and mechanical execution.
+   - **Rule**:
+     Isolates the exact `bash`, `gh`, or API mechanics.
+     A skill is agnostic to *who* uses it.
+     It exists strictly to define *how* an audit, a build, or a commit sync is correctly executed.
 
-## Core Agent Execution Protocol (Mandatory for All Forks)
-
-**Pre-execution reverse-prompting activation**:
-
-- **CI/CD Failure Escalation**: When CI/CD pipelines or automated checks fail, do NOT immediately
-  patch local configuration files or create suppressions to hide errors. Investigate the execution
-  environment and upstream dependencies. If the root cause originates outside the repository scope,
-  state the required upstream fix clearly and halt rather than introducing local entropy.
-- Read, assimilate, and strictly enforce the invariants defined in the main `AGENTS.md`,
-  along with any directory-specific `AGENTS.md` and `AGENTS.mmd` (if it exists, containing
-  supplemental project diagrams, flows, and the booting sequence), related files,
-  `.github/copilot-instructions.md`,
-  and autonomously load any relevant `.instructions.md` rules, `FACTS.mmd` context,
-  or `SKILL.md` workflows before formulating a strategy.
-- Declare required inputs, missing context, edge cases, and optimal strategy before any tool invocation or code delta.
-- Snapshot current problem state in one entropy-minimized sentence.
-- Enumerate risks against classic-mistakes matrix and Top-10 Risks List.
-- Apply noise-pruning filter + single-variable delta rule for all experiments.
-- Complete the Mandatory Skill Loading Protocol, then load the highest-confidence relevant `SKILL.md` files before execution.
-
-**Strategic vs tactical default**:
-
-- Always default to strategic programming (Ousterhout).
-- Invest 10-20% per cycle in design/refactoring for long-term velocity.
-- Tactical tornadoes trigger immediate rollback + root-cause ablation.
-
-**Complexity annihilation primitives** (apply at every layer):
-
-- Design-it-twice mandate on non-trivial decisions.
-- Divide-and-conquer + controlled simplification.
-- DRY + Boy Scout Rule + Rule-of-Three on every duplication smell.
-- Information hiding / deep modules over shallow pass-throughs.
-- Pull complexity downwards; define errors out of existence where possible.
-- Refactor mercilessly via Fowler catalog before feature addition.
-
-**Verification scaffold (Neurosymbolic)**:
-
-- Chain-of-Verification (CoV) + self-consistency majority vote on every output.
-- Unit, then integration, then system regression sequence before any merge.
-- Minimal reproducible example builder for every failure isolation.
-- Trust-but-verify: replace every assumption with logs/assertions/runtime inspection.
-- Post-action: blameless root-cause ablation + lesson injection into persistent memory.
-
-**Debug & Troubleshooting Engine**:
-
-- Stabilize, then reproduce, then isolate via divide-and-conquer + single-variable delta.
-- Never patch symptoms; fix root via 5-Whys until systemic.
-- Instrument targeted breakpoints; prune non-contributory variables first.
-- Maintain runbooks for recurring failure signatures.
-
-**Orchestration Models** (select via task cardinality):
-
-- **Fork**: byte-identical context clone for bounded subtasks.
-- **Teammate**: persistent peer with isolated tools/memory.
-- **Worktree**: fully parallel independent streams with fork-join synchronization.
-
-**Termination invariants**:
-
-- All TODOs empirically verified.
-- Quality, security, performance gates satisfied.
-- User objective resolved at target fidelity (+20% over prior baseline).
-- AGENTS.md/AGENTS.mmd/SKILL.md updated if new reusable primitive discovered.
-
-## GitHub Actions Runtime
-
-When executing autonomously within a GitHub Actions environment, adhere strictly to these
-interaction constraints:
-
-### OpenCode PR Context & Response Routing
-
-**Context & Targeting Invariants**:
-
-- **Extract Context**: Parse the `## Pull Request Context` block containing `**Base Branch:**` dynamically.
-- **Dynamic PR Targeting**: ALWAYS target this explicitly provided **Base Branch** when creating/updating PRs.
-
-**Response Detection & Routing**:
-Check `github.event_name` and payload to identify trigger source:
-
-- **General PR comment** (`issue_comment`):
-  - Condition: `if: ${{ github.event.issue.pull_request }}`
-  - Reply Method: `gh pr comment`
-- **Issue comment** (`issue_comment`):
-  - Condition: `if: ${{ !github.event.issue.pull_request }}`
-  - Reply Method: `gh issue comment`
-- **Inline code review** (`pull_request_review_comment`):
-  - Reply Method: `gh api repos/{owner}/{repo}/pulls/{pr}/comments/{comment_id}/replies -f body="..."`
-
-**Routing Invariants**:
-
-- **Symmetric Routing**: ALWAYS reply via the exact originating channel. NEVER cross threads.
-- Parse `github.event.comment.id` and `in_reply_to_id` to maintain thread continuity.
-
-### Branch Sync Policy (No Rebase During Runtime)
-
-When the prompt asks to "pull" or "sync with base" in GitHub Actions runtime,
-the agent MUST integrate remote changes with a merge commit workflow.
-
-- **MUST NOT** run any rebase-based update command during runtime.
-- **FORBIDDEN**: `gh pr update-branch --rebase`, `git pull --rebase`,
-  `git rebase`, or any history rewrite that changes commit SHAs.
-- **MUST** use pull-with-merge semantics: `git pull --no-rebase`.
-- **MUST** preserve remote branch compatibility for post-run auto PR/push logic.
-
-**Execution Steps (strict order)**:
-
-1. Determine PR base/head from context (`## Pull Request Context`, `gh pr view`).
-2. Ensure work is on the PR head branch (not detached HEAD).
-3. Sync head branch from remote with merge semantics:
-   `git pull --no-rebase origin <head-branch>`.
-4. If base changes must be integrated into head, merge base explicitly:
-   `git fetch origin <base-branch> && git merge --no-ff origin/<base-branch>`.
-5. Resolve conflicts, commit merge if required, then push normally (no force).
-
-**Verification Gate (required before push)**:
-
-- Confirm no rebase command was executed in this run.
-- Confirm `git log --oneline --graph -n 10` shows merge topology
-  (no rewritten linearized history from rebase).
-- Proceed with normal `git push` only after these checks pass.
-
-### General Constraints
-
-- **Contextual Continuity**: Maintain conversation context within the originating thread.
-- If replying to an inline comment, your response MUST appear as a reply in that same thread.
-
-### GitHub Runtime Decision Policy
-
-- **Default to Best Practice:** Implement the most recommended path autonomously when multiple options exist.
-- **Document Trade-offs:** Capture unresolved decisions, explicit options, and impacts in the PR description.
-- **Never Stall:** Proceed immediately with safe defaults. Request preference feedback in the PR instead of waiting.
-- **Report Defensively:** Present recommended option first; list alternatives only if they alter scope or risk.
+3. **Instructions (`*.instructions.md`) - The "Rules" (Domain Standards)**:
+   - **Focus**:
+     Formatting standards, coding conventions, and structural rules (e.g. JSON schema, Python dependencies).
+   - **Rule**:
+     Applied dynamically based on the file-type or project paths being modified.
+     They govern the output structure regardless of which agent or skill generated it.
 
 ## Required References
 
-- Project overview & install: [README.md](README.md)
-- Agent configuration & conventions: [.github/copilot-instructions.md](.github/copilot-instructions.md)
-- Workflow navigation: [.tours/getting-started.tour](.tours/getting-started.tour)
-- Latest org baseline: <https://github.com/Cogni-AI-OU/.github/blob/main/AGENTS.md>
+- **Project overview & install**:
+  [README.md](README.md)
+- **Agent configuration & conventions**:
+  [.github/copilot-instructions.md](.github/copilot-instructions.md)
+- **Workflow navigation**:
+  [.tours/getting-started.tour](.tours/getting-started.tour)
+- **Latest org baseline**:
+  <https://github.com/Cogni-AI-OU/.github/blob/main/AGENTS.md>
 
 ## Example Structure for New/Updated AGENTS.md Files
 
@@ -261,171 +184,11 @@ the agent MUST integrate remote changes with a merge commit workflow.
 - Inject full content into every sub-agent context.
 - For latest version see:
   <https://github.com/Cogni-AI-OU/.github/blob/main/AGENTS.md>
-- For latest standard see: <https://agents.md/>
+- For latest standard see:
+  <https://agents.md/>
 
-
-## Common Tasks
-
-### Before each commit
-
-- Verify your expected changes with `git diff --no-color`.
-- Ensure no temporary, dummy, or unrelated test files are included in the commit.
-- Use the project linting/validation tools to confirm your changes meet the coding standard.
-- If the repo uses git hooks, run them to validate your changes.
-
-### Linting and Validation
-
-```bash
-# Run all pre-commit checks
-pre-commit run -a
-
-# Run specific checks
-pre-commit run markdownlint -a
-pre-commit run yamllint -a
-```
-
-### File operations
-
-### Editing files
-
-- When modifying or creating documentation and plain text files, always enforce line-wrapping and length
-  limits in accordance with project-defined standards (such as `.markdownlint.yaml` or `.editorconfig`).
-
-### Editing files with ex
-
-- While files should normally be edited directly via MCP tools, `ex` (Vim in Ex mode) provides powerful
-  non-interactive text manipulation directly from the terminal shell.
-- Use `ex` when it is more beneficial to manipulate text programmatically, such as rapidly wrapping long lines,
-  performing complex regex parsing, or safely editing a few lines in-place within an automated script context.
-  It is especially useful for large files where patching the whole file via MCP could take a lot of context
-  processing for simple changes.
-- For detailed commands and examples, see `.github/skills/vim-ex/SKILL.md`.
-
-### Renaming/removing files
-
-- Use `git mv`, `git rm`, or equivalent Git-aware tooling (instead of `mv` or `rm`) to preserve history
-  when working with files under source control.
-
-## Feature-specific Notes
-
-### opencode
-
-OpenCode (if installed), it uses XDG base directories (not a single `~/.opencode` dir):
-
-| Directory                 | Purpose                                                |
-| ------------------------- | ------------------------------------------------------ |
-| `~/.local/share/opencode` | Data **and** auth credentials (`auth.json` lives here) |
-| `~/.config/opencode`      | User configuration (`opencode.json`/`opencode.jsonc`)  |
-| `~/.cache/opencode`       | Ephemeral binary cache - not worth persisting          |
-| `~/.local/state/opencode` | Runtime state - not worth persisting                   |
-
-## Tooling
-
-- Use MCP when possible.
-- Use `pre-commit` for linting and validation if installed.
-- For dumping links use `links -dump` if installed.
-
-### Understanding the Task
-
-- When the task is not clear, look for additional context.
-- If triggered by a brief comment, check whether the parent comment exists and includes more detail.
-- If it's still ambiguous, communicate with the user and propose options.
-
-### Testing
-
-```bash
-# Run Molecule tests
-molecule test
-
-# Syntax check
-molecule syntax
-```
-
-### Adding or Modifying Workflows
-
-- Workflows in `.github/workflows/` can be reused via `workflow_call`
-- Test workflow changes on a feature branch before merging to main
-- Use `actionlint` to validate workflow syntax locally
-
-### Updating Coding Standards
-
-- Update `.markdownlint.yaml`, `.yamllint`, or `.editorconfig` for linting rules
-- Run `pre-commit run -a` to verify changes pass all checks
-
-## Integrating Changes from Target Branch
-
-Recommended way is to use the **cherry-pick workflow** to rebase your commits
-on top of the updated target branch:
-
-1. Identify your feature commits
-2. Fetch the latest target branch
-3. Reset your branch to target (with backup)
-4. Cherry-pick your feature commits
-5. Verify only your changes remain
-
-**For detailed step-by-step instructions with commands**, see:
-`.github/skills/git/SKILL.md`
-
-### Key Points
-
-- **Never** use `git merge <target-branch>` for branch integration
-- **Always** create backup tags before destructive operations
-- **Always** verify with `git diff` that only your changes remain
-- **Use** `GIT_EDITOR=true` for non-interactive cherry-pick operations
-
-### Using `report_progress` Tool
-
-**WARNING**: The `report_progress` tool automatically rebases your branch against the remote
-tracking branch. This **WILL CRASH** the session if your local history has diverged from remote.
-
-**When Crash Occurs:**
-
-After using `git reset --hard` to rewrite history, your local branch diverges from remote. When `report_progress`
-tries to auto-rebase (e.g., 113 commits), it encounters conflicts it cannot resolve, crashing the session.
-
-**Prevention (Choose One):**
-
-1. **Use new branch name** after rewriting history: `git checkout -b <feature>-v2` (safest)
-2. **Complete git operations manually**, then ask user for manual push (never call `report_progress` after `git reset --hard`)
-
-**If Already Crashed:**
-
-1. Run `git rebase --abort`
-2. Create new branch: `git checkout -b <feature>-v2`
-3. Push new branch: `git push origin <feature>-v2`
-
-**Error Patterns:** `Rebasing (1/XXX)` with large numbers, `CONFLICT (content)`, session crash with `GitError`
-
-**For complete details**, see:
-`.github/skills/git/SKILL.md` - "Working with Automation Tools"
 
 ## References
 
-- Main documentation: [README.md](README.md)
-
-## Troubleshooting
-
-### GitHub Build issues
-
-- Use `gh` command to interact with GitHub resources. For example:
-
-  - `gh run list --limit 3` to list recent builds.
-  - `gh run view {ID} --log | rg -iw "failed|error|exit"` to look for build errors.
-
-### Firewall issues
-
-If you encounter firewall issues when using the GitHub Copilot Agent:
-
-- Refer to <https://gh.io/copilot/firewall-config> for configuration details.
-- Do not workaround blocked URLs by adding markdown-link-check ignore/whitelist patterns for real links.
-- Keep markdown-link-check validating real links, and request firewall allowlisting instead.
-- If you need to allowlist additional hosts, update your firewall configuration accordingly
-  by following `FIREWALL.md` and keep that file up to date.
-
-### Linting issues
-
-If Copilot or automated checks behave unexpectedly:
-
-- Re-run `pre-commit run -a` locally to surface formatting or linting issues.
-- Verify `.markdownlint.yaml` and `.yamllint` have not been modified incorrectly.
-- If problems persist, open an issue with details of the command run and any error output.
+- **Main documentation**:
+  [README.md](README.md)

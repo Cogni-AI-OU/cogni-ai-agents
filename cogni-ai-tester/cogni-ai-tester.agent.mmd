@@ -3,8 +3,8 @@ flowchart TD
 
     subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        B1["1- AGENTS.md Contract Alignment"]
-        B2["2- Facts, Constraints, Instructions, & Skills"]
+        B1["1- Agent Contract Alignment"] --> B2
+        B2["2- Skill & Instruction Loading"]
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
@@ -15,45 +15,40 @@ flowchart TD
         SL8 --> B3
     end
 
-    subgraph LOCAL_CONTRACT [weaver.agent.md: Local Framework]
-        B4["4- Store Discovery"]
-        B5["5- Schema Validation"]
-        B6["6- Contradiction & Integrity Scan"]
-        B7["7- Provenance Audit"]
-        B8["8- Emit Boot Report"]
-        Idle{"9- Await Invocation"}
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
 
-        Idle -->|Weaver verb: payload| Input[Parse Invocation]
+    subgraph LOCAL_CONTRACT [tester.agent.md: Local Framework]
+        B4["4- Context Verification"]
+        B5["5- Emit Boot Report"]
+        B5 --> Idle
+        Idle{"6- Await Testing Target"}
 
-        Input --> PreGate{"Pre-Flight Checklist Valid?"}
+        Idle -->|Code/Feature Input| Phase0[Phase 0: Pre-Execution Audit]
 
-        Operation[Route to Specific Contract Verb]
+        Phase0 --> T_Audit["Adversarial Testability Review"]
+        T_Audit -->|Fail| RefactorReq["Reject: Code Not Testable"]
+        T_Audit -->|Pass| Phase1[Phase 1: Test-Driven Lifecycle]
 
-        Operation -->|Mutating Verbs| O1("ingest | update")
-        Operation -->|Read-Only Verbs| O2("query | export | verify")
+        RefactorReq --> Phase3
 
-        O1 --> Mutate[Apply Delta / Weave Flow]
-        Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
+        Phase1 --> TDD_Red["1. Assert the Gap (Write Failing Test)"]
+        TDD_Red --> TDD_Dim["2. Dimensional Scaling (Scale Boundaries/Errors)"]
+        TDD_Dim --> TDD_Exec{"Execute Test Suite"}
 
-        PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
-        Rollback --> EmitError["Emit: STATUS: ERROR"]
-        EmitError --> Finalize
+        TDD_Exec -->|Passes Intentionally| TDD_Green["3. Resolve the Gap (Green)"]
+        TDD_Exec -->|Fails/Flaky| Signal["Signal Extraction & Flakiness Eradication"]
+        Signal --> TDD_Exec
 
-        PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
-        Commit --> IntegrityCheck{"Anomalies Detected? (Cycles, Dangling, Inversions)"}
+        TDD_Green --> Phase2[Phase 2: Quality & Security Gates]
 
-        IntegrityCheck -->|Yes| Quarantine["Flag / Quarantine Elements"]
-        Quarantine --> Report["Emit [ANOMALY]_REPORT"]
-        Report --> Finalize
+        Phase2 --> Q_Mock["Boundary Mocking Verification"]
+        Q_Mock --> Q_Iso["Non-Destructive Isolation Check"]
+        Q_Iso --> Q_Cov["Behavior vs Coverage Check"]
 
-        IntegrityCheck -->|No| Entropy["Entropy Pruning Pass"]
-        Entropy --> Finalize
-
-        O2 --> ReadOnly[Execute Read/Export/Verify Operation]
-        ReadOnly --> Finalize
-
-        Finalize[Format against Rigid Output Schema]
-        Finalize --> Output["Emit: WEAVER RESPONSE"]
+        Q_Cov --> Phase3[Phase 3: Output & Closure]
+        Phase3 --> Finalize["Format Trace & Summarize Permutations"]
+        Finalize --> Output["Finalize Test Engineering Action"]
     end
 
     subgraph GLOBAL_PROTOCOLS [Global Protocols: AGENTS.mmd & docs/FLOWS.mmd]
@@ -117,46 +112,29 @@ flowchart TD
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
     end
 
-    Boot --> B1
-    B1 --> B2
-    B3 -->|Yes| B4
-    B4 --> B5
-    B5 --> B6
-    B6 --> B7
-    B7 --> B8
-    B8 --> Idle
+    Output --> End([Objective Complete])
 
-    PreGate -->|No| Reject["Reject: INVOCATION_ERROR"]
-    Reject --> Idle
-
-    PreGate -->|Yes| TL
-    TL -->|Green: Autonomous| Operation
+    Phase1 --> TL
+    TL -->|Green: Autonomous| Phase2
     TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
-    Escalate -->|User Input Received| Operation
-    EscalateGate -->|No| Operation
+    Escalate -->|User Input Received| Phase1
+    EscalateGate -->|No| Phase2
 
-    Output --> Idle
-
-    subgraph Invariants ["Primary Invariants (Crash-Early)"]
+    subgraph Invariants ["Testing Invariants"]
         direction TB
-        I1["Single Source of Truth"]
-        I2["Provenance-Bearing Elements"]
-        I3["Zero-Hallucination Mandate"]
-        I4["Contradiction Transparency"]
-        I5["Rigid Output Schema"]
-        I6["Orthogonality (Own Dynamic Flows, Not Static Facts)"]
-        I7["Reversibility via VCS"]
-        I8["Entropy Pruning"]
+        I1["Genuine Falsifiability (Tests Must Fail First)"]
+        I2["Behavior Over Implementation"]
+        I3["Boundary Mocking Constraint"]
+        I4["Realistic Data Modeling"]
+        I5["Non-Destructive Execution"]
     end
 
-    Input -.->|governed by| I5
-    Mutate -.->|governed by| I1
-    Mutate -.->|governed by| I2
-    PostGate -.->|governed by| I7
-    Quarantine -.->|governed by| I4
-    Output -.->|governed by| I3
-    Entropy -.->|governed by| I8
+    TDD_Red -.->|governed by| I1
+    Q_Cov -.->|governed by| I2
+    Q_Mock -.->|governed by| I3
+    TDD_Dim -.->|governed by| I4
+    Q_Iso -.->|governed by| I5
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -164,11 +142,10 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-
-    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5,B6,B7,B8 phaseNode
+    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a phaseNode
     class FL2,CL2,IL2,SL2,SL4,B3 gateNode
-    class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly phaseNode
-    class Idle,PreGate,PostGate,IntegrityCheck,TL,EscalateGate gateNode
-    class Reject,Rollback,Commit,EmitError,Quarantine,Report,Escalate checkNode
-    class Start,Output endNode
-    class I1,I2,I3,I4,I5,I6,I7,I8 guardNode
+    class Boot,Phase0,Phase1,Phase2,Phase3,Finalize,B4,B5 phaseNode
+    class Idle,T_Audit,TDD_Exec,TL,EscalateGate gateNode
+    class TDD_Red,TDD_Dim,TDD_Green,Signal,Q_Mock,Q_Iso,Q_Cov,RefactorReq,Escalate checkNode
+    class Start,End,Output endNode
+    class I1,I2,I3,I4,I5 guardNode

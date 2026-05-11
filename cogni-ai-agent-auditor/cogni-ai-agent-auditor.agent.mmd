@@ -3,8 +3,8 @@ flowchart TD
 
     subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
         direction TB
-        B1["1- AGENTS.md Contract Alignment"]
-        B2["2- Facts, Constraints, Instructions, & Skills"]
+        B1["1- Agent Contract Alignment"] --> B2
+        B2["2- Skill & Instruction Loading"]
         B3{"3- Submodules Initialized?"}
         B3 -->|No| B3a["git submodule update --init"]
         B3a --> B2
@@ -15,45 +15,59 @@ flowchart TD
         SL8 --> B3
     end
 
-    subgraph LOCAL_CONTRACT [weaver.agent.md: Local Framework]
-        B4["4- Store Discovery"]
-        B5["5- Schema Validation"]
-        B6["6- Contradiction & Integrity Scan"]
-        B7["7- Provenance Audit"]
-        B8["8- Emit Boot Report"]
-        Idle{"9- Await Invocation"}
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
 
-        Idle -->|Weaver verb: payload| Input[Parse Invocation]
+    subgraph LOCAL_CONTRACT [agent-auditor.agent.md: Local Framework]
+        B4["4- Context Verification"]
+        B5["5- Emit Boot Report"]
+        B5 --> Idle
+        Idle{"6- Await Session Logs"}
 
-        Input --> PreGate{"Pre-Flight Checklist Valid?"}
+        Idle -->|Log Intake| Input[Parse Raw Session Logs]
 
-        Operation[Route to Specific Contract Verb]
+        Input --> Rules{"Relevant Rules Found?"}
+        Rules -->|No| Generic[Load Base Audit Standards]
+        Rules -->|Yes| Specific[Load Context-Specific Audit Instructions]
 
-        Operation -->|Mutating Verbs| O1("ingest | update")
-        Operation -->|Read-Only Verbs| O2("query | export | verify")
+        Generic & Specific --> Scope[Phase 0: Investigation & Scope Alignment]
 
-        O1 --> Mutate[Apply Delta / Weave Flow]
-        Mutate --> PostGate{"Post-Execution Checklist Valid? (CoV, Syntax)"}
+        Scope --> TaskTargeting[Task Targeting: Identify Primary Intent]
+        TaskTargeting --> Phase1[Phase 1: Deep Protocol Analysis]
 
-        PostGate -->|No| Rollback["Atomic Rollback (Rollback)"]
-        Rollback --> EmitError["Emit: STATUS: ERROR"]
-        EmitError --> Finalize
+        subgraph Analysis_Dimensions [Mandatory Audit Dimensions]
+            direction TB
+            D1["Task Adherence"]
+            D2["Workflow Compliance"]
+            D3["Tool Selection & Context Gathering"]
+            D4["Self-Verification"]
+            D5["Root Cause Analysis"]
+        end
 
-        PostGate -->|Yes| Commit["Atomic Commit (VCS)"]
-        Commit --> IntegrityCheck{"Anomalies Detected? (Cycles, Dangling, Inversions)"}
+        Phase1 --> Analysis_Dimensions
 
-        IntegrityCheck -->|Yes| Quarantine["Flag / Quarantine Elements"]
-        Quarantine --> Report["Emit [ANOMALY]_REPORT"]
-        Report --> Finalize
+        Analysis_Dimensions --> Friction{"Friction or Errors Detected?"}
 
-        IntegrityCheck -->|No| Entropy["Entropy Pruning Pass"]
-        Entropy --> Finalize
+        Friction -->|Yes| FailureTrace[Map Error Trajectory & Root Cause]
+        Friction -->|No| SuccessTrace[Map Positive Execution Path]
 
-        O2 --> ReadOnly[Execute Read/Export/Verify Operation]
-        ReadOnly --> Finalize
+        FailureTrace & SuccessTrace --> Phase2[Phase 2: Synthesis & Feedback Generation]
 
-        Finalize[Format against Rigid Output Schema]
-        Finalize --> Output["Emit: WEAVER RESPONSE"]
+        subgraph Visual_Audit_Suite [Comprehensive Visual Audit Suite]
+            direction TB
+            V1["Markdown Text Report"]
+            V2["Radar-Beta Diagram"]
+            V3["Sequence Diagram"]
+            V4["StateDiagram-v2"]
+            V5["Journey Map"]
+            V6["Venn-Beta Diagram"]
+            V7["Ishikawa / Architecture Beta (if errors)"]
+        end
+
+        Phase2 --> Visual_Audit_Suite
+
+        Visual_Audit_Suite --> Finalize[Log Meta-Analysis for Telemetry]
+        Finalize --> Output["Finalize Audit Report"]
     end
 
     subgraph GLOBAL_PROTOCOLS [Global Protocols: AGENTS.mmd & docs/FLOWS.mmd]
@@ -117,46 +131,27 @@ flowchart TD
         EE1 & EE2 & EE3 & EE4 & EE5 & EE6 & EE7 & EE8 & EE9 & EE10 --> Escalate[Extrinsic Escalation: 10-Point Gate]
     end
 
-    Boot --> B1
-    B1 --> B2
-    B3 -->|Yes| B4
-    B4 --> B5
-    B5 --> B6
-    B6 --> B7
-    B7 --> B8
-    B8 --> Idle
+    Output --> End([Objective Complete])
 
-    PreGate -->|No| Reject["Reject: INVOCATION_ERROR"]
-    Reject --> Idle
-
-    PreGate -->|Yes| TL
-    TL -->|Green: Autonomous| Operation
+    Phase1 --> TL
+    TL -->|Green: Autonomous| Phase2
     TL -->|Yellow: Collaborative| EscalateGate{Escalation Required?}
     EscalateGate -->|Yes| EE_Trig
-    Escalate -->|User Input Received| Operation
-    EscalateGate -->|No| Operation
+    Escalate -->|User Input Received| Phase2
+    EscalateGate -->|No| Phase2
 
-    Output --> Idle
-
-    subgraph Invariants ["Primary Invariants (Crash-Early)"]
+    subgraph Guardrails [Agent Auditor Continuous Guardrails]
         direction TB
-        I1["Single Source of Truth"]
-        I2["Provenance-Bearing Elements"]
-        I3["Zero-Hallucination Mandate"]
-        I4["Contradiction Transparency"]
-        I5["Rigid Output Schema"]
-        I6["Orthogonality (Own Dynamic Flows, Not Static Facts)"]
-        I7["Reversibility via VCS"]
-        I8["Entropy Pruning"]
+        G1[Objective Telemetry: No Hallucination]
+        G2[Strict Template Compliance: Agent Log Analysis Skill]
+        G3[Root Cause Validation]
+        G4[Protocol Enforcement]
     end
 
-    Input -.->|governed by| I5
-    Mutate -.->|governed by| I1
-    Mutate -.->|governed by| I2
-    PostGate -.->|governed by| I7
-    Quarantine -.->|governed by| I4
-    Output -.->|governed by| I3
-    Entropy -.->|governed by| I8
+    Phase0 -.->|governed by| G1
+    Visual_Audit_Suite -.->|governed by| G2
+    FailureTrace -.->|governed by| G3
+    D2 -.->|governed by| G4
 
     classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
     classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
@@ -164,11 +159,8 @@ flowchart TD
     classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
     classDef guardNode fill:#3a2a4a,stroke:#a070c0,stroke-width:1px,color:#eee
 
-
-    class FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5,B6,B7,B8 phaseNode
-    class FL2,CL2,IL2,SL2,SL4,B3 gateNode
-    class Boot,Operation,Finalize,Mutate,Entropy,ReadOnly phaseNode
-    class Idle,PreGate,PostGate,IntegrityCheck,TL,EscalateGate gateNode
-    class Reject,Rollback,Commit,EmitError,Quarantine,Report,Escalate checkNode
-    class Start,Output endNode
-    class I1,I2,I3,I4,I5,I6,I7,I8 guardNode
+    class Phase0,Phase1,Phase2,TaskTargeting,Scope,Input,Boot,FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL6,SL7,SL8,B1,B2,B3a,B4,B5 phaseNode
+    class Rules,Friction,TL,EscalateGate,B3,FL2,CL2,IL2,SL2,SL4 gateNode
+    class FailureTrace,SuccessTrace,Generic,Specific,Escalate checkNode
+    class Start,End,Output endNode
+    class G1,G2,G3,G4 guardNode

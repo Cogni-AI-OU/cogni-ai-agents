@@ -6,6 +6,7 @@ gh
 git
 links
 mawk
+minizinc
 sed
 time
 vim

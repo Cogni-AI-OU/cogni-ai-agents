@@ -1,0 +1,107 @@
+flowchart TD
+    Start([Activation]) --> Boot[Initialization Sequence]
+
+    subgraph GLOBAL_AGENTS_md [AGENTS.md: Global Contract]
+        direction TB
+        B1["1- AGENTS.md Contract Alignment"]
+        B2["2- Facts, Constraints, Instructions, & Skills"]
+        B3{"3- Submodules Initialized?"}
+        B3 -->|No| B3a["git submodule update --init"]
+        B3 -->|Yes| B4
+        B3a --> B2
+        B2 --> FL1
+        FL6 --> CL1
+        CL6 --> IL1
+        IL6 --> SL1
+        SL8 --> B3
+    end
+
+    Boot --> GLOBAL_AGENTS_md
+    GLOBAL_AGENTS_md --> B4
+
+    subgraph LOCAL_CONTRACT [docs-editor.agent.md: Local Framework]
+        B4["4- Context Verification"]
+        B5["5- Skills Initialization"]
+        B6["6- Cross-Reference Documentation"]
+
+        B4 --> B5
+        B5 --> B6
+
+        B6 --> Phase1[Phase 1: Task Intake & Auditing]
+
+        Phase1 --> P1a[Load Docs-Review Skill]
+        P1a --> P1b[Read Architectural Schemas (*.mmd, *.mzn)]
+        P1b --> P1c[Read Documentation Definitions (AGENTS.md, README.md)]
+        P1c --> P1d[Detect Discrepancies or Stale Rules]
+
+        P1d --> DiscrepancyFound{Discrepancies Found?}
+
+        DiscrepancyFound -->|Yes| Phase2[Phase 2: Minimal Mutation]
+        DiscrepancyFound -->|No| Phase3[Phase 3: Final Reporting]
+
+        Phase2 --> P2a[Formulate Conservative Updates]
+        P2a --> P2b[Address Faults Directly]
+        P2b --> P2c[Review against Facts and Schemas]
+
+        P2c --> Verify{Fixes Valid?}
+        Verify -->|Yes| P2d[Apply Changes]
+        Verify -->|No| P2a
+
+        P2d --> Phase3
+
+        Phase3 --> P3a[Generate Edit Summary]
+        P3a --> P3b[Report Exact Files Patched]
+    end
+
+    subgraph GLOBAL_PROTOCOLS [Global Protocols: AGENTS.mmd & docs/FLOWS.mmd]
+        direction TB
+        TL{Traffic Light Classification}
+
+        subgraph Mandatory_Facts_Loading_Protocol
+            FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
+            FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
+            FL3 --> FL4[Inject Core Context into Working Memory]
+            FL2 -->|No| FL5[Proceed Without Canonical Facts]
+            FL4 --> FL6[Align Strategy with Project Facts]
+            FL5 --> FL6
+        end
+
+        subgraph Mandatory_Constraints_Loading_Protocol
+            CL1[Locate CONSTRAINTS.mzn in Repo] --> CL2{CONSTRAINTS.mzn Exists?}
+            CL2 -->|Yes| CL3[Parse Project Constraints & Invariants]
+            CL3 --> CL4[Inject Core Logic Context into Working Memory]
+            CL2 -->|No| CL5[Proceed Without Constraint Bounds]
+            CL4 --> CL6[Align Execution Bounds with Restrictions]
+            CL5 --> CL6
+        end
+
+        subgraph Mandatory_Instructions_Loading_Protocol
+            IL1[Scan Context for .instructions.md] --> IL2{Instructions Found?}
+            IL2 -->|Yes| IL3[Match Context to Instruction Scope]
+            IL3 --> IL4[Read Relevant .instructions.md Files]
+            IL2 -->|No| IL5[Proceed Without Domain Instructions]
+            IL4 --> IL6[Apply Instruction Rules to Execution]
+            IL5 --> IL6
+        end
+
+        subgraph Mandatory_Skill_Loading_Protocol
+            SL1[Check .github/skills/AGENTS.md] --> SL2{Skills Found?}
+            SL2 -->|Yes| SL3[Route Intent: Match Skill Name/Alias/Keyword]
+            SL2 -->|No| SL6_STOP([Stop & Report: docs-review Unavailable])
+            SL3 --> SL4{Multiple Matches?}
+            SL4 -->|Yes| SL5[Load Non-Overlapping or Most Specific]
+            SL4 -->|No| SL5
+            SL5 --> SL7[Read Best-Matching SKILL.md Files]
+            SL7 --> SL8[Proceed with Execution]
+        end
+    end
+
+    P3b --> End([Objective Complete])
+
+    classDef phaseNode fill:#1e3a5f,stroke:#4a90e2,stroke-width:2px,color:#fff
+    classDef gateNode fill:#5f1e1e,stroke:#e24a4a,stroke-width:2px,color:#fff
+    classDef endNode fill:#1e5f3a,stroke:#4ae290,stroke-width:2px,color:#fff
+
+    class Phase1,Phase2,Phase3,B1,B2,B3a,B4,B5,B6,FL1,FL3,FL4,FL5,FL6,CL1,CL3,CL4,CL5,CL6,IL1,IL3,IL4,IL5,IL6,SL1,SL3,SL5,SL7,SL8 phaseNode
+    class DiscrepancyFound,Verify,B3,FL2,CL2,IL2,SL2,SL4 gateNode
+    class Start,End,SL6_STOP endNode

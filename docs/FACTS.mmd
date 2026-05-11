@@ -4,12 +4,22 @@ mindmap
   root((Project Cogni AI Agents))
     Architecture
       Agents
+        Agent_Auditor::Log_Analysis
         Architect::Primary
+        Brain_Ops::Brainstorming
+        Code_Reviewer::Code_Review_And_Audit_Only
+        Context7_Ops::Documentation_Gathering
         DevOps::Site_Reliability
+        Docs_Editor::Documentation_Editor
         Elite::System_Architect
         Fact_Ops::Fact_Operator
+        GitHub_Ops::GitHub_Operator
         Keeper::Fact_Custody
-        Reviewer::Code_Review
+        Manager::Orchestration
+        Plan_Reviewer::Plan_Review
+        Python_Dev::Python_Development
+        Security_Auditor::Security_Validation
+        Tester::Test_Execution
         Weaver::Flow_Custody
       Memory
         Checkpoints::Task_Snapshots
@@ -21,6 +31,9 @@ mindmap
           Pull_With_Merge
         Mandatory_Skill_Loading
           Read_First::.github/skills/AGENTS.md
+        Subagent_Delegation
+          Encouraged::Complex_Tasks
+
     Context
       Clone_Path::.github/agents
       License::MIT
@@ -31,9 +44,9 @@ mindmap
       Purpose::Template_Repo
     Ecosystem
       Dependencies
-        PyYAML
         ansible
         molecule
+        PyYAML
         requests
         tabulate
         uv
