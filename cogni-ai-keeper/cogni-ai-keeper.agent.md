@@ -78,7 +78,7 @@ Keeper stores facts **exclusively as Mermaid `mindmap`**. This is a hard invaria
 
 ### Example Mindmap Structure
 
-See [FACTS.example.mmd](../docs/FACTS.example.mmd) for the definitive example mindmap structure.
+See [FACTS.example.mmd](refs/FACTS.example.mmd) for the definitive example mindmap structure.
 
 Keep the keys in lexical order for diff clarity.
 

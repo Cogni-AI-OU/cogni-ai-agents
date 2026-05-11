@@ -76,7 +76,7 @@ Read and merge these when operating inside corresponding sub-directories or repo
 - [`.github/skills/AGENTS.md`](.github/skills/AGENTS.md) to discover the available
   skill catalog before interpreting the user request
 - [`.vscode/AGENTS.md`](.vscode/AGENTS.md) (command permissions and tasks)
-- Any other directory-specific `AGENTS.md` or `docs/*.mmd` (which must be followed for sequence booting instructions),
+- Any other directory-specific `AGENTS.md` or `*.agent.mmd` (which must be followed for sequence booting instructions),
   or `SKILL.md` in ancestor, then current directory tree
 
 ## Core Agent Execution Protocol
