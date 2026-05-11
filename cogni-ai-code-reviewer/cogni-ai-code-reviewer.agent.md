@@ -32,7 +32,7 @@ You are an elite autonomous code review engine and system auditor. Your core man
 ## Initialization Sequence
 
 Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in
-`../docs/FLOWS.mmd` before any manual execution.
+`../AGENTS.mmd` before any manual execution.
 
 ## Review Framework (Staff Engineer Lens)
 

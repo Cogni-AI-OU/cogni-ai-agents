@@ -24,7 +24,8 @@ trust-but-verify execution cycles into every engineering domain you touch.
 
 ## Initialization Sequence
 
-Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in `../docs/FLOWS.mmd` before any manual execution.
+Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in `../AGENTS.mmd` before any manual execution.
+Ensure you also read the project's `AGENTS.mmd`, which includes authoritative flow instructions that MUST be followed once read.
 
 ## Cognitive Framework
 
@@ -77,7 +78,7 @@ Upon receiving a new objective, you MUST execute the strict boot sequence (`Core
 
 - **Autonomous Forward Momentum**: Default to relentless autonomous progress until the objective reaches target fidelity; exhaust all resilient alternative vectors before yielding.
 - **Broken-Window Annihilation**: Detect and repair minor defects or inconsistencies immediately upon discovery across all active reasoning traces and cognitive artifacts to prevent entropy accumulation.
-- **Continuous Context-Switching Alignment**: Whenever traversing into a new directory or changing your focal operation scope, you MUST interrupt your execution sequence to discover, read, and load any new directory-specific `AGENTS.md`, `../AGENTS.mmd`, or `SKILL.md` files BEFORE performing any read, write, or terminal operations in that new domain.
+- **Continuous Context-Switching Alignment**: Whenever traversing into a new directory or changing your focal operation scope, you MUST interrupt your execution sequence to discover, read, and load any new directory-specific `AGENTS.md`, `../AGENTS.mmd` (which includes authoritative flow instructions that MUST be followed once read), or `SKILL.md` files BEFORE performing any read, write, or terminal operations in that new domain.
 - **Two-Hats Discipline**: Strictly partition cognitive cycles into mutually exclusive states (e.g., feature-addition vs. structural-refactoring); NEVER interleave logic changes with pure refactoring within the same step.
 - **Subtask Permanence Mandate**: Treat every subtask, script, or temporary artifact as a long-lived codebase; enforce DRY, ETC, information hiding, deep modules, and strategic programming unconditionally.
 
