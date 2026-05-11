@@ -9,7 +9,7 @@ flowchart TD
         ADP3 --> ADP4["Sub-agent: Receive encapsulated context and task"]
         ADP4 --> ADP5["Sub-agent: Execute specialized operations (e.g., gh issue create)"]
         ADP5 --> ADP6["Sub-agent: Return results and artifacts to parent"]
-        ADP6 --> ADP7["Architect: Integrate results and update FACTS.mmd"]
+        ADP6 --> ADP7["Architect: Integrate results and update docs/FACTS.mmd"]
     end
 
     subgraph Command_Failure_Recovery_Protocol [Command Failure Recovery Protocol - Bounded Scheduler v3]
@@ -45,8 +45,8 @@ flowchart TD
     subgraph Core_Initialization_Sequence [Initialization Sequence]
         direction TB
         %% Note: FL6, IL6, CL6, and SL8 are the contractual terminal nodes relied on by this sequence
-        IS_FL["Execute Mandatory_Facts_Loading_Protocol (FACTS.mmd)"] --> FL1
-        FL6 --> IS1["Agent Contract Alignment (AGENTS.mmd, FLOWS.mmd)"]
+        IS_FL["Execute Mandatory_Facts_Loading_Protocol (docs/FACTS.mmd)"] --> FL1
+        FL6 --> IS1["Agent Contract Alignment (AGENTS.mmd, docs/FLOWS.mmd)"]
         IS1 --> IS_CL["Execute Mandatory_Constraints_Loading_Protocol (CONSTRAINTS.mzn)"]
         IS_CL --> CL1
         CL6 --> IS_AL["Agent Contract Alignment (Root AGENTS.md + Local AGENTS.md)"]
@@ -199,7 +199,7 @@ flowchart TD
     end
 
     subgraph Mandatory_Facts_Loading_Protocol
-        FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+        FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
         FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
         FL3 --> FL4[Inject Core Context into Working Memory]
         FL2 -->|No| FL5[Proceed Without Canonical Facts]

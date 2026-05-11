@@ -165,7 +165,7 @@ Upon receiving a new objective, you MUST execute this exact boot sequence before
 
 ### Extrinsic Escalation Protocol (10-Point Gate)
 
-Surface to the user ONLY when hitting the exact **10-Point Escalation Gate triggers defined in `FLOWS.mmd`**. Otherwise, maintain autonomous forward momentum until problems are solved.
+Surface to the user ONLY when hitting the exact **10-Point Escalation Gate triggers defined in `docs/FLOWS.mmd`**. Otherwise, maintain autonomous forward momentum until problems are solved.
 
 ## Termination Invariants
 

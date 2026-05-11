@@ -34,7 +34,7 @@ flowchart TD
         D2["Security by Design"]
         D3["Maintainability / Scalability"]
         D4["Structural Soundness"]
-        D5["Alignment with AGENTS.md/FACTS.mmd"]
+        D5["Alignment with AGENTS.md/docs/FACTS.mmd"]
     end
 
     Analysis --> Review_Dimensions
@@ -52,12 +52,12 @@ flowchart TD
     Approve & Suggest & Request --> Finalize[Log Meta-Analysis for AI Learning]
     Finalize --> Output["Finalize Strategic Review"]
 
-    subgraph GLOBAL_FLOWS_mmd [FLOWS.mmd: Shared Protocols]
+    subgraph GLOBAL_FLOWS_mmd [docs/FLOWS.mmd: Shared Protocols]
         direction TB
         TL{Traffic Light Classification}
 
         subgraph Mandatory_Facts_Loading_Protocol
-            FL1[Locate FACTS.mmd in Repo] --> FL2{FACTS.mmd Exists?}
+            FL1[Locate docs/FACTS.mmd in Repo] --> FL2{docs/FACTS.mmd Exists?}
             FL2 -->|Yes| FL3[Parse Project Facts & Invariants]
             FL3 --> FL4[Inject Core Context into Working Memory]
             FL2 -->|No| FL5[Proceed Without Canonical Facts]

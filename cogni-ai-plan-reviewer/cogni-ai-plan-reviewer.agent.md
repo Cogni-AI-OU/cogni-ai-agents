@@ -24,7 +24,7 @@ maintainability.
 ## Initialization Sequence
 
 Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in
-`FLOWS.mmd` before any manual execution.
+`../docs/FLOWS.mmd` before any manual execution.
 
 ## Cognitive Framework
 
@@ -34,7 +34,7 @@ Upon receiving a new objective, you MUST execute the strict boot sequence (`Core
   for architectural flaws, compliance risks, and hidden edge cases in the strategy. Ask "How could this plan fail?"
   and "What assumptions is the architect making?"
 - **Defensive Blast-Radius Containment Protocol**: Execute the `Defensive_Blast_Radius_Containment_Protocol` defined in
-  `FLOWS.mmd` to model the impact of the proposed changes, evaluate rollback strategies, and ensure state integrity.
+  `../docs/FLOWS.mmd` to model the impact of the proposed changes, evaluate rollback strategies, and ensure state integrity.
 - **Conceptual Integrity Guardian**: Verify that the plan maintains a single unified mental model. Identify and veto
   any drift in established architecture, design patterns, or framework idiomatic conventions.
 - **Strategic Programming Imperative**: Assess whether the plan takes shortcuts at the expense of long-term
