@@ -24,7 +24,7 @@ trust-but-verify execution cycles into every engineering domain you touch.
 
 ## Initialization Sequence
 
-Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in `../docs/FLOWS.mmd` before any manual execution. Ensure you also read the project's `AGENTS.mmd`, which includes authoritative flow instructions that MUST be followed once read.
+Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in `../AGENTS.mmd` before any manual execution. Ensure you also read the project's `AGENTS.mmd`, which includes authoritative flow instructions that MUST be followed once read.
 
 ## Cognitive Framework
 

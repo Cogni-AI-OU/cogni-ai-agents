@@ -87,7 +87,7 @@ pre-commit run flake8 -a
 - `cogni-ai-weaver/cogni-ai-weaver.agent.md`: canonical flow custody and diagram stewardship kernel
 - `AGENTS.md`: agents catalog and repository-specific guidance
 - `AGENTS-RUNTIME.md`: core loading protocols and execution logic for the GitHub Runtime
-- `AGENTS.mmd`: root canonical diagram, flows, and booting sequence visualizations
+- `AGENTS.mmd`: root canonical diagram, flows, and booting sequence visualizations (Initialization primary source)
 - `CONSTRAINTS.mzn`: formal constraint declarations (budgets, loop arrest, and guardrails)
 - `docs/FACTS.mmd`: root canonical fact store and project mindmap
 - `docs/FLOWS.mmd`: root canonical timelines, flows, and dependency graphs
@@ -122,10 +122,10 @@ into `.github/agents`, consumers receive them directly at
 | [cogni-ai-weaver/cogni-ai-weaver.agent.md](cogni-ai-weaver/cogni-ai-weaver.agent.md) | Weavers | Canonical Flow Custody & Diagram Stewardship Kernel |
 | [AGENTS.md](AGENTS.md) | All agents | Agents catalog and repository-specific guidance |
 | [AGENTS-RUNTIME.md](AGENTS-RUNTIME.md) | Runtime | Core loading protocols and execution logic |
-| [AGENTS.mmd](AGENTS.mmd) | Runtime | root canonical diagram, flows, and booting sequence visualizations |
+| [AGENTS.mmd](AGENTS.mmd) | Runtime | root canonical diagram, flows, and booting sequence visualizations (Initialization primary source) |
 | [CONSTRAINTS.mzn](CONSTRAINTS.mzn) | Runtime | formal constraint declarations (budgets, loop arrest, and guardrails) |
 | [docs/FACTS.mmd](docs/FACTS.mmd) | Fact Ops | root canonical fact store and project mindmap |
-| [docs/FLOWS.mmd](docs/FLOWS.mmd) | All agents | root canonical timelines, flows, and dependency graphs |
+| [docs/FLOWS.mmd](docs/FLOWS.mmd) | All agents | root canonical timelines, flows, and dependency graphs (Operational protocols) |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Copilot | Coding standards and project context |
 | [cogni-ai-architect/](cogni-ai-architect/) | Orchestrators | Local agent configs for this template repo |
 | [.github/skills/](.github/skills/) | All agents | Reusable capabilities (git, GitHub Actions, etc.) |

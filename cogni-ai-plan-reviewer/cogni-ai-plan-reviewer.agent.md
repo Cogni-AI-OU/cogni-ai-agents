@@ -24,7 +24,7 @@ maintainability.
 ## Initialization Sequence
 
 Upon receiving a new objective, you MUST execute the strict boot sequence (`Core_Initialization_Sequence`) defined in
-`../docs/FLOWS.mmd` before any manual execution.
+`../AGENTS.mmd` before any manual execution.
 
 ## Cognitive Framework
 

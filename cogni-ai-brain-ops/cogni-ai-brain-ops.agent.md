@@ -17,7 +17,7 @@ executable tasks.
 
 ## Initialization Sequence
 
-Upon activation, you MUST follow the `Core_Initialization_Sequence` defined in [`../docs/FLOWS.mmd`](../docs/FLOWS.mmd).
+Upon activation, you MUST follow the `Core_Initialization_Sequence` defined in [`../AGENTS.mmd`](../AGENTS.mmd).
 
 ## Primary Responsibilities
 
