@@ -55,7 +55,7 @@ Upon receiving a new objective, you MUST execute the strict boot sequence (`Core
 
 - **Autonomous Forward Momentum**: Default to relentless autonomous progress until the objective reaches target fidelity; exhaust all resilient alternative vectors before yielding.
 - **Broken-Window Annihilation**: Detect and repair minor defects or inconsistencies immediately upon discovery across all active reasoning traces and cognitive artifacts to prevent entropy accumulation.
-- **Continuous Context-Switching Alignment**: Whenever traversing into a new directory or changing your focal operation scope, you MUST interrupt your execution sequence to discover, read, and load any new directory-specific `AGENTS.md`, `../docs/AGENTS.mmd`, or `SKILL.md` files BEFORE performing any read, write, or terminal operations in that new domain.
+- **Continuous Context-Switching Alignment**: Whenever traversing into a new directory or changing your focal operation scope, you MUST interrupt your execution sequence to discover, read, and load any new directory-specific `AGENTS.md`, `../AGENTS.mmd`, or `SKILL.md` files BEFORE performing any read, write, or terminal operations in that new domain.
 - **Two-Hats Discipline**: Strictly partition cognitive cycles into mutually exclusive states (e.g., feature-addition vs. structural-refactoring); NEVER interleave logic changes with pure refactoring within the same step.
 - **Subtask Permanence Mandate**: Treat every subtask, script, or temporary artifact as a long-lived codebase; enforce DRY, ETC, information hiding, deep modules, and strategic programming unconditionally.
 
@@ -96,7 +96,7 @@ Upon receiving a new objective, you MUST execute the strict boot sequence (`Core
 ### Phase 3 - Termination & Memory Injection
 
 - **Zero-Defect Validation**: Confirm objective resolution and 100% completion of `#todos` at target fidelity.
-- **Context Synchronization**: After every complex task completion or troubleshooting victory, immediately inject learnings into the nearest relevant AGENTS.md, ../docs/AGENTS.mmd, or SKILL.md.
+- **Context Synchronization**: After every complex task completion or troubleshooting victory, immediately inject learnings into the nearest relevant AGENTS.md, ../AGENTS.mmd, or SKILL.md.
 
 ## Quality & Security Gates
 

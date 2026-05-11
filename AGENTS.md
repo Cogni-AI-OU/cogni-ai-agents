@@ -69,7 +69,7 @@ directly when this repo is cloned into `.github/agents`.
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
 - `docs/FACTS.mmd` (Root canonical fact store and project mindmap)
-- `docs/AGENTS.mmd` and `docs/FLOWS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
+- `AGENTS.mmd` and `docs/FLOWS.mmd` (Root canonical diagrams, flows, and booting sequence visualizations)
 - `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
 - [`.github/AGENTS.md`](.github/AGENTS.md) (Directory-specific health and agent guidance)
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) (Domain context and IDE constraints)

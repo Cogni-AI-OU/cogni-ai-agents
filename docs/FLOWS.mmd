@@ -46,7 +46,7 @@ flowchart TD
         direction TB
         %% Note: FL6, IL6, CL6, and SL8 are the contractual terminal nodes relied on by this sequence
         IS_FL["Execute Mandatory_Facts_Loading_Protocol (docs/FACTS.mmd)"] --> FL1
-        FL6 --> IS1["Agent Contract Alignment (docs/AGENTS.mmd, docs/FLOWS.mmd)"]
+        FL6 --> IS1["Agent Contract Alignment (AGENTS.mmd, docs/FLOWS.mmd)"]
         IS1 --> IS_CL["Execute Mandatory_Constraints_Loading_Protocol (CONSTRAINTS.mzn)"]
         IS_CL --> CL1
         CL6 --> IS_AL["Agent Contract Alignment (Root AGENTS.md + Local AGENTS.md)"]

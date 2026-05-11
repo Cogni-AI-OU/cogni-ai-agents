@@ -1,7 +1,7 @@
 ---
 name: update-agents-mmd
 description: Analyzes, updates, or validates an agent's cognitive logic (.agent.mmd) against its instructions
-  (.agent.md) and global context (AGENTS.md, docs/AGENTS.mmd, docs/FLOWS.mmd)
+  (.agent.md) and global context (AGENTS.md, AGENTS.mmd, docs/FLOWS.mmd)
 ---
 
 # Agent Logic and State Machine Synchronization Prompt
@@ -14,7 +14,7 @@ localized \`.agent.md\`.
 
 Before generating or validating any logic, you MUST read, ingest, and process the following layered hierarchy:
 
-1. **Global Invariants**: \`AGENTS.md\` (root directory fact store), \`docs/AGENTS.mmd\`, and \`docs/FLOWS.mmd\`. This defines the
+1. **Global Invariants**: \`AGENTS.md\` (root directory fact store), \`AGENTS.mmd\`, and \`docs/FLOWS.mmd\`. This defines the
    system-wide orchestration bounds, shared booting sequences, and standard flow abstractions.
 2. **Local Agent Contract**: The target agent's \``agent-name`.agent.md\`. Extract all Persona rules, Initialization
    Sequences, Cognitive Framework Constraints (e.g., Metacognitive Rewind, Checkpoints), and Workflow Phases.
@@ -54,6 +54,6 @@ Based on the synthesis:
 ## Execution Directive
 
 *Prompt Invocation Start:*
-"I am beginning the cognitive framework simulation. I will parse \`AGENTS.md\`, \`docs/AGENTS.mmd\`, and \`docs/FLOWS.mmd\` to
+"I am beginning the cognitive framework simulation. I will parse \`AGENTS.md\`, \`AGENTS.mmd\`, and \`docs/FLOWS.mmd\` to
 establish the baseline orchestration constraints, map the target agent's \`.agent.md\`, and compute the delta for
 generating the updated \`.agent.mmd\` structure."
