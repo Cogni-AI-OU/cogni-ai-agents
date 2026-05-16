@@ -68,6 +68,7 @@ directly when this repo is cloned into `.github/agents`.
 
 Read and merge these when operating inside corresponding sub-directories or repo root (order = precedence):
 
+- `/memories/` (Cognitive persistence tier for session and long-term state)
 - `docs/FACTS.mmd` (Root canonical fact store and project mindmap)
 - `AGENTS.mmd` (Booting sequence and initialization) and `docs/FLOWS.mmd` (Timelines and operational protocols)
 - `CONSTRAINTS.mzn` (Formal constraint declarations: scheduler-theoretic bounds, budget protocol, and loop arrest)
